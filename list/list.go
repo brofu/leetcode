@@ -15,6 +15,8 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// MergeTwoLists
+// Problem 21
 func MergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 
 	dummy := &ListNode{-1, nil}
