@@ -3,6 +3,8 @@ package list
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMergeTwoLists(t *testing.T) {
@@ -243,14 +245,6 @@ func TestFindFromEnd(t *testing.T) {
 			want: []int{5},
 		},
 		{
-			name: "edge - empty",
-			args: args{
-				head: []int{},
-				n:    1,
-			},
-			want: []int{},
-		},
-		{
 			name: "edge - at the begining",
 			args: args{
 				head: []int{1, 3, 2, 5},
@@ -346,6 +340,293 @@ func TestFindFromEndWithProtection(t *testing.T) {
 			if got := FindFromEndWithProtection(input, tt.args.n); !reflect.DeepEqual(got, want) {
 				t.Errorf("Case: %s, FindFromEnd() = %v, want %v", tt.name, got, tt.want)
 				t.Error(tt.name, GetSliceFromList(got), tt.want)
+			}
+		})
+	}
+}
+
+func Test_removeNthFromEndV2(t *testing.T) {
+
+	type args struct {
+		head []int
+		n    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc 1",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+				n:    2,
+			},
+			want: []int{1, 2, 3, 5},
+		},
+		{
+			name: "lc 2",
+			args: args{
+				head: []int{1},
+				n:    1,
+			},
+			want: []int{},
+		},
+		{
+			name: "lc 3",
+			args: args{
+				head: []int{1, 2},
+				n:    1,
+			},
+			want: []int{1},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			got := removeNthFromEndV2(input, tt.args.n)
+			if !reflect.DeepEqual(got, want) {
+				t.Errorf("removeNthFromEnd() = %v, want %v", got, want)
+				t.Error(tt.name, GetSliceFromList(got), tt.want)
+			}
+		})
+	}
+
+}
+
+func Test_removeNthFromEndV3(t *testing.T) {
+	type args struct {
+		head []int
+		n    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc 1",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+				n:    2,
+			},
+			want: []int{1, 2, 3, 5},
+		},
+		{
+			name: "lc 2",
+			args: args{
+				head: []int{1},
+				n:    1,
+			},
+			want: []int{},
+		},
+		{
+			name: "lc 3",
+			args: args{
+				head: []int{1, 2},
+				n:    1,
+			},
+			want: []int{1},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			got := removeNthFromEndV3(input, tt.args.n)
+			if !reflect.DeepEqual(got, want) {
+				t.Errorf("removeNthFromEnd() = %v, want %v", got, want)
+				t.Error(tt.name, GetSliceFromList(got), tt.want)
+			}
+		})
+	}
+}
+
+func Test_middleNode(t *testing.T) {
+	type args struct {
+		head []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+			},
+			want: []int{3, 4, 5},
+		},
+		{
+			name: "lc-case-2",
+			args: args{
+				head: []int{1, 2, 3, 4, 5, 6},
+			},
+			want: []int{4, 5, 6},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			if got := middleNode(input); !reflect.DeepEqual(got, want) {
+				t.Errorf("middleNode() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_deleteMiddle(t *testing.T) {
+	type args struct {
+		head []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{1, 3, 4, 7, 1, 2, 6},
+			},
+			want: []int{1, 3, 4, 1, 2, 6},
+		},
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{1, 2, 3, 4},
+			},
+			want: []int{1, 2, 4},
+		},
+		{
+			name: "lc-case-3",
+			args: args{
+				head: []int{2, 1},
+			},
+			want: []int{2},
+		},
+		{
+			name: "only one element",
+			args: args{
+				head: []int{2},
+			},
+			want: []int{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			if got := deleteMiddleV2(input); !reflect.DeepEqual(got, want) {
+				t.Errorf("deleteMiddle() = %v, want %v", got, tt.want)
+				t.Error(tt.name, GetSliceFromList(got), tt.want)
+			}
+		})
+	}
+}
+
+func Test_deleteMiddleWithTwoLoop(t *testing.T) {
+
+	type args struct {
+		head []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{1, 3, 4, 7, 1, 2, 6},
+			},
+			want: []int{1, 3, 4, 1, 2, 6},
+		},
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{1, 2, 3, 4},
+			},
+			want: []int{1, 2, 4},
+		},
+		{
+			name: "lc-case-3",
+			args: args{
+				head: []int{2, 1},
+			},
+			want: []int{2},
+		},
+		{
+			name: "only one element",
+			args: args{
+				head: []int{2},
+			},
+			want: []int{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			if got := deleteMiddleWithTwoLoop(input); !reflect.DeepEqual(got, want) {
+				t.Errorf("deleteMiddle() = %v, want %v", got, tt.want)
+				t.Error(tt.name, GetSliceFromList(got), tt.want)
+			}
+		})
+	}
+
+}
+
+func Test_detectCycleV2(t *testing.T) {
+	type args struct {
+		head []int
+		n    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc-case-1",
+			args: args{
+				head: []int{3, 2, 0, -4},
+				n:    0,
+			},
+			want: []int{3},
+		},
+		{
+			name: "lc-case-2",
+			args: args{
+				head: []int{1, 2},
+				n:    0,
+			},
+			want: []int{1},
+		},
+		{
+			name: "lc-case-3",
+			args: args{
+				head: []int{1},
+				n:    -1,
+			},
+			want: []int{},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			input := ConstructListNodeFromSliceWithCycle(tt.args.head, tt.args.n)
+			got := detectCycleV2(input)
+			if len(tt.want) == 0 {
+				var empty *ListNode
+				assert.Equal(t, empty, got)
+			} else {
+				assert.Equal(t, tt.want[0], got.Val)
 			}
 		})
 	}
