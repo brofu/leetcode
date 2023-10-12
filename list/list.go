@@ -1,7 +1,5 @@
 package list
 
-import "fmt"
-
 func ConstructListNodeFromSlice(input []int) *ListNode {
 	dummy := &ListNode{-1, nil}
 	p := dummy
@@ -17,7 +15,6 @@ func GetSliceFromList(list *ListNode) []int {
 	for list != nil {
 		s = append(s, list.Val)
 		list = list.Next
-		fmt.Println(len(s))
 	}
 
 	return s
@@ -92,6 +89,105 @@ func partition(head *ListNode, x int) *ListNode {
 
 	s.Next = nil
 	p.Next = dummy2.Next
+
+	return dummy.Next
+}
+
+// FindFromEnd
+// Key Point
+// 1. protect the situation: head is nil or n > length of the list
+func FindFromEnd(head *ListNode, n int) *ListNode {
+
+	if head == nil {
+		return head
+	}
+
+	p := head
+	for i := 0; i < n; i += 1 {
+		p = p.Next
+	}
+
+	s := head
+
+	for p != nil {
+		p = p.Next
+		s = s.Next
+	}
+
+	return s
+}
+
+// FindFromEndWithProtection
+// Key Point
+// 1. protect the edges cases:
+// 1.1 head is nil
+// 1.2 n > length of the list
+func FindFromEndWithProtection(head *ListNode, n int) *ListNode {
+
+	// head is nil
+	if head == nil {
+		return head
+	}
+
+	p := head
+
+	var (
+		i int
+		s *ListNode
+	)
+
+	// if n > length of head
+	for ; i < n && p != nil; i += 1 {
+		p = p.Next
+	}
+
+	// means n > length of head
+	if i < n {
+		return s
+	}
+
+	s = head
+	for p != nil {
+		p = p.Next
+		s = s.Next
+	}
+
+	return s
+}
+
+// removeNthFromEnd
+// Problem 19
+// Note the constraints
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+
+	dummy := &ListNode{
+		-1,
+		head,
+	}
+
+	t := dummy
+	p := head
+
+	for i := 0; i < n; i += 1 {
+		p = p.Next
+	}
+
+	s := head
+
+	//  n == length of the list
+	if p == nil {
+		return s.Next
+	}
+
+	t.Next = s
+
+	for p != nil {
+		p = p.Next
+		s = s.Next
+		t = t.Next
+	}
+
+	t.Next = s.Next
 
 	return dummy.Next
 }
