@@ -451,9 +451,19 @@ func detectCycleV2(head *ListNode) *ListNode {
 	return s
 }
 
+/*
+Problem 160 Intersection of Two Linked Lists
+Key Points
+	*	Performance
+		*	Map with memory O(M+N) or
+		*	Multiple pointer with time O(M+N) and memory O(1)
+	*	Implement
+		*	More clear implementation
+*/
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	p1, p2 := headA, headB
 	n, n1, n2 := 0, 0, 0
+
 	for p1 != nil && p2 != nil {
 		p1 = p1.Next
 		p2 = p2.Next
@@ -488,5 +498,36 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 		p1 = p1.Next
 		p2 = p2.Next
 	}
+	return nil
+}
+
+func getIntersectionNodeV2(headA, headB *ListNode) *ListNode {
+
+	pointerAFaster, pointerASlower := headA, headA
+	pointerBFaster, pointerBSlower := headB, headB
+
+	for pointerAFaster != nil && pointerBFaster != nil {
+		pointerAFaster = pointerAFaster.Next
+		pointerBFaster = pointerBFaster.Next
+	}
+
+	for pointerAFaster != nil {
+		pointerAFaster = pointerAFaster.Next
+		pointerASlower = pointerASlower.Next
+	}
+
+	for pointerBFaster != nil {
+		pointerBFaster = pointerBFaster.Next
+		pointerBSlower = pointerBSlower.Next
+	}
+
+	for pointerASlower != nil && pointerBSlower != nil {
+		if pointerASlower == pointerBSlower {
+			return pointerASlower
+		}
+		pointerASlower = pointerASlower.Next
+		pointerBSlower = pointerBSlower.Next
+	}
+
 	return nil
 }

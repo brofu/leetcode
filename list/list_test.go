@@ -687,3 +687,58 @@ func Test_getIntersectionNode(t *testing.T) {
 		})
 	}
 }
+
+func Test_getIntersectionNodeV2(t *testing.T) {
+	type args struct {
+		headA []int
+		headB []int
+		skipA int
+		skipB int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				headA: []int{4, 1, 8, 4, 5},
+				headB: []int{5, 6, 1, 8, 4, 5},
+				skipA: 2,
+				skipB: 3,
+			},
+			want: []int{8, 4, 5},
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				headA: []int{1, 9, 1, 2, 4},
+				headB: []int{3, 2, 4},
+				skipA: 3,
+				skipB: 1,
+			},
+			want: []int{2, 4},
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				headA: []int{2, 6, 4},
+				headB: []int{1, 5},
+				skipA: 3,
+				skipB: 2,
+			},
+			want: []int{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			listA, listB, err := ConstructIntersectedListNodesFromSlice(tt.args.headA, tt.args.headB, tt.args.skipA, tt.args.skipB)
+			assert.Equal(t, nil, err)
+			want := ConstructListNodeFromSlice(tt.want)
+			if got := getIntersectionNodeV2(listA, listB); !reflect.DeepEqual(got, want) {
+				t.Errorf("getIntersectionNode() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
