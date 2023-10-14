@@ -1,5 +1,61 @@
 package list
 
+import "errors"
+
+func ConstructIntersectedListNodesFromSlice(sliceA, sliceB []int, skipA, skipB int) (*ListNode, *ListNode, error) {
+
+	var (
+		lengthA = len(sliceA)
+		lengthB = len(sliceB)
+
+		dummy1 = &ListNode{
+			-1,
+			nil,
+		}
+		dummy2 = &ListNode{
+			-1,
+			nil,
+		}
+		p1 = dummy1
+		p2 = dummy2
+	)
+
+	if skipA < 0 || skipA > lengthA || skipB < 0 || skipB > lengthB {
+		return nil, nil, errors.New("wrong skip parameters")
+	}
+
+	i := 0
+	for ; i < skipA; i += 1 {
+		p1.Next = &ListNode{
+			sliceA[i],
+			nil,
+		}
+		p1 = p1.Next
+	}
+
+	intersectedNode := p1
+
+	for ; i < lengthA; i += 1 {
+		p1.Next = &ListNode{
+			sliceA[i],
+			nil,
+		}
+		p1 = p1.Next
+	}
+
+	for j := 0; j < skipB; j += 1 {
+		p2.Next = &ListNode{
+			sliceB[j],
+			nil,
+		}
+		p2 = p2.Next
+	}
+
+	p2.Next = intersectedNode.Next
+
+	return dummy1.Next, dummy2.Next, nil
+}
+
 func ConstructListNodeFromSliceWithCycle(input []int, n int) *ListNode {
 
 	if n > len(input)-1 {
@@ -393,4 +449,44 @@ func detectCycleV2(head *ListNode) *ListNode {
 	}
 
 	return s
+}
+
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	p1, p2 := headA, headB
+	n, n1, n2 := 0, 0, 0
+	for p1 != nil && p2 != nil {
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	for p1 != nil {
+		p1 = p1.Next
+		n1 += 1
+	}
+	for p2 != nil {
+		p2 = p2.Next
+		n2 += 1
+	}
+
+	if n1 > 0 {
+		n = n1
+		p1 = headA
+		p2 = headB
+	} else {
+		n = n2
+		p1 = headB
+		p2 = headA
+	}
+
+	for i := 0; i < n; i += 1 {
+		p1 = p1.Next
+	}
+
+	for p1 != nil && p2 != nil {
+		if p1 == p2 {
+			return p1
+		}
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return nil
 }
