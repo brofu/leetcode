@@ -539,6 +539,8 @@ func getIntersectionNodeV2(headA, headB *ListNode) *ListNode {
 
 /*
 Problem 23. Merge k Sorted Lists
+Versions
+	*	V3 merge the list by 2-2. The time consumption would be higher than version 1 and 2
 Key Points
 	*	Use Binary Heap for sort
 */
@@ -609,13 +611,6 @@ func (pq *MinListNodePQ) Pop() (node *ListNode) {
 func (pq *MinListNodePQ) greaterThan(source, destination common.Comparable) bool {
 	return source.CompareTo(destination) > 0
 }
-
-/*
-Problem 23. Merge k Sorted Lists
-Version 2
-Key Points
-	*	Use Binary Heap for sort
-*/
 
 func mergeKListsV2(lists []*ListNode) *ListNode {
 
@@ -723,4 +718,22 @@ func (pq *MinListNodePQV2) left(index int) int {
 
 func (pq *MinListNodePQV2) right(index int) int {
 	return index*2 + 1
+}
+
+func mergeKListsV3(lists []*ListNode) *ListNode {
+
+	if len(lists) == 0 {
+		return nil
+	}
+
+	if len(lists) == 1 {
+		return lists[0]
+	}
+
+	mid := len(lists) / 2
+
+	left := mergeKListsV3(lists[:mid])
+	right := mergeKListsV3(lists[mid:])
+
+	return MergeTwoLists(left, right)
 }

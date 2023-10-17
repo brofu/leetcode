@@ -832,3 +832,57 @@ func Test_mergeKListsV2(t *testing.T) {
 		})
 	}
 }
+
+func Test_mergeKListsV3(t *testing.T) {
+	type args struct {
+		lists [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "lccase1",
+			args: args{
+				lists: [][]int{{1, 4, 5}, {1, 3, 4}, {2, 6}},
+			},
+			want: []int{1, 1, 2, 3, 4, 4, 5, 6},
+		},
+		{
+			name: "lccase2",
+			args: args{
+				lists: [][]int{},
+			},
+			want: []int{},
+		},
+		{
+			name: "lccase3",
+			args: args{
+				lists: [][]int{{}},
+			},
+			want: []int{},
+		},
+		{
+			name: "lccase4",
+			args: args{
+				lists: [][]int{{}, {}},
+			},
+			want: []int{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			lists := make([]*ListNode, len(tt.args.lists))
+			for i, list := range tt.args.lists {
+				lists[i] = ConstructListNodeFromSlice(list)
+			}
+			want := ConstructListNodeFromSlice(tt.want)
+			got := mergeKListsV3(lists)
+			t.Log("flag", GetSliceFromList(got), tt.want)
+			if !reflect.DeepEqual(got, want) {
+				t.Errorf("mergeKLists() = %v, want %v", got, want)
+			}
+		})
+	}
+}
