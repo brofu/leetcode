@@ -1,6 +1,8 @@
 package tree_common
 
-import "github.com/brofu/leetcode/common"
+import (
+	"github.com/brofu/leetcode/common"
+)
 
 type checkSwapFunc func(source, destination common.Comparable) bool
 
@@ -24,10 +26,17 @@ func NewBinaryHeap(elements []common.Comparable, checkSwapFunc checkSwapFunc) *B
 	}
 
 	for _, element := range elements {
+
 		bh.Push(element)
 	}
 
 	return bh
+}
+
+// Length returns the length of the heap
+// mainly used for purpose
+func (bh *BinaryHeap) Length() int {
+	return bh.size
 }
 
 func (bh *BinaryHeap) parent(index int) int {
@@ -53,6 +62,7 @@ func (bh *BinaryHeap) Push(element common.Comparable) {
 	bh.array[bh.size] = element
 	bh.swim(bh.size)
 }
+
 func (bh *BinaryHeap) Pop() common.Comparable {
 	if bh.size == 0 {
 		return nil
@@ -71,10 +81,12 @@ func (bh *BinaryHeap) swim(index int) {
 	for index > 1 {
 		parent := bh.array[bh.parent(index)]
 		current := bh.array[index]
-		if bh.checkSwapFunc(parent, current) {
-			bh.swap(bh.parent(index), index)
-			index = bh.parent(index)
+		if !bh.checkSwapFunc(parent, current) {
+			break
 		}
+
+		bh.swap(bh.parent(index), index)
+		index = bh.parent(index)
 	}
 }
 

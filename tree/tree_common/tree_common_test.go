@@ -34,7 +34,7 @@ func TestNewMaxPQ(t *testing.T) {
 		want []common.Comparable
 	}{
 		{
-			name: "normal case",
+			name: "construct PQ. normal case",
 			args: args{
 				elements: []common.Comparable{
 					&wrapInt{number: 5},
@@ -57,6 +57,7 @@ func TestNewMaxPQ(t *testing.T) {
 
 			// new
 			got := NewMaxPQ(tt.args.elements)
+			t.Log("flag1")
 			assert.Equal(t, len(tt.want), len(got.Queue()))
 			for i := 1; i < len(tt.want); i += 1 {
 				wantWrapInt, ok := tt.want[i].(*wrapInt)

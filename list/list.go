@@ -1,6 +1,11 @@
 package list
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/brofu/leetcode/common"
+	"github.com/brofu/leetcode/tree/tree_common"
+)
 
 func ConstructIntersectedListNodesFromSlice(sliceA, sliceB []int, skipA, skipB int) (*ListNode, *ListNode, error) {
 
@@ -530,4 +535,192 @@ func getIntersectionNodeV2(headA, headB *ListNode) *ListNode {
 	}
 
 	return nil
+}
+
+/*
+Problem 23. Merge k Sorted Lists
+Key Points
+	*	Use Binary Heap for sort
+*/
+
+// CompareTo Let *ListNode implement the Comparable interface
+// But it's not allowed by leetcode
+func (ln *ListNode) CompareTo(destination common.Comparable) int {
+	destinationListNode, _ := destination.(*ListNode)
+	if ln.Val > destinationListNode.Val {
+		return 1
+	}
+	if ln.Val == destinationListNode.Val {
+		return 0
+	}
+	return -1
+}
+
+func mergeKLists(lists []*ListNode) *ListNode {
+
+	dummy := &ListNode{
+		-1,
+		nil,
+	}
+
+	p := dummy
+
+	pq := NewMinListNodePQ(lists)
+
+	node := pq.Pop()
+	for node != nil {
+		p.Next = node
+		p = p.Next
+		if node.Next != nil {
+			pq.Push(node.Next)
+		}
+		node = pq.Pop()
+	}
+
+	return dummy.Next
+}
+
+type MinListNodePQ struct {
+	binaryHeap *tree_common.BinaryHeap
+}
+
+func NewMinListNodePQ(nodes []*ListNode) *MinListNodePQ {
+	pq := &MinListNodePQ{}
+
+	//TODO: better approach
+	elements := make([]common.Comparable, len(nodes))
+	for i, node := range nodes {
+		elements[i] = node
+	}
+	hb := tree_common.NewBinaryHeap(elements, pq.greaterThan)
+	pq.binaryHeap = hb
+	return pq
+}
+func (pq *MinListNodePQ) Push(node *ListNode) {
+	pq.binaryHeap.Push(node)
+}
+
+func (pq *MinListNodePQ) Pop() (node *ListNode) {
+	element := pq.binaryHeap.Pop()
+	node, _ = element.(*ListNode)
+	return
+}
+
+func (pq *MinListNodePQ) greaterThan(source, destination common.Comparable) bool {
+	return source.CompareTo(destination) > 0
+}
+
+/*
+Problem 23. Merge k Sorted Lists
+Version 2
+Key Points
+	*	Use Binary Heap for sort
+*/
+
+func mergeKListsV2(lists []*ListNode) *ListNode {
+
+	dummy := &ListNode{
+		-1,
+		nil,
+	}
+
+	p := dummy
+
+	pq := NewMinListNodePQV2(lists)
+
+	node := pq.Pop()
+	for node != nil {
+		p.Next = node
+		p = p.Next
+		if node.Next != nil {
+			pq.Push(node.Next)
+		}
+		node = pq.Pop()
+	}
+
+	return dummy.Next
+}
+
+type MinListNodePQV2 struct {
+	array []*ListNode
+	size  int
+}
+
+func NewMinListNodePQV2(lists []*ListNode) *MinListNodePQV2 {
+	pq := &MinListNodePQV2{
+		array: make([]*ListNode, len(lists)+1),
+		size:  0,
+	}
+	for _, list := range lists {
+		if list != nil {
+			pq.Push(list)
+		}
+	}
+	return pq
+}
+
+func (pq *MinListNodePQV2) Push(list *ListNode) {
+	pq.size += 1
+	pq.array[pq.size] = list
+	pq.swim(pq.size)
+}
+
+func (pq *MinListNodePQV2) swim(index int) {
+	for index > 1 && pq.greaterThan(pq.parent(index), index) {
+		pq.swap(pq.parent(index), index)
+		index = pq.parent(index)
+	}
+}
+
+func (pq *MinListNodePQV2) swap(sourceIndex, destinationIndex int) {
+	pq.array[sourceIndex], pq.array[destinationIndex] = pq.array[destinationIndex], pq.array[sourceIndex]
+}
+
+func (pq *MinListNodePQV2) parent(index int) int {
+	return index / 2
+}
+
+func (pq *MinListNodePQV2) greaterThan(sourceIndex, destinationIndex int) bool {
+	return pq.array[sourceIndex].Val > pq.array[destinationIndex].Val
+}
+
+func (pq *MinListNodePQV2) Pop() *ListNode {
+
+	if pq.size == 0 {
+		return nil
+	}
+
+	list := pq.array[1]
+
+	pq.swap(1, pq.size)
+	pq.array[pq.size] = nil
+	pq.size -= 1
+
+	pq.sink(1)
+	return list
+}
+
+func (pq *MinListNodePQV2) sink(index int) {
+
+	for pq.left(index) <= pq.size { // there is left child
+		minIndex := pq.left(index)
+		rightIndex := pq.right(index)
+		if rightIndex <= pq.size && pq.greaterThan(minIndex, rightIndex) { // there is right child and compare
+			minIndex = rightIndex
+		}
+
+		if !pq.greaterThan(index, minIndex) {
+			break
+		}
+		pq.swap(index, minIndex)
+		index = minIndex
+	}
+}
+
+func (pq *MinListNodePQV2) left(index int) int {
+	return index * 2
+}
+
+func (pq *MinListNodePQV2) right(index int) int {
+	return index*2 + 1
 }
