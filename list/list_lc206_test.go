@@ -221,3 +221,80 @@ func Test_reverseListFirstNHelper(t *testing.T) {
 		})
 	}
 }
+
+func Test_reverseListBetween(t *testing.T) {
+	type args struct {
+		head []int
+		m    int
+		n    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "case 1",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+				m:    2,
+				n:    4,
+			},
+			want: []int{1, 4, 3, 2, 5},
+		},
+		{
+			name: "case 2",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+				m:    2,
+				n:    5,
+			},
+			want: []int{1, 5, 4, 3, 2},
+		},
+		{
+			name: "case 3",
+			args: args{
+				head: []int{1, 2, 3, 4, 5},
+				m:    3,
+				n:    3,
+			},
+			want: []int{1, 2, 3, 4, 5},
+		},
+		{
+			name: "case 4",
+			args: args{
+				head: []int{1, 2},
+				m:    3,
+				n:    2,
+			},
+			want: []int{},
+		},
+		{
+			name: "case 5",
+			args: args{
+				head: []int{1, 2},
+				m:    3,
+				n:    4,
+			},
+			want: []int{1, 2},
+		},
+		{
+			name: "case 6",
+			args: args{
+				head: []int{1, 2, 3},
+				m:    2,
+				n:    4,
+			},
+			want: []int{1, 3, 2},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			list := ConstructListNodeFromSlice(tt.args.head)
+			want := ConstructListNodeFromSlice(tt.want)
+			if got := reverseListBetween(list, tt.args.m, tt.args.n); !reflect.DeepEqual(got, want) {
+				t.Errorf("case: %s, reverseListBetween() = %v, want %v", tt.name, got, tt.want)
+			}
+		})
+	}
+}

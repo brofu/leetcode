@@ -112,3 +112,26 @@ func reverseListFirstNHelper(head *ListNode, n int) (*ListNode, *ListNode) {
 
 	return last, tail
 }
+
+func reverseListBetween(head *ListNode, m, n int) *ListNode {
+
+	if m > n {
+		return nil
+	}
+
+	p := head
+
+	for index := 0; index < m && p != nil; index++ {
+		p = p.Next
+	}
+
+	if p == nil {
+		return head
+	}
+
+	last := reverseListFirstN(p, n-m)
+
+	p.Next = last
+
+	return nil
+}
