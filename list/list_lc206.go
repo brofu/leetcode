@@ -2,7 +2,6 @@ package list
 
 /*
 Problem 206
-Key Point
 Versions
 	*	Iterate version 1. Bad performance
 	*	Iterate version 2. Multiple pointer and the controlling logic
@@ -14,6 +13,8 @@ Extensions
 		*	return 2 parameters or use global var
 		*	The edges cases
 			*	n > list length
+
+	*	Reverse the nodes [m, n]
 */
 
 // Iterate verion 1.
@@ -141,7 +142,7 @@ func reverseListBetween(head *ListNode, m, n int) *ListNode {
 	return dummy.Next
 }
 
-// v2.totally reverse
+// v3.totally recursive
 func reverseListBetweenV2(head *ListNode, m, n int) *ListNode {
 
 	if m > n {
