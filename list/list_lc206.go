@@ -119,19 +119,40 @@ func reverseListBetween(head *ListNode, m, n int) *ListNode {
 		return nil
 	}
 
-	p := head
+	dummy := &ListNode{
+		-1,
+		head,
+	}
 
-	for index := 0; index < m && p != nil; index++ {
+	p := dummy
+
+	for index := 0; index < m-1 && p != nil; index++ {
 		p = p.Next
 	}
 
-	if p == nil {
-		return head
+	if p == nil || p.Next == nil {
+		return dummy.Next
 	}
 
-	last := reverseListFirstN(p, n-m)
+	last := reverseListFirstN(p.Next, n-m+1)
 
 	p.Next = last
 
-	return nil
+	return dummy.Next
+}
+
+// v2.totally reverse
+func reverseListBetweenV2(head *ListNode, m, n int) *ListNode {
+
+	if m > n {
+		return nil
+	}
+
+	if m == 1 {
+		return reverseListFirstN(head, n)
+	}
+
+	head.Next = reverseListBetweenV2(head.Next, m-1, n-1)
+
+	return head
 }
