@@ -1,8 +1,16 @@
 package tree
 
 import (
+	"fmt"
 	"math"
 )
+
+type Node struct {
+	Val   int
+	Left  *Node
+	Right *Node
+	Next  *Node
+}
 
 type TreeNode struct {
 	Val   int
@@ -19,11 +27,13 @@ func MaxInt(a, b int) int {
 
 func GenerateBinaryTreeFromSlice(numbers []int, index int) *TreeNode {
 
+	fmt.Println(index)
 	if index > len(numbers)-1 {
 		return nil
 	}
 
 	number := numbers[index]
+	//fmt.Println(index, number)
 	if number == math.MaxInt {
 		return nil
 	}
@@ -91,6 +101,7 @@ func BreadthFirstTraverseRecursiveWrapper(res *[]int, nodes []*TreeNode) {
 	nextLayerNodes := []*TreeNode{}
 	for _, node := range nodes {
 		if node != nil {
+			fmt.Println(node, node.Val)
 			*res = append(*res, node.Val)
 			nextLayerNodes = append(nextLayerNodes, node.Left)
 			nextLayerNodes = append(nextLayerNodes, node.Right)
@@ -99,4 +110,52 @@ func BreadthFirstTraverseRecursiveWrapper(res *[]int, nodes []*TreeNode) {
 	if len(nextLayerNodes) != 0 {
 		BreadthFirstTraverseRecursiveWrapper(res, nextLayerNodes)
 	}
+}
+func GenerateSliceFromTreeNode(root *TreeNode) []int {
+	return BreadthFirstTraverseRecursive(root)
+}
+
+func GenerateNodeFromSlice(numbers []int, index int) *Node {
+
+	if index > len(numbers)-1 {
+		return nil
+	}
+
+	number := numbers[index]
+	if number == math.MaxInt {
+		return nil
+	}
+	left := GenerateNodeFromSlice(numbers, index*2+1)
+	right := GenerateNodeFromSlice(numbers, index*2+2)
+	return &Node{Val: number, Left: left, Right: right}
+}
+
+// GenerateSlinceFromNode generate the slice from a linked perfect binary tree
+func GenerateSlinceFromNode(root *Node) []int {
+
+	res := []int{}
+	if root == nil {
+		return res
+	}
+
+	pointer := root
+
+	for pointer != nil {
+		res = append(res, pointer.Val)
+		pointer = pointer.Next
+	}
+
+	res = append(res, math.MaxInt)
+
+	res = append(res, GenerateSlinceFromNode(root.Left)...)
+
+	return res
+}
+
+func Pow(a, b int) int {
+	mul := 1
+	for i := 0; i < b; i++ {
+		mul *= a
+	}
+	return mul
 }
