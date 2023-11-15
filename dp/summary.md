@@ -46,6 +46,13 @@
 5. Formulation of State Transition Equation 
     * LC300. `dp[i] = max(dp[i], dp[j])+1), where j = [i-1,i-2,…,0] && nums[j] < nums[i]`
 
+
+**Thinking Patterns**
+
+> 动态规划不就是从最简单的 base case 往后推导吗，可以想象成一个链式反应，以小博大。但只有符合最优子结构的问题，才有发生这种链式反应的性质。 找最优子结构的过程，其实就是证明状态转移方程正确性的过程，方程符合最优子结构就可以写暴力解了，写出暴力解就可以看出有没有重叠子问题了，有则优化，无则 OK。这也是套路，经常刷题的读者应该能体会。
+
+
+
 **Problmes**
 * LC509. Fibonacci Number
     * Recursive with middle result cached.
