@@ -1,7 +1,6 @@
 package tree
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -27,13 +26,11 @@ func MaxInt(a, b int) int {
 
 func GenerateBinaryTreeFromSlice(numbers []int, index int) *TreeNode {
 
-	fmt.Println(index)
 	if index > len(numbers)-1 {
 		return nil
 	}
 
 	number := numbers[index]
-	//fmt.Println(index, number)
 	if number == math.MaxInt {
 		return nil
 	}
@@ -101,7 +98,7 @@ func BreadthFirstTraverseRecursiveWrapper(res *[]int, nodes []*TreeNode) {
 	nextLayerNodes := []*TreeNode{}
 	for _, node := range nodes {
 		if node != nil {
-			fmt.Println(node, node.Val)
+			//fmt.Println(node, node.Val)
 			*res = append(*res, node.Val)
 			nextLayerNodes = append(nextLayerNodes, node.Left)
 			nextLayerNodes = append(nextLayerNodes, node.Right)
@@ -158,4 +155,27 @@ func Pow(a, b int) int {
 		mul *= a
 	}
 	return mul
+}
+
+func FindIndex(nums []int, num int) int {
+	for index, val := range nums {
+		if val == num {
+			return index
+		}
+	}
+
+	return -1
+}
+
+func FindMax(nums []int) (index, val int) {
+
+	index, val = 0, nums[0]
+
+	for i, v := range nums {
+		if val < v {
+			index, val = i, v
+		}
+	}
+
+	return
 }

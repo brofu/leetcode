@@ -29,3 +29,36 @@ func flattenTraverse(root *TreeNode) *TreeNode {
 		return rightLeaf
 	}
 }
+
+func flattenV2(root **TreeNode) {
+	if root == nil {
+		return
+	}
+
+	dummy := &TreeNode{
+		Val:   -1,
+		Left:  nil,
+		Right: nil,
+	}
+
+	flattenTraverseV2(*root, dummy)
+	*root = dummy.Right
+}
+
+func flattenTraverseV2(root, dummy *TreeNode) *TreeNode {
+
+	dummy.Right = &TreeNode{
+		Val: root.Val,
+	}
+
+	dummy = dummy.Right
+
+	if root.Left != nil {
+		dummy = flattenTraverseV2(root.Left, dummy)
+	}
+	if root.Right != nil {
+		dummy = flattenTraverseV2(root.Right, dummy)
+	}
+
+	return dummy
+}

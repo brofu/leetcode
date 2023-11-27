@@ -25,16 +25,31 @@
 
 
 **Problems**
-1. LC116. Populating Next Right Pointers in Each Node
+* LC116. Populating Next Right Pointers in Each Node
     * Why the normal `traverse` approach doesn't work with this problem? O(N), O(1)
     * Util BFS `traverse`. O(N), O(N)
     * LC117. Populating Next Right Pointers in Each Node II
         * BFS approach. O(N), O(N)
         * BFS approach with cursive. O(N), O(N)
         * Multiple pointers approach & sentinel. O(N), O(Cons). And the approach also work with LC116.
-2. LC114. Flatten Binary Tree to Linked List
-    * Traverse the tree
+* LC114. Flatten Binary Tree to Linked List
+    * Traverse the tree, construct the link.
+    * Flat recursively
 
+***Construction***
 
-
+* LC105. Construct binary tree from preorder and inorder array
+    * Recursively.
+    * Key points
+      * Bound of array
+* LC106. Construct binary tree from preorder and inorder array
+    * Recursively.
+    * Key points
+      * Bound of array
+* LC654. Maximum Binary Tree
+    * Recursively
+* LC889. Construct binary tree from preorder and postorder array  
+    * Recursively
+    * Key Points
+        * 2 situations
 
