@@ -52,4 +52,12 @@
     * Recursively
     * Key Points
         * 2 situations
-
+        * Common solution.
+* LC652. Find Duplicate Subtrees
+    * DFS. Post order
+    * Key Points
+        * Generate a `signature` for each sub tree
+            * Serilize the tree or
+            * generate an id for it. Pay attention to the id of `nil node`
+        * Time: O(n). O(n), O(1)
+        * Space: O(n)
