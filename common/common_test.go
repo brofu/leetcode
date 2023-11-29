@@ -5,25 +5,6 @@ import (
 	"testing"
 )
 
-func Test_mergeSortWrapper(t *testing.T) {
-	type args struct {
-		nums  []int
-		start int
-		end   int
-	}
-	tests := []struct {
-		name string
-		args args
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			mergeSortWrapper(tt.args.nums, tt.args.start, tt.args.end)
-		})
-	}
-}
-
 func TestMergeSort(t *testing.T) {
 	type args struct {
 		nums []int

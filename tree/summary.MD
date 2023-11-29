@@ -61,3 +61,7 @@
             * generate an id for it. Pay attention to the id of `nil node`
         * Time: O(n). O(n), O(1)
         * Space: O(n)
+* LC315. 
+
+**Binary Indexed Tree**
+![Binary Indexed Tree] (../images/tree_bit.png)
