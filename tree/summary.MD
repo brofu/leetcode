@@ -61,7 +61,9 @@
             * generate an id for it. Pay attention to the id of `nil node`
         * Time: O(n). O(n), O(1)
         * Space: O(n)
-* LC315. 
+* LC315. Count of Smaller Numbers After Self
+    * Merge Sort
+    * BIT
 
 **Binary Indexed Tree**
 

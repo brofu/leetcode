@@ -181,7 +181,7 @@ func FindMax(nums []int) (index, val int) {
 }
 
 func NewBinaryIndexTree(length int) BinaryIndexedTree {
-	return make(BinaryIndexedTree, length)
+	return make(BinaryIndexedTree, length+1)
 }
 
 type BinaryIndexedTree []int
@@ -196,8 +196,28 @@ func (BIT BinaryIndexedTree) Add(index, val int) {
 
 func (BIT BinaryIndexedTree) Sum(index int) int {
 	sum := 0
-	for i := index + 1; i > 0; i -= i & (-i) {
+	for i := index + 1; i > 0 && i < len(BIT); i -= i & (-i) {
 		sum += BIT[i]
+	}
+	return sum
+}
+
+type BinaryIndexedTreeReverse []int
+
+func NewBinaryIndexTreeReverse(length int) BinaryIndexedTreeReverse {
+	return make(BinaryIndexedTreeReverse, length+1)
+}
+
+func (BITR BinaryIndexedTreeReverse) Add(index, val int) {
+	for i := index + 1; i > 0; i -= i & (-i) {
+		BITR[i] += val
+	}
+}
+
+func (BITR BinaryIndexedTreeReverse) Sum(index int) int {
+	sum := 0
+	for i := index + 1; i < len(BITR); i += i & (-i) {
+		sum += BITR[i]
 	}
 	return sum
 }

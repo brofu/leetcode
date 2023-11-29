@@ -1,8 +1,6 @@
 package tree
 
 import (
-	"fmt"
-
 	"github.com/brofu/leetcode/common"
 )
 
@@ -22,11 +20,8 @@ func countSmaller(nums []int) []int {
 
 	// sort T: O(N*LogN)
 	common.MergeSort(sorted)
-
 	// setup index map. T: O(N) S: O(N)
 	indexMap := make(map[int]int)
-
-	fmt.Println("start")
 
 	index := 0
 	for _, val := range sorted {
@@ -37,11 +32,9 @@ func countSmaller(nums []int) []int {
 	}
 
 	bit := NewBinaryIndexTree(len(indexMap))
-	//fmt.Println(len(nums), len(bit), len(indexMap))
 	for i := len(nums) - 1; i >= 0; i-- {
 		val := nums[i]
 		index := indexMap[val]
-		fmt.Println("flag", val, index)
 		count := bit.Sum(index - 1) // query occur times
 		res[i] = count
 		bit.Add(index, 1)
