@@ -64,4 +64,5 @@
 * LC315. 
 
 **Binary Indexed Tree**
+
 ![Binary Indexed Tree] (../images/tree_bit.png)
