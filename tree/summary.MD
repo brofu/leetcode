@@ -65,4 +65,4 @@
 
 **Binary Indexed Tree**
 
-![Binary Indexed Tree] (https://github.com/brofu/leetcode/blob/main/images/tree_bit.png)
+![Binary Indexed Tree] (https://github.com/brofu/leetcode/blob/main/images/tree_bit.png?raw=true)
