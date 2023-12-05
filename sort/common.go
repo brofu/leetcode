@@ -1,5 +1,7 @@
 package sort
 
+import "fmt"
+
 func HeapSort(nums []int) {
 
 	length := len(nums)
@@ -65,11 +67,12 @@ func heapify(nums []int, length, index int) {
 func HeapSortIterative(nums []int) {
 	length := len(nums)
 
-	for index := 0; index < length/2; index += 1 {
+	fmt.Println(nums)
+	for index := 0; index <= length/2; index += 1 {
 		heapifyIterative(nums, length, index)
 	}
 
-	for index := length - 1; index >= 0; index -= 1 {
+	for index := length - 1; index > 0; index -= 1 {
 		if nums[0] > nums[index] { // make it stable
 			nums[0], nums[index] = nums[index], nums[0]
 		}
@@ -81,14 +84,22 @@ func HeapSortIterative(nums []int) {
 func heapifyIterative(nums []int, length, index int) {
 
 	for left := 2*index + 1; left < length; left = left*2 + 1 {
+		fmt.Println("left", nums, index, left, nums[index], nums[left])
 		if nums[index] < nums[left] {
+			fmt.Println("left hit")
 			nums[index], nums[left] = nums[left], nums[index]
 		}
+		fmt.Println("left after", nums)
 	}
 
 	for right := 2*index + 2; right < length; right = right*2 + 2 {
+		fmt.Println("right", nums, index, right, nums[index], nums[right])
 		if nums[index] < nums[right] {
 			nums[index], nums[right] = nums[right], nums[index]
+			fmt.Println("right hit")
 		}
+		fmt.Println("right after", nums)
 	}
+
+	fmt.Println(nums)
 }

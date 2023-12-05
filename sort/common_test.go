@@ -49,6 +49,13 @@ func TestHeapSortIterative(t *testing.T) {
 			},
 			want: []int{5, 6, 7, 11, 12, 13},
 		},
+		{
+			name: "lc case",
+			args: args{
+				nums: []int{-4, 0, 7, 4, 9, -5, -1, 0, -7, -1},
+			},
+			want: []int{-7, -5, -4, -1, -1, 0, 0, 4, 7, 9},
+		},
 	}
 	for _, tt := range tests {
 		fmt.Println(tt.name)
