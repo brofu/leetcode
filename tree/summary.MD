@@ -64,6 +64,29 @@
 * LC315. Count of Smaller Numbers After Self
     * Merge Sort
     * BIT
+    * Complexity:
+      * T:
+        * Copy middle list: O(N)
+        * Merge Sort: O(N*LogN) 
+        * Setup Index Map: O(N)
+        * Query and Update BIT: O(N*LogN)*2
+      * Space
+        * Middle list: O(N)
+        * Index Map: O(N)
+        * BIT: O(N)
+* LC493. Reverse Pairs
+    * Similar as LC315.
+      * Reverse BIT
+    * Solution 2. Only with Merge Sort
+      * Key Points
+        * Count first and then sort
+        * count += middle-i+1
+        * Complexity
+          * T: 
+            * Compare and Sort: 2(N*logN)
+          * S:
+            * O(N)
+      * Why LC315 can not resolved with only Merge Sort?
 
 **Binary Indexed Tree**
 

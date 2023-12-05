@@ -41,3 +41,33 @@ func reversePairs(nums []int) int {
 
 	return sum
 }
+
+func reversePairsV2(nums []int) int {
+	return reversePairsWrapper(nums, 0, len(nums)-1)
+}
+
+func reversePairsWrapper(nums []int, left, end int) int {
+
+	if left >= end {
+		return 0
+	}
+
+	middle := (left + end) / 2
+	leftCount := reversePairsWrapper(nums, left, middle)
+	rightCount := reversePairsWrapper(nums, middle+1, end)
+
+	count, i, j := 0, left, middle+1
+
+	// count
+	for i <= middle && j <= end {
+		if nums[i] > 2*nums[j] {
+			count += middle - i + 1
+			j += 1
+		} else {
+			i += 1
+		}
+	}
+	// sort
+	common.MergeSort(nums[left : end+1])
+	return count + leftCount + rightCount
+}
