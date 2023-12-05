@@ -53,7 +53,6 @@ func TestHeapSortIterative(t *testing.T) {
 	for _, tt := range tests {
 		fmt.Println(tt.name)
 		t.Run(tt.name, func(t *testing.T) {
-			fmt.Println(tt.name)
 			HeapSortIterative(tt.args.nums)
 			if !reflect.DeepEqual(tt.args.nums, tt.want) {
 				t.Errorf("HeapSortIterative() = %v, want %v", tt.args.nums, tt.want)
