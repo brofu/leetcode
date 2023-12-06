@@ -22,5 +22,11 @@
     * swim and sink are equal
 
 **Problems**
+
 * LC912 sort an array
   * Merge Sort. Space O(N)
+
+* LC327 Count of Range Sum
+  * Merge Sort usage.
+    * handle logic and then sort
+  * Similar as LC315, LC493
