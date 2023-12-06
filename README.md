@@ -28,6 +28,11 @@ $ ./bin/leetcode
 
 **Tree**
   * Binary Indexed Tree
+  * Binary Search Tree
+  * AVL Tree
+      * References: https://www.geeksforgeeks.org/introduction-to-avl-tree/
+  * Red-Black Tree
+      * [ ] References: https://geeksforgeeks.org/introduction-to-red-black-tree
 
 **Graph**
 

@@ -88,6 +88,11 @@
             * O(N)
       * Why LC315 can not resolved with only Merge Sort?
 
+**Binary Search Tree**
+
+* LC230. Kth Smallest Element in a BST
+    * Inorder traverse
+
 **Binary Indexed Tree**
 
 ![](../images/tree_bit.png?raw=true)
