@@ -17,6 +17,9 @@
   * Key Points
     * In-place sorting
     * not stable. May make stable
+  * About Heap
+    * A complete Binary Tree
+    * swim and sink are equal
 
 **Problems**
 * LC912 sort an array

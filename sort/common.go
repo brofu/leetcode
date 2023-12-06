@@ -1,7 +1,5 @@
 package sort
 
-import "fmt"
-
 func HeapSort(nums []int) {
 
 	length := len(nums)
@@ -40,66 +38,39 @@ func heapify(nums []int, length, index int) {
 	}
 }
 
-//func HeapSortRecursive(nums []int) {
-//	fmt.Println(nums)
-//	heapifyRecursive(nums, 0, 1, 2)
-//}
-//
-//func heapifyRecursive(nums []int, root, left, right int) {
-//	fmt.Println(root, left, right)
-//	if left >= len(nums) || right >= len(nums) {
-//		return
-//	}
-//
-//	fmt.Println(root, left, right, nums[root], nums[left], nums[right])
-//	heapifyRecursive(nums, left, left*2+1, left*2+2)
-//	heapifyRecursive(nums, right, right*2+1, right*2+2)
-//
-//	if nums[root] > nums[left] {
-//		nums[root], nums[left] = nums[left], nums[root]
-//	}
-//
-//	if nums[root] > nums[right] {
-//		nums[root], nums[right] = nums[right], nums[root]
-//	}
-//}
-
 func HeapSortIterative(nums []int) {
 	length := len(nums)
 
-	fmt.Println(nums)
-	for index := 0; index <= length/2; index += 1 {
-		heapifyIterative(nums, length, index)
-	}
-
-	for index := length - 1; index > 0; index -= 1 {
-		if nums[0] > nums[index] { // make it stable
-			nums[0], nums[index] = nums[index], nums[0]
+	// setup max heap
+	for index := length - 1; index >= 0; index -= 1 {
+		// swim
+		for parent := (index - 1) / 2; ; parent = (parent - 1) / 2 {
+			if nums[index] > nums[parent] {
+				nums[index], nums[parent] = nums[parent], nums[index]
+			}
+			if parent == 0 {
+				break
+			}
 		}
-		heapifyIterative(nums, index, 0)
 	}
 
-}
-
-func heapifyIterative(nums []int, length, index int) {
-
-	for left := 2*index + 1; left < length; left = left*2 + 1 {
-		fmt.Println("left", nums, index, left, nums[index], nums[left])
-		if nums[index] < nums[left] {
-			fmt.Println("left hit")
-			nums[index], nums[left] = nums[left], nums[index]
+	for index := length - 1; index >= 0; index -= 1 {
+		if nums[0] <= nums[index] { // make it stable
+			continue
 		}
-		fmt.Println("left after", nums)
-	}
-
-	for right := 2*index + 2; right < length; right = right*2 + 2 {
-		fmt.Println("right", nums, index, right, nums[index], nums[right])
-		if nums[index] < nums[right] {
-			nums[index], nums[right] = nums[right], nums[index]
-			fmt.Println("right hit")
+		nums[0], nums[index] = nums[index], nums[0]
+		// sink
+		root := 0
+		for left, right := 1, 2; left < index; left, right = root*2+1, root*2+2 {
+			maxIndex := left
+			if right < index && nums[maxIndex] < nums[right] {
+				maxIndex = right
+			}
+			if nums[root] >= nums[maxIndex] {
+				break
+			}
+			nums[root], nums[maxIndex] = nums[maxIndex], nums[root]
+			root = maxIndex
 		}
-		fmt.Println("right after", nums)
 	}
-
-	fmt.Println(nums)
 }

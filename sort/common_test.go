@@ -1,7 +1,6 @@
 package sort
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -58,7 +57,6 @@ func TestHeapSortIterative(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		fmt.Println(tt.name)
 		t.Run(tt.name, func(t *testing.T) {
 			HeapSortIterative(tt.args.nums)
 			if !reflect.DeepEqual(tt.args.nums, tt.want) {
