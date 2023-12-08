@@ -49,3 +49,30 @@ func kthSmallestWrapper(root *TreeNode, index int) (int, int) {
 	// return from right subtree
 	return kthSmallestWrapper(root.Right, index)
 }
+
+func kthSmallestV2(root *TreeNode, k int) int {
+
+	val, index := -1, 0
+
+	traverse := func(*TreeNode) {}
+	traverse = func(root *TreeNode) {
+
+		if root == nil {
+			return
+		}
+
+		traverse(root.Left)
+
+		index += 1
+		if index == k {
+			val = root.Val
+			return
+		}
+
+		traverse(root.Right)
+	}
+
+	traverse(root)
+
+	return val
+}

@@ -90,8 +90,15 @@
 
 **Binary Search Tree**
 
+* Key Points
+  * Use closure to reduce the complexity of passing parameters
+  *
 * LC230. Kth Smallest Element in a BST
     * Inorder traverse
+
+* LC538. LC1038. Convert BST to Greater Tree (same as 1038)
+    * DFT and right sub tree first (in order)
+
 
 **Binary Indexed Tree**
 

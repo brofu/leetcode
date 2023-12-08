@@ -75,3 +75,48 @@ func Test_kthSmallestWrapper(t *testing.T) {
 		})
 	}
 }
+
+func Test_kthSmallestV2(t *testing.T) {
+	type args struct {
+		root []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				root: []int{3, 1, 4, math.MaxInt, 2},
+				k:    1,
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				root: []int{5, 3, 6, 2, 4, math.MaxInt, math.MaxInt, 1},
+				k:    3,
+			},
+			want: 3,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				root: []int{3, 1, 4, math.MaxInt, 2},
+				k:    2,
+			},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			bst := GenerateBinaryTreeFromSlice(tt.args.root, 0)
+			if got := kthSmallestV2(bst, tt.args.k); got != tt.want {
+				t.Errorf("kthSmallestV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
