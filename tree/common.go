@@ -17,6 +17,13 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+type TreeNodeWithSubtreeSum struct {
+	Val   int
+	Sum   int
+	Left  *TreeNodeWithSubtreeSum
+	Right *TreeNodeWithSubtreeSum
+}
+
 func MaxInt(a, b int) int {
 	if a > b {
 		return a

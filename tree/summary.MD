@@ -95,6 +95,9 @@
   *
 * LC230. Kth Smallest Element in a BST
     * Inorder traverse
+    * Follow Up
+      * Extend the BST with `NumberSumOfSubtree`
+      * The operation of `Insert/Delete` elements into/from BST
 
 * LC538. LC1038. Convert BST to Greater Tree (same as 1038)
     * DFT and right sub tree first (in order)
