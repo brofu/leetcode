@@ -108,6 +108,7 @@
     
 * LC700. Search in a Binary Search Tree.
 * LC701. Insert into a Binary Search Tree.
+* LC450. Delete Node in a BST
 
 **Binary Indexed Tree**
 

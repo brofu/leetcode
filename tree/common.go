@@ -228,3 +228,10 @@ func (BITR BinaryIndexedTreeReverse) Sum(index int) int {
 	}
 	return sum
 }
+
+func GetMinFromBST(root *TreeNode) int {
+	for root.Left != nil {
+		root = root.Left
+	}
+	return root.Val
+}
