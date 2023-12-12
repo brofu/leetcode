@@ -102,6 +102,11 @@
 * LC538. LC1038. Convert BST to Greater Tree (same as 1038)
     * DFT and right sub tree first (in order)
 
+* LC98. Validate Binary Search Tree
+  * Key Points
+    * Not only the left and right child. But also all the left and right subtree
+    
+* LC700. Search in a Binary Search Tree.
 
 **Binary Indexed Tree**
 
