@@ -107,6 +107,7 @@
     * Not only the left and right child. But also all the left and right subtree
     
 * LC700. Search in a Binary Search Tree.
+* LC701. Insert into a Binary Search Tree.
 
 **Binary Indexed Tree**
 
