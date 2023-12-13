@@ -98,6 +98,16 @@
   * Principle
     > According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 
+    * For any node, if it has children, then, there must be at least 1 `Perfect Binary Tree` in it's children. 
+    
+**Perfect Binary Tree**
+  * Principle
+    * Every level of the tree is full
+    
+**Full Binary Tree**
+  * Principle
+    * Every node has either has both of the 2 children or none of the 2 children.
+    
 **Binary Search Tree**
 
 * Key Points
