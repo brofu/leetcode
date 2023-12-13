@@ -122,6 +122,13 @@
         * Recursive
 * LC95. Unique Binary Search Trees II
 
+* LC235. Lowest Common Ancestor of a Binary Search Tree
+  * Key Points.
+    * Convert to find the nodes in sub trees. Both at left sub tree, both at right sub tree, or 1 at right, 1 at left
+    * Utilize the BST character.
+
+
+
 **Binary Indexed Tree**
 
 ![](../images/tree_bit.png?raw=true)
