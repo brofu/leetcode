@@ -94,6 +94,9 @@
   * Key Points.
     * Convert to find the nodes in sub trees. Both at left sub tree, both at right sub tree, or 1 at right, 1 at left
 
+**Complete Binary Tree**
+  * Principle
+    > According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 
 **Binary Search Tree**
 
