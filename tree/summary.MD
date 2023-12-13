@@ -38,6 +38,8 @@
 
 ***Construction***
 
+**Binary Tree**
+
 * LC105. Construct binary tree from preorder and inorder array
     * Recursively.
     * Key points
@@ -87,6 +89,11 @@
           * S:
             * O(N)
       * Why LC315 can not resolved with only Merge Sort?
+
+* LC236. Lowest Common Ancestor of a Binary Tree
+  * Key Points.
+    * Convert to find the nodes in sub trees. Both at left sub tree, both at right sub tree, or 1 at right, 1 at left
+
 
 **Binary Search Tree**
 

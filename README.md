@@ -27,8 +27,8 @@ $ ./bin/leetcode
 **Array**
 
 **Tree**
-  * Binary Indexed Tree
   * Binary Search Tree
+  * Binary Indexed Tree
   * AVL Tree
       * References: https://www.geeksforgeeks.org/introduction-to-avl-tree/
   * Red-Black Tree
