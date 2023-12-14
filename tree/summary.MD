@@ -101,6 +101,9 @@
   * Key Points.
       * Cache the parents in array for p and q 
       * Convert the problem of `get the 1st common node of 2 linked list`
+* LC1676. Lowest Common Ancestor of a Binary Tree IV
+  * Key Point.
+    * Difference from LC1664??
 
 **Complete Binary Tree**
   * Principle

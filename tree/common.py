@@ -19,6 +19,17 @@ def GenerateBinaryTreeFromArray(array, index):
 
     return node
 
+def GetTreeNodeFromTree(root, key):
+    if not root:
+        return None
+    if root.val == key:
+        return root
+    res = GetTreeNodeFromTree(root.left, key)
+    if res:
+        return res
+   
+    return GetTreeNodeFromTree(root.right, key) 
+
 def PrintBinaryTreeWithDeepthFirstTraverse(root):
     nodes =[root] 
     level = 1 

@@ -89,6 +89,21 @@ func GetNodeWithParentFromTree(root *NodeWithParent, key int) *NodeWithParent {
 
 	return GetNodeWithParentFromTree(root.Right, key)
 }
+func GetTreeNodeFromTree(root *TreeNode, key int) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	if root.Val == key {
+		return root
+	}
+
+	if res := GetTreeNodeFromTree(root.Left, key); res != nil {
+		return res
+	}
+
+	return GetTreeNodeFromTree(root.Right, key)
+}
 
 type Queue struct {
 	elements []*TreeNode
