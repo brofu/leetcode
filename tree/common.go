@@ -4,6 +4,13 @@ import (
 	"math"
 )
 
+type NodeWithParent struct {
+	Val    int
+	Left   *NodeWithParent
+	Right  *NodeWithParent
+	Parent *NodeWithParent
+}
+
 type Node struct {
 	Val   int
 	Left  *Node
@@ -44,6 +51,43 @@ func GenerateBinaryTreeFromSlice(numbers []int, index int) *TreeNode {
 	left := GenerateBinaryTreeFromSlice(numbers, index*2+1)
 	right := GenerateBinaryTreeFromSlice(numbers, index*2+2)
 	return &TreeNode{Val: number, Left: left, Right: right}
+}
+
+func GenerateTreeNodeWithParentFromSlice(numbers []int, index int, parent *NodeWithParent) *NodeWithParent {
+
+	if index > len(numbers)-1 {
+		return nil
+	}
+
+	number := numbers[index]
+	if number == math.MaxInt {
+		return nil
+	}
+	node := &NodeWithParent{
+		Val:    number,
+		Parent: parent,
+	}
+
+	node.Left = GenerateTreeNodeWithParentFromSlice(numbers, index*2+1, node)
+	node.Right = GenerateTreeNodeWithParentFromSlice(numbers, index*2+2, node)
+
+	return node
+}
+
+func GetNodeWithParentFromTree(root *NodeWithParent, key int) *NodeWithParent {
+	if root == nil {
+		return nil
+	}
+
+	if root.Val == key {
+		return root
+	}
+
+	if res := GetNodeWithParentFromTree(root.Left, key); res != nil {
+		return res
+	}
+
+	return GetNodeWithParentFromTree(root.Right, key)
 }
 
 type Queue struct {

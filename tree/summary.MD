@@ -97,6 +97,10 @@
 * LC1664. Lowest Common Ancestor of a Binary Tree II.
   * Key Points.
     * Keep the idea of pre-order, in-order, post-order traverse...
+* LC1650. Lowest Common Ancestor of a Binary Tree III.
+  * Key Points.
+      * Cache the parents in array for p and q 
+      * Convert the problem of `get the 1st common node of 2 linked list`
 
 **Complete Binary Tree**
   * Principle
