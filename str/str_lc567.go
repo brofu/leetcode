@@ -4,7 +4,11 @@ package str
 1. O(n) space complexity is necessary, because need to check
 	a. If one letter occurs in s1 and s2
 	b. The occur times
+
+2. Possible optimizations
+	a. Use array instead. Improve significantly. 2ms vs 13ms.
 */
+
 func checkInclusion(s1 string, s2 string) bool {
 
 	recording := make(map[byte]int)
@@ -96,6 +100,58 @@ func checkInclusionV2(s1 string, s2 string) bool {
 
 		}
 
+	}
+
+	return false
+}
+
+// KP. consist of lowercase English letters.
+func checkInclusionV3(s1 string, s2 string) bool {
+
+	var recording, need [26]int
+
+	left, match, neededLetterNumber := 0, 0, 0
+
+	for _, s := range s1 {
+		need[s-'a'] += 1
+	}
+
+	for _, i := range need {
+		if i > 0 {
+			neededLetterNumber += 1
+		}
+	}
+
+	for right, s := range s2 {
+
+		// expand the window
+		index := s - 'a'
+		if need[index] > 0 { // need this letter
+			recording[index] += 1
+			if recording[index] == need[index] {
+				match += 1
+			}
+
+		}
+		right += 1
+
+		// shrink the window
+		for match == neededLetterNumber {
+			if right-left == len(s1) { // exist a result
+				return true
+			}
+
+			t := s2[left]
+			left += 1
+
+			index2 := t - 'a'
+			if need[index2] > 0 {
+				if need[index2] == recording[index2] {
+					match -= 1
+				}
+				recording[index2] -= 1
+			}
+		}
 	}
 
 	return false
