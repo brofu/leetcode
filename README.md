@@ -28,11 +28,11 @@ $ ./bin/leetcode
 
 #### Skills
 
-**Sliding Window**
+##### Sliding Window
 
 * Problem
 
-    Sub string problems
+    Sub-string problems
 
 * Examples
 
@@ -43,6 +43,16 @@ $ ./bin/leetcode
     https://labuladong.online/algo/essential-technique/sliding-window-framework/
 
 ### Tree
+
+#### BFS
+
+* Problem
+
+* Examples
+    111 
+
+#### DFS
+
   * Binary Search Tree
   * Binary Indexed Tree
   * AVL Tree

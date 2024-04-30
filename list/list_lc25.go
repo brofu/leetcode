@@ -1,5 +1,7 @@
 package list
 
+import "fmt"
+
 /*
 Problem 25. Reverse Nodes in k-Group
 Versions:
@@ -92,7 +94,52 @@ func reverseKGroupV2(head *ListNode, k int) *ListNode {
 		s = p // adjust the start
 	}
 
+	// edge case `k > list length` is not considered
+	// refer to `reverseKGroupP1`
 	tail.Next = p
 
 	return newHead
+}
+
+/*
+Practice iterate apprach
+*/
+
+func reverseKGroupP1(head *ListNode, k int) *ListNode {
+
+	index := 0
+
+	p, s, t := head, head, head
+	var newHead *ListNode
+
+	for ; p != nil; index += 1 {
+		p = p.Next
+	}
+
+	groups := index / k
+	fmt.Println("flag index, k, groups:", index, k, groups)
+
+	for p, group := s, 0; group < groups; group += 1 {
+
+		for i := 0; i < k; i++ {
+			p = p.Next
+		}
+
+		h := reverseByNode(s, p)
+
+		if newHead == nil {
+			newHead = h
+		} else {
+			t.Next = h
+		}
+		t = s
+		s = p
+	}
+
+	if newHead != nil {
+		t.Next = s
+		return newHead
+	}
+
+	return head
 }
