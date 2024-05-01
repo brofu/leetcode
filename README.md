@@ -32,24 +32,42 @@ $ ./bin/leetcode
 
 * Problem
 
-    Sub-string problems
+    * Sub-string problems
 
 * Examples
 
-    3, 76, 438, 567
+    * 3
+    * 76
+    * 438
+    * 567
 
 * References
 
-    https://labuladong.online/algo/essential-technique/sliding-window-framework/
+    * https://labuladong.online/algo/essential-technique/sliding-window-framework/
 
 ### Tree
 
-#### BFS
+#### Skills
 
-* Problem
+##### BFS
+
+* Problems
+
+    1. Min depth of binary tree
+    2. Min steps to open lock
+    3. Shortest distance from the `start` to the `target` node in a `graph`
+
 
 * Examples
-    111 
+
+    * 103
+    * 111
+    * 752 
+
+* References
+
+    * https://labuladong.online/algo/essential-technique/bfs-framework/
+
 
 #### DFS
 
