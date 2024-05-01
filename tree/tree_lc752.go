@@ -1,8 +1,13 @@
 package tree
 
+import (
+	"strconv"
+)
+
 /*
 KP
 	1. BFS
+	2. ~100ms
 */
 func openLock(deadends []string, target string) int {
 
@@ -74,5 +79,87 @@ func getNeighbour(str string) [8]string {
 		result[2*index+1] = string(str[:index]) + string(next) + string(str[index+1:])
 	}
 
+	return result
+}
+
+/*
+KP
+	1. BFS
+	2. Optimization. < 10ms
+		* store markers with array
+		* generate neighbors with integer approach
+
+*/
+func openLockV2(deadends []string, target string) int {
+
+	result := 0
+	init := "0000"
+
+	// possible values
+	// 0 not occurred
+	// 1 occurred
+	// 2 dead end
+	markers := [10000]int{}
+
+	for _, str := range deadends {
+		if str == target && str == init {
+			return -1
+		}
+		number, _ := strconv.Atoi(str)
+		markers[number] = 2
+	}
+
+	initNumber, _ := strconv.Atoi(init)
+	targetNumber, _ := strconv.Atoi(target)
+
+	markers[initNumber] = 1
+
+	queue := make([]int, 1)
+	queue[0] = initNumber
+
+	for len(queue) > 0 {
+		sz := len(queue)
+		index := 0
+		for ; index < sz; index += 1 {
+			number := queue[index]
+
+			if number == targetNumber {
+				return result
+			}
+
+			nexts := openLockHelperV2(number)
+			for _, next := range nexts {
+				if markers[next] == 0 {
+					queue = append(queue, next)
+					markers[next] = 1
+				}
+			}
+		}
+		queue = queue[index:]
+		result += 1
+	}
+
+	return -1
+}
+
+func openLockHelperV2(number int) [8]int {
+
+	result := [8]int{}
+	changeFactors := [4]int{1000, 100, 10, 1}
+
+	for i, factor := range changeFactors {
+		d := (number / factor) % 10
+		for j, mul := range [2]int{-1, 1} {
+			z := d + mul
+			if z == -1 {
+				z = 9
+			}
+			if z == 10 {
+				z = 0
+			}
+			next := number + (z-d)*factor
+			result[2*i+j] = next
+		}
+	}
 	return result
 }
