@@ -8,12 +8,17 @@ package tree
  *     Right *TreeNode
  * }
  */
+
+/**
+KP
+	1. bfs
+*/
 func zigzagLevelOrder(root *TreeNode) [][]int {
 
 	result := [][]int{}
 
 	if root == nil {
-		return nil
+		return result
 	}
 	queue := []*TreeNode{root}
 	direction := 1
@@ -42,5 +47,41 @@ func zigzagLevelOrder(root *TreeNode) [][]int {
 		direction = -direction
 	}
 
+	return result
+}
+
+/**
+KP
+	1. DFS
+*/
+func zigzagLevelOrderDFS(root *TreeNode) [][]int {
+
+	result := [][]int{}
+
+	var dfs func(*TreeNode, int)
+	dfs = func(root *TreeNode, level int) {
+		if root == nil {
+			return
+		}
+		if len(result) == level {
+			result = append(result, []int{root.Val})
+		} else {
+			result[level] = append(result[level], root.Val)
+		}
+		dfs(root.Left, level+1)
+		dfs(root.Right, level+1)
+	}
+	dfs(root, 0)
+	revert := func(result [][]int) {
+		for index, list := range result {
+			if index%2 == 1 {
+				for i, j := 0, len(list)-1; i < j; i, j = i+1, j-1 {
+					list[i], list[j] = list[j], list[i]
+				}
+			}
+		}
+	}
+
+	revert(result)
 	return result
 }
