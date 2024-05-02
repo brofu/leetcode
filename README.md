@@ -97,4 +97,17 @@ $ ./bin/leetcode
 
 
 
+### LinkedHashMap
 
+#### Skills
+
+##### LinkdedHashMap
+
+* Problems
+    * LRU Cache
+
+* Examples
+    * 146
+
+* References
+    * https://labuladong.online/algo/data-structure/lru-cache/

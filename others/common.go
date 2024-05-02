@@ -6,3 +6,10 @@ type Node struct {
 	Pre  *Node
 	Next *Node
 }
+
+type FrequencyNode struct {
+	Node
+	Frequency int
+	Pre       *FrequencyNode
+	Next      *FrequencyNode
+}
