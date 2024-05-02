@@ -105,9 +105,11 @@ $ ./bin/leetcode
 
 * Problems
     * LRU Cache
+    * LFU Cache
 
 * Examples
     * 146
+    * 460
 
 * References
     * https://labuladong.online/algo/data-structure/lru-cache/
