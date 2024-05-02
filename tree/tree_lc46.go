@@ -13,7 +13,7 @@ func permute(nums []int) [][]int {
 func backtrack(nums, track []int, used map[int]struct{}, answer *[][]int) {
 
 	if len(track) == len(nums) {
-		temp := make([]int, len(track))
+		temp := make([]int, len(track)) //TODO: difference of make and []int{}
 		//temp := []int{}
 		//n := copy(temp, track)
 		copy(temp, track)
@@ -34,4 +34,8 @@ func backtrack(nums, track []int, used map[int]struct{}, answer *[][]int) {
 		track = track[:len(track)-1]
 		delete(used, num)
 	}
+}
+
+func Permute(num []int) [][]int {
+	return permute(num)
 }

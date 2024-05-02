@@ -78,6 +78,23 @@ $ ./bin/leetcode
   * Red-Black Tree
       * [ ] References: https://geeksforgeeks.org/introduction-to-red-black-tree
 
+
+#### BackTrack
+
+* Problems
+
+    1. Permute number
+    2. Queen Problems
+    3. Restore IP address
+
+* Examples
+
+    * 46
+
+* References
+
+    * https://labuladong.online/algo/essential-technique/backtrack-framework/
+    
 ### Graph
 
 #### Heap
