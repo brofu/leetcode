@@ -86,10 +86,13 @@ $ ./bin/leetcode
     1. Permute number
     2. Queen Problems
     3. Restore IP address
+    4. Sudoku
 
 * Examples
 
     * 46
+    * 51
+    * 52
 
 * References
 
