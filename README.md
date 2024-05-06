@@ -28,6 +28,16 @@ $ ./bin/leetcode
 
 #### Skills
 
+##### Quick Select 
+
+* Problems
+
+  * Get the K largest number without sorting the whole array
+
+* Examples
+
+  * 215
+
 ##### Sliding Window
 
 * Problem
