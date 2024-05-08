@@ -16,6 +16,7 @@ func findKthLargest(nums []int, k int) int {
 
 	low, high := 0, len(nums)-1
 	//pivot := (low + high) / 2
+	//rand.Seed(time.Now().UnixNano())
 	pivot := low + rand.Intn(high-low+1)
 
 	for {
@@ -48,7 +49,7 @@ func quickSelectHelper(array []int, pivot, low, high int) int {
 	array[high], array[pivot] = array[pivot], array[high]
 	c := low
 
-	for i := low; i <= high; i += 1 {
+	for i := low; i < high; i += 1 {
 		if array[i] < val {
 			array[i], array[c] = array[c], array[i]
 			c += 1
@@ -93,4 +94,43 @@ func findKthLargestV2(nums []int, k int) int {
 	}
 
 	return 0
+}
+
+/**
+KP
+	1. QuickSort
+	2. T O(N*lgN)
+	3. M O(1)
+*/
+func findKthLargestV3(nums []int, k int) int {
+
+	quickSort(nums, 0, len(nums)-1)
+	return nums[len(nums)-k]
+}
+
+func quickSort(nums []int, low, high int) {
+
+	if low < high {
+		pivot := partition(nums, low, high)
+		quickSort(nums, low, pivot-1)
+		quickSort(nums, pivot+1, high)
+	}
+}
+
+func partition(nums []int, low, high int) int {
+	pivot := low + rand.Intn(high-low+1)
+	val := nums[pivot]
+	coursor := low
+
+	nums[pivot], nums[high] = nums[high], nums[pivot]
+
+	for i := low; i < high; i += 1 {
+		if nums[i] < val {
+			nums[i], nums[coursor] = nums[coursor], nums[i]
+			coursor += 1
+		}
+	}
+	nums[coursor], nums[high] = nums[high], nums[coursor]
+
+	return coursor
 }

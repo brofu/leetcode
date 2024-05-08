@@ -66,6 +66,15 @@ func Test_findKthLargest(t *testing.T) {
 			want: 5,
 		},
 		{
+			name: "lc case 2",
+			args: args{
+				nums: []int{3, 2, 3, 1, 2, 4, 5, 5, 6},
+				k:    4,
+			},
+			want: 4,
+		},
+
+		{
 			name: "lc case 3",
 			args: args{
 				nums: []int{1},
@@ -114,6 +123,42 @@ func Test_findKthLargestV2(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := findKthLargestV2(tt.args.nums, tt.args.k); got != tt.want {
 				t.Errorf("findKthLargestV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_findKthLargestV3(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "case 1",
+			args: args{
+				nums: []int{3, 2, 1, 5, 6, 4},
+				k:    2,
+			},
+			want: 5,
+		},
+		{
+			name: "case 2",
+			args: args{
+				nums: []int{3, 2, 3, 1, 2, 4, 5, 5, 6},
+				k:    4,
+			},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findKthLargestV3(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("findKthLargestV3() = %v, want %v", got, tt.want)
 			}
 		})
 	}
