@@ -3,6 +3,8 @@ package array
 import (
 	"math"
 	"math/rand"
+
+	"github.com/brofu/leetcode/sort"
 )
 
 /**
@@ -133,4 +135,14 @@ func partition(nums []int, low, high int) int {
 	nums[coursor], nums[high] = nums[high], nums[coursor]
 
 	return coursor
+}
+
+/**
+KP
+	1. Heap Sort
+*/
+
+func findKthLargestV4(nums []int, k int) int {
+	sort.HeapSort(nums)
+	return nums[len(nums)-k]
 }

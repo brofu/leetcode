@@ -74,3 +74,42 @@ func HeapSortIterative(nums []int) {
 		}
 	}
 }
+
+func HeapSortPV1(nums []int) {
+
+	length := len(nums)
+
+	// construct max heap
+	// why should loop from 1/2 largest indext to 0?
+	for i := (length - 1) / 2; i >= 0; i -= 1 {
+		heapifyPV1(nums, length, i)
+	}
+
+	// extract from max heap
+	for i := length - 1; i >= 0; i -= 1 {
+		if nums[0] > nums[i] {
+			nums[0], nums[i] = nums[i], nums[0]
+		}
+		heapifyPV1(nums, i, 0)
+	}
+}
+
+func heapifyPV1(nums []int, length, index int) {
+	largest := index
+
+	left := 2*index + 1
+	right := 2*index + 2
+
+	if left < length && nums[left] > nums[largest] {
+		largest = left
+	}
+
+	if right < length && nums[right] > nums[largest] {
+		largest = right
+	}
+
+	if largest != index {
+		nums[largest], nums[index] = nums[index], nums[largest]
+		heapify(nums, length, largest)
+	}
+}

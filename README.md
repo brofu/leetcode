@@ -18,9 +18,18 @@ $ ./bin/leetcode
 ``make test``
 
 
-## Principles
+## Algorithm
 
-### Data Structures
+### Sort
+
+| algorithm |  Time Complexity | Space Complexity | Scenarios | Problems | References |
+| :- | :- | :- | :- | :- | :- |
+| Quick Sort | O(N*lgN) | O(1) <br> O(lgN) considering recursion| * The K largest number in array  | * 215 <br> * 912| |
+| Merge Sort| O(N*lgN) | O(1) | * Sort <br> * The K largest number in array  | * 215 <br> * 912 ||
+| Heap Sort| O(N*lgN) | O(1) | * Sort <br> * The K largest number in array  | * 912 <br> * 215 | |
+
+
+## Data Structures
 
 ### List
 

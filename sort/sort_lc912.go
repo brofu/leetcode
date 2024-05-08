@@ -14,3 +14,8 @@ func sortArrayHeap(nums []int) []int {
 	HeapSort(nums)
 	return nums
 }
+
+func sortQuickSort(nums []int) []int {
+	QuickSort(nums, 0, len(nums)-1)
+	return nums
+}
