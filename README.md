@@ -22,14 +22,27 @@ $ ./bin/leetcode
 
 ### Sort
 
+| Scenarios | Problems |
+| :- | :- | 
+| Sort | * 912 |
+| The K largest number in array | * 215 |
+
 | algorithm |  Time Complexity | Space Complexity | Scenarios | Problems | References |
 | :- | :- | :- | :- | :- | :- |
-| Quick Sort | O(N*lgN) | O(1) <br> O(lgN) considering recursion| * The K largest number in array  | * 215 <br> * 912| |
-| Merge Sort| O(N*lgN) | O(1) | * Sort <br> * The K largest number in array  | * 215 <br> * 912 ||
-| Heap Sort| O(N*lgN) | O(1) | * Sort <br> * The K largest number in array  | * 912 <br> * 215 | |
+| Quick Sort | O(N*lgN) | O(1) <br> O(lgN) considering recursion| | | https://labuladong.online/algo/practice-in-action/quick-sort/ |
+| Merge Sort| O(N*lgN) | O(1) <br> O(N*lgN) considering recursion| | | * https://labuladong.online/algo/practice-in-action/merge-sort/ <br> * https://www.geeksforgeeks.org/merge-sort/ |
+| Heap Sort| O(N*lgN) | O(1) | | | https://www.geeksforgeeks.org/heap-sort/ |
 
 
 ## Data Structures
+
+### Binary Heap
+
+| Scenarios | Problems |
+| :- | :- | 
+| K Merge Problem | * 23  | 
+| Priority Queue Problems | * 295 Get the median of an ordered stream | 
+| Graph Algorithms | ?  | 
 
 ### List
 

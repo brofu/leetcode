@@ -208,3 +208,48 @@ func Test_findKthLargestV4(t *testing.T) {
 		})
 	}
 }
+
+func Test_findKthLargestV5(t *testing.T) {
+	type args struct {
+		nums []int
+		k    int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				nums: []int{3, 2, 1, 5, 6, 4},
+				k:    2,
+			},
+			want: 5,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				nums: []int{3, 2, 3, 1, 2, 4, 5, 5, 6},
+				k:    4,
+			},
+			want: 4,
+		},
+
+		{
+			name: "lc case 3",
+			args: args{
+				nums: []int{1},
+				k:    1,
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := findKthLargestV5(tt.args.nums, tt.args.k); got != tt.want {
+				t.Errorf("findKthLargestV5() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

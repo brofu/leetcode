@@ -4,6 +4,7 @@ import (
 	"math"
 	"math/rand"
 
+	"github.com/brofu/leetcode/common"
 	"github.com/brofu/leetcode/sort"
 )
 
@@ -144,5 +145,10 @@ KP
 
 func findKthLargestV4(nums []int, k int) int {
 	sort.HeapSort(nums)
+	return nums[len(nums)-k]
+}
+
+func findKthLargestV5(nums []int, k int) int {
+	common.MergeSort(nums)
 	return nums[len(nums)-k]
 }

@@ -1,4 +1,4 @@
-package stream
+package heap
 
 import (
 	"reflect"

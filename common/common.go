@@ -44,3 +44,41 @@ func MergeSort(nums []int) {
 		nums[index] = right[j]
 	}
 }
+
+func MergeSortPV1(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
+
+	middle := len(nums) / 2
+
+	MergeSortPV1(nums[:middle])
+	MergeSortPV1(nums[middle:])
+
+	left := make([]int, len(nums[:middle]))
+	right := make([]int, len(nums[middle:]))
+
+	_ = copy(left, nums[:middle])
+	_ = copy(right, nums[middle:])
+
+	i, j := 0, 0
+	index := 0
+
+	for ; i < middle && j < len(nums[middle:]); index += 1 {
+		if left[i] < right[j] {
+			nums[index] = left[i]
+			i += 1
+		} else {
+			nums[index] = right[j]
+			j += 1
+		}
+	}
+
+	for ; i < middle; i, index = i+1, index+1 {
+		nums[index] = left[i]
+	}
+
+	for ; j < len(nums[middle:]); j, index = j+1, index+1 {
+		nums[index] = right[j]
+	}
+}
