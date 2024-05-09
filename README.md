@@ -34,6 +34,12 @@ $ ./bin/leetcode
 | Heap Sort| O(N*lgN) | O(1) | | | https://www.geeksforgeeks.org/heap-sort/ |
 
 
+### Dynamic Programming
+
+| Scenarios | Problems |
+| :- | :- | 
+| | * 32. Longest Valid Parentheses |
+
 ## Data Structures
 
 ### Binary Heap

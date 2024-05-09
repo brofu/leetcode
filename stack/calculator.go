@@ -1,4 +1,4 @@
-package common
+package stack
 
 func main() {
 }
