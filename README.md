@@ -42,6 +42,13 @@ $ ./bin/leetcode
 
 ## Data Structures
 
+### Stack
+
+| Scenarios | Problems |
+| :- | :- | 
+| Valid Parentheses Problems| * 30  | 
+
+
 ### Binary Heap
 
 | Scenarios | Problems |
