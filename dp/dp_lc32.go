@@ -2,9 +2,13 @@ package dp
 
 /**
 Normal Version. Dynamic Programming. (Similar as backtrack)
+
+Reference: https://leetcode.com/problems/longest-valid-parentheses/editorial/
+
 KP
 	1.	T:	O(n)
 	2.	S:	O(n), with DP slice
+
 */
 
 func longestValidParenthesesV5(s string) int {
