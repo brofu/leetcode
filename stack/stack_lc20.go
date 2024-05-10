@@ -1,5 +1,11 @@
 package stack
 
+/**
+KP
+	1.	It's invalid if current is `)`, but stack.Size() == 0
+	2.	Need to check if all the elements in stack are matched
+*/
+
 func isValid(s string) bool {
 
 	stack := NewByteStack()
