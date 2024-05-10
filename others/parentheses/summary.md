@@ -5,5 +5,5 @@
 | :- | :- |:- | :- | 
 | 20 | | stack |  | 
 | 32 | | * stack <br> * Dynamic Programming | | 
-| 921 | | | | 
-| 1541 | | | Questions in the code. Makes no sense | 
+| 921. Minimum Add to Make Parentheses Valid | [Code](./parentheses_lc921.go) | | | 
+| 1541. Minimum Insertions to Balance a Parentheses String | | | TODO: Questions in the code. | 
