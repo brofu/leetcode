@@ -40,13 +40,14 @@ $ ./bin/leetcode
 | :- | :- | 
 | | * 32. Longest Valid Parentheses |
 
+
 ## Data Structures
 
 ### Stack
 
-| Scenarios | Problems |
-| :- | :- | 
-| Valid Parentheses Problems| * 30  | 
+| Scenarios | Problems | References |
+| :- | :- | :- |
+| Valid Parentheses Problems| * 30  | https://labuladong.online/algo/frequency-interview/bracket-problems-summary/ |
 
 
 ### Binary Heap
@@ -178,3 +179,12 @@ $ ./bin/leetcode
 
 * References
     * https://labuladong.online/algo/data-structure/lru-cache/
+    *
+
+## Other Classic Problems
+
+### Parentheses Problems
+
+[Parentheses Problems Summary](others/parentheses/summary.md)
+
+
