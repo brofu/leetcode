@@ -1,5 +1,7 @@
 package common
 
+import "fmt"
+
 //Comparable is the interface which is comparable
 type Comparable interface {
 	// if a > b, a.CompareTo(b) return 1
@@ -81,4 +83,12 @@ func MergeSortPV1(nums []int) {
 	for ; j < len(nums[middle:]); j, index = j+1, index+1 {
 		nums[index] = right[j]
 	}
+}
+
+func Debug(debug func(), msg string, args ...interface{}) {
+	fmt.Println(msg)
+	if debug != nil {
+		debug()
+	}
+	fmt.Println(msg, args)
 }
