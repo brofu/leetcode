@@ -84,3 +84,66 @@ func calculateWithParenthese(s string) int {
 
 	return result
 }
+
+/**
+KP
+	1.	How to control the cursive call-return point? Use the length of s. And need a pointer to s
+	2.	Handl the edged case when ' ' or number is at the end of the string.
+*/
+func calculateWithParentheseRecursively(s string) int {
+
+	var helper func(*string) int
+
+	helper = func(s *string) int {
+		result := 0
+		stack := NewRuneStack()
+		previousOperator := '+'
+		currentOperand := 0
+		*s = *s + "@"
+
+		for len(*s) > 0 {
+
+			o := (*s)[0]
+			*s = (*s)[1:]
+
+			if o == ' ' {
+				continue
+			}
+
+			if unicode.IsDigit(rune(o)) {
+				currentOperand = currentOperand*10 + int(o-'0')
+				continue
+			}
+
+			if o == '(' {
+				currentOperand = helper(s)
+				continue
+			}
+
+			switch previousOperator {
+			case '-':
+				currentOperand = -currentOperand
+			case '*':
+				previousOperand := stack.Pop()
+				currentOperand *= int(previousOperand)
+			case '/':
+				previousOperand := stack.Pop()
+				currentOperand = int(previousOperand) / currentOperand
+			}
+			stack.Push(rune(currentOperand))
+			previousOperator = rune(o)
+			currentOperand = 0
+
+			if o == ')' {
+				break
+			}
+		}
+		for stack.Size() > 0 {
+			result += int(stack.Pop())
+		}
+
+		return result
+	}
+
+	return helper(&s)
+}
