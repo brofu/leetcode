@@ -1,6 +1,8 @@
 package parentheses
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_minInsertions(t *testing.T) {
 	type args struct {
@@ -58,6 +60,75 @@ func Test_minInsertions(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := minInsertions(tt.args.s); got != tt.want {
 				t.Errorf("minInsertions() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_minInsertionsPV1(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				s: "(()))",
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				s: "())",
+			},
+			want: 0,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				s: "))())(",
+			},
+			want: 3,
+		},
+		{
+			name: "lc case 4",
+			args: args{
+				s: "(()))(()))()())))",
+			},
+			want: 4,
+		},
+		{
+			name: "self case 1",
+			args: args{
+				s: ")())",
+			},
+			want: 2,
+		},
+		{
+			name: "self case 2",
+			args: args{
+				//s: "()()())))",
+				s: "()()))",
+			},
+			want: 3,
+		},
+		{
+			name: "self case 3",
+			args: args{
+				s: ")(",
+			},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := minInsertionsPV1(tt.args.s); got != tt.want {
+				t.Errorf("minInsertionsPV1() = %v, want %v", got, tt.want)
 			}
 		})
 	}
