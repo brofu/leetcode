@@ -7,3 +7,8 @@
 | 32. Longest Valid Parentheses | | * stack <br> * [Dynamic Programming](../../dp/dp_lc32.go) | | 
 | 921. Minimum Add to Make Parentheses Valid | [KP in code](./parentheses_lc921.go) | | | 
 | 1541. Minimum Insertions to Balance a Parentheses String | | | TODO: Questions in the code. | 
+
+
+# Skills
+
+
