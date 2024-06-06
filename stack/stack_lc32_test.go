@@ -235,3 +235,50 @@ func Test_longestValidParenthesesV5(t *testing.T) {
 		})
 	}
 }
+
+func Test_longestValidParenthesesV3PV1(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc ase 1",
+			args: args{
+				s: "(()",
+			},
+			want: 2,
+		},
+		{
+			name: "lc ase 2",
+			args: args{
+				s: ")()())",
+			},
+			want: 4,
+		},
+		{
+			name: "lc ase 3",
+			args: args{
+				s: "",
+			},
+			want: 0,
+		},
+		{
+			name: "lc ase 4",
+			args: args{
+				s: "()(()",
+			},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := longestValidParenthesesV3PV1(tt.args.s); got != tt.want {
+				t.Errorf("longestValidParenthesesV3PV1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

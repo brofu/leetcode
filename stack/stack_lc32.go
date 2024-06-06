@@ -204,3 +204,32 @@ func longestValidParenthesesV5(s string) int {
 
 	return result
 }
+
+func longestValidParenthesesV3PV1(s string) int {
+	result := 0
+	stack := NewIntStack()
+	stack.Push(-1)
+
+	for i, o := range s {
+
+		if o == '(' {
+			stack.Push(i)
+			continue
+		}
+
+		stack.Pop()
+
+		if stack.Size() == 0 {
+			stack.Push(i)
+		} else {
+			pre := stack.Pop()
+			newAnswer := i - pre
+			if result < newAnswer {
+				result = newAnswer
+			}
+			stack.Push(pre)
+		}
+	}
+
+	return result
+}
