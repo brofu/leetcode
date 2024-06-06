@@ -3,8 +3,8 @@
 
 There are mainly 2 type problems relevant to parentheses
 
-    1.  Check if the parentheses in string are valid. Usually can be resolved with `stack`
-    2.  Generate valid parentheses in string. Usually can be resolve with `backtrack`
+    1. Check if the parentheses in string are valid. Usually can be resolved with `stack`
+    2. Generate valid parentheses in string. Usually can be resolve with `backtrack`
 
 
 # Problems
