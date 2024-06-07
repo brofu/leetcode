@@ -13,9 +13,7 @@ func permute(nums []int) [][]int {
 func backtrack(nums, track []int, used map[int]struct{}, answer *[][]int) {
 
 	if len(track) == len(nums) {
-		temp := make([]int, len(track)) //TODO: difference of make and []int{}
-		//temp := []int{}
-		//n := copy(temp, track)
+		temp := make([]int, len(track))
 		copy(temp, track)
 		*answer = append(*answer, temp)
 		return
@@ -79,5 +77,44 @@ func permutePV1(nums []int) [][]int {
 	}
 
 	backtrack(nums, track, used, &result)
+	return result
+}
+
+// 2024.06.07
+func permutePV2(nums []int) [][]int {
+
+	result := [][]int{}
+	track := []int{}
+	used := make([]bool, len(nums))
+
+	var bt func([]int, []int, []bool, *[][]int)
+	bt = func(nums, track []int, used []bool, result *[][]int) {
+
+		// base case
+		if len(track) == len(nums) {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			*result = append(*result, temp)
+			return
+		}
+
+		for index, num := range nums {
+
+			// filter
+			if used[index] {
+				continue
+			}
+
+			// choose
+			used[index] = true
+
+			// next layer traverse
+			bt(nums, append(track, num), used, result)
+			// cancel choose
+			used[index] = false
+		}
+	}
+
+	bt(nums, track, used, &result)
 	return result
 }
