@@ -2,7 +2,7 @@
 
 ### Three Types of Permutation, Combination and Set Problems
 
-There are 3 types of classic problems for `Permutation`, `Combination` and `Set` problems
+Generally, there are 3 types of classic problems for `Permutation`, `Combination` and `Set` problems. There maybe some other variants from these 3 types.
 
     1. Choose from a list which contains `Non-Duplicate` elements, and element can ONLY be used for ONE time.
     2. Choose from a list which contains `Duplicate` elements, and element can ONLY be used for ONE times.
@@ -15,6 +15,7 @@ There are 3 types of classic problems for `Permutation`, `Combination` and `Set`
 | Permutation Problems | [46](https://leetcode.com/problems/permutations/description/) | | [code](backtrack_lc46.go) | type 1 | 
 | Combination Problems | [77](https://leetcode.com/problems/combinations/description/)  | |[code](backtrack_lc77.go) | type 1 | 
 | Set Problems | [78](https://leetcode.com/problems/subsets/description/)  | |[code](backtrack_lc78.go) | type 1 | 
+| Set Problems | [90](https://leetcode.com/problems/subsets-ii/description/)  | |[code](backtrack_lc90.go) | type 2 | 
 | Queen Problems |  | | | | 
 | Sudo Problems |  | | | | 
 | Parentheses Problems |  | | | | 
