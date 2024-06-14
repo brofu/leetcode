@@ -72,3 +72,50 @@ func permuteUnique(nums []int) [][]int {
 	bt(nums, track, used, &result)
 	return result
 }
+
+/**
+KP
+	1.	A simpler pruning solution
+*/
+func permuteUniqueV2(nums []int) [][]int {
+	result := [][]int{}
+	track := []int{}
+	used := make([]bool, len(nums))
+
+	sort.Ints(nums)
+
+	var bt func([]int, []int, []bool, *[][]int)
+
+	bt = func(nums []int, track []int, used []bool, result *[][]int) {
+
+		// base case
+		if len(track) == len(nums) {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			*result = append(*result, temp)
+			return
+		}
+		preNum := -11
+
+		for i := 0; i < len(nums); i++ {
+			// pruning
+			if used[i] {
+				continue
+			}
+
+			// pruning
+			if preNum == nums[i] {
+				continue
+			}
+
+			// choose, next layer and cancel choose
+			used[i] = true
+			preNum = nums[i]
+			bt(nums, append(track, nums[i]), used, result)
+			used[i] = false
+		}
+	}
+
+	bt(nums, track, used, &result)
+	return result
+}
