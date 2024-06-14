@@ -13,7 +13,9 @@ Generally, there are 3 types of classic problems for `Permutation`, `Combination
 | Types | Problems | Key Points | Possible Solutions | Comments |
 | :- | :- | :- |:- | :- | 
 | Permutation Problems | [46](https://leetcode.com/problems/permutations/description/) | | [code](backtrack_lc46.go) | type 1 | 
+| Permutation Problems | [47](https://leetcode.com/problems/permutations-ii/description/) | | [code](backtrack_lc47.go) | type 2 | 
 | Combination Problems | [77](https://leetcode.com/problems/combinations/description/)  | |[code](backtrack_lc77.go) | type 1 | 
+| Combination Problems | [40](https://leetcode.com/problems/combination-sum-ii/description/)  | |[code](backtrack_lc40.go) | type 2 | 
 | Set Problems | [78](https://leetcode.com/problems/subsets/description/)  | |[code](backtrack_lc78.go) | type 1 | 
 | Set Problems | [90](https://leetcode.com/problems/subsets-ii/description/)  | |[code](backtrack_lc90.go) | type 2 | 
 | Queen Problems |  | | | | 
