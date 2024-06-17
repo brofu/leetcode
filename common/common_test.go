@@ -76,3 +76,75 @@ func TestMergeSortPV1(t *testing.T) {
 		})
 	}
 }
+
+func TestCheckIntSlice(t *testing.T) {
+	type args struct {
+		a []int
+		b [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "case 1",
+			args: args{
+				a: []int{1, 2},
+				b: [][]int{{1, 2, 3}, {1, 2}},
+			},
+			want: true,
+		},
+		{
+			name: "case 2",
+			args: args{
+				a: []int{1, 2},
+				b: [][]int{{1, 2, 3}, {1}},
+			},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := CheckIntSlice(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("CheckIntSlice() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDeepEqualIntSlice(t *testing.T) {
+	type args struct {
+		a [][]int
+		b [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "case 1",
+			args: args{
+				a: [][]int{{1, 2}},
+				b: [][]int{{1, 2, 3}, {1, 2}},
+			},
+			want: false,
+		},
+		{
+			name: "case 2",
+			args: args{
+				a: [][]int{{1, 2, 3}, {1, 2}},
+				b: [][]int{{1, 2, 3}, {1, 2}},
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := DeepEqualIntSlice(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("DeepEqualIntSlice() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

@@ -3,6 +3,8 @@ package backtrack
 import (
 	"reflect"
 	"testing"
+
+	"github.com/brofu/leetcode/common"
 )
 
 func Test_backtrack(t *testing.T) {
@@ -214,7 +216,7 @@ func Test_permuteV2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := permuteV2(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
+			if got := permuteV2(tt.args.nums); !common.DeepEqualIntSlice(got, tt.want) {
 				t.Errorf("permuteV2() = %v, want %v", got, tt.want)
 			}
 		})

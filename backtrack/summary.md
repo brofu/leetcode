@@ -32,5 +32,6 @@ And the key points of these problems is the `backtrack tree`
 
 1. https://labuladong.online/algo/essential-technique/backtrack-framework/ 
 2. https://labuladong.online/algo/essential-technique/permutation-combination-subset-all-in-one/
-3. 
+3. https://labuladong.online/algo/practice-in-action/two-views-of-backtrack/
+4. 
 

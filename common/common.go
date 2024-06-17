@@ -92,3 +92,57 @@ func Debug(debug func(), msg string, args ...interface{}) {
 	}
 	fmt.Println(msg, args)
 }
+
+func DeepEqualIntSlice(a, b [][]int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for _, list := range a {
+		if !CheckIntSlice(list, b) {
+			return false
+		}
+	}
+	return true
+}
+
+func CheckIntSlice(a []int, b [][]int) bool {
+	result := false
+
+OutLoop:
+	for _, list := range b {
+
+		if len(list) != len(a) {
+			continue
+		}
+		mapA := make(map[int]int)
+		for _, e := range a {
+			if _, exists := mapA[e]; exists {
+				mapA[e] += 1
+			} else {
+				mapA[e] = 1
+			}
+		}
+		mapB := make(map[int]int)
+		for _, e := range list {
+			if _, exists := mapB[e]; exists {
+				mapB[e] += 1
+			} else {
+				mapB[e] = 1
+			}
+		}
+
+		for keyA, valA := range mapA {
+			if valB, exists := mapB[keyA]; !exists {
+				continue OutLoop
+			} else {
+				if valA != valB {
+					continue OutLoop
+				}
+			}
+		}
+
+		result = true
+	}
+
+	return result
+}
