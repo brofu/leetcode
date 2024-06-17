@@ -41,3 +41,32 @@ func combinationSum(candidates []int, target int) [][]int {
 	bt(candidates, track, 0, sum, target, &result)
 	return result
 }
+
+func combinationSumV2(candidates []int, target int) [][]int {
+
+	result := [][]int{}
+	track := []int{}
+
+	var bt func([]int, int, int)
+
+	bt = func(track []int, start, sum int) {
+
+		// base case
+		if sum == target {
+			result = append(result, append([]int(nil), track...))
+			return
+		}
+
+		if sum > target {
+			return
+		}
+
+		for i := start; i < len(candidates); i++ {
+			bt(append(track, candidates[i]), i, sum+candidates[i])
+		}
+	}
+
+	bt(track, 0, 0)
+
+	return result
+}
