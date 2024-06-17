@@ -86,8 +86,8 @@ func Test_combinationSumV2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := combinationSumV2(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("combinationSumV2() = %v, want %v", got, tt.want)
+			if got := combinationSumPV1(tt.args.candidates, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("combinationSumPV1() = %v, want %v", got, tt.want)
 			}
 		})
 	}

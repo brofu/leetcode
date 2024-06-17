@@ -42,7 +42,7 @@ func combinationSum(candidates []int, target int) [][]int {
 	return result
 }
 
-func combinationSumV2(candidates []int, target int) [][]int {
+func combinationSumPV1(candidates []int, target int) [][]int {
 
 	result := [][]int{}
 	track := []int{}
