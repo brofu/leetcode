@@ -118,3 +118,36 @@ func permutePV2(nums []int) [][]int {
 	bt(nums, track, used, &result)
 	return result
 }
+
+/**
+KP.
+	1.	Use `swap` to reduce the memory complexity
+	2.	Select elements for each position.
+*/
+
+func permuteV2(nums []int) [][]int {
+	result := [][]int{}
+
+	var bt func(int)
+
+	bt = func(start int) {
+
+		// base case
+		if start == len(nums) {
+			result = append(result, append([]int(nil), nums...))
+			return
+		}
+
+		for i := start; i < len(nums); i++ {
+
+			// choose, traverse next layer, and cancel choose
+			nums[start], nums[i] = nums[i], nums[start]
+			bt(start + 1)
+			nums[start], nums[i] = nums[i], nums[start]
+		}
+	}
+
+	bt(0)
+
+	return result
+}
