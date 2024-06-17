@@ -19,6 +19,7 @@ And the key points of these problems is the `backtrack tree`
 | Permutation Problems | [46](https://leetcode.com/problems/permutations/description/) | | [code](backtrack_lc46.go) | type 1 | 
 | Permutation Problems | [47](https://leetcode.com/problems/permutations-ii/description/) | | [code](backtrack_lc47.go) | type 2 | 
 | Combination Problems | [77](https://leetcode.com/problems/combinations/description/)  | |[code](backtrack_lc77.go) | type 1 | 
+| Combination Problems | [216](https://leetcode.com/problems/combination-sum-iii/description/)  | |[code](backtrack_lc216.go) | type 1 | 
 | Combination Problems | [40](https://leetcode.com/problems/combination-sum-ii/description/)  | |[code](backtrack_lc40.go) | type 2 | 
 | Combination Problems | [39](https://leetcode.com/problems/combination-sum/description/)  | |[code](backtrack_lc39.go) | type 3 | 
 | Set Problems | [78](https://leetcode.com/problems/subsets/description/)  | |[code](backtrack_lc78.go) | type 1 | 
@@ -31,4 +32,5 @@ And the key points of these problems is the `backtrack tree`
 
 1. https://labuladong.online/algo/essential-technique/backtrack-framework/ 
 2. https://labuladong.online/algo/essential-technique/permutation-combination-subset-all-in-one/
+3. 
 
