@@ -28,6 +28,12 @@ And the key points of these problems is the `backtrack tree`
 | Sudo Problems |  | | | | 
 | Parentheses Problems |  | | | | 
 
+# Variants Problems
+
+| Types | Problems | Key Points | Possible Solutions | Comments |
+| :- | :- | :- |:- | :- | 
+| Debt Problem | [465](https://leetcode.com/problems/optimal-account-balancing/description/) | | [code](backtrack_lc465.go) | | 
+
 # References
 
 1. https://labuladong.online/algo/essential-technique/backtrack-framework/ 
