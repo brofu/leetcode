@@ -4,13 +4,13 @@ import "math"
 
 /**
 KP.
-	1. Setup correct connection with `backtrack`. Migrate the debts of current person (with index `cur`) to the next person (with index `cur+1`).
+	1. Setup correct connection with `backtrack`. Migrate the debts of current person (with index `cur`) to the next person (with index `cur+1`). Similar to `Dynamic Programming`?
 	2. Migrate the debt to the next person, so we have
 		a.	bt(cur) = 1 + bt(cur + 1) and if
 		b.  leftDebts[cur] == 0, then bt(cur) = bt(cur + 1)
 	3. Two import pruning:
 		a.  if leftDebts[cur]*leftDebts[cur+1] > 0, can skip the debt migration
-		b.  if leftDebts[cur]+leftDets[cur+1] == 0, can break. Since if the min transactions of bt(cur+1) is N, then bt(cur) must be N+1. (The pruning happens after the deeper layer traverse)
+		b.  if leftDebts[cur]+leftDets[cur+1] == 0, can break. Since if the min transactions of bt(cur+1) is N, then bt(cur) must be N+1. (The pruning happens after the deeper layer traverse). Similiar to `Dynamic Programming`?
 
 */
 func minTransfers(transactions [][]int) int {

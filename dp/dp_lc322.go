@@ -4,6 +4,12 @@ import (
 	"math"
 )
 
+/**
+KP
+	1.	最优子结构
+	2.	状态转移方程
+	3.  重叠子问题
+*/
 func coinChange(coins []int, amount int) int {
 
 	if amount == 0 {
@@ -102,4 +108,76 @@ func coinChangeRecurrenceWithMemo(coins []int, amount int) int {
 	}
 
 	return memo[amount]
+}
+
+func coinChangePV1(coins []int, amount int) int {
+
+	var dp func(int) int
+
+	memo := make(map[int]int)
+
+	dp = func(amount int) int {
+
+		// base case
+		if amount == 0 {
+			return 0
+		}
+
+		// wrong solution
+		if amount < 0 {
+			return -1
+		}
+
+		if val, exists := memo[amount]; exists {
+			return val
+		}
+
+		solution := math.MaxInt
+		for _, coin := range coins {
+			subSolution := dp(amount - coin)
+			if subSolution == -1 {
+				continue
+			}
+			solution = MinInt(solution, subSolution+1)
+		}
+
+		if solution == math.MaxInt {
+			solution = -1
+		}
+
+		memo[amount] = solution
+		return solution
+	}
+
+	return dp(amount)
+}
+
+/**
+KP
+	1.	Setup correct DP table. （状态转移方程）
+*/
+func coinChangeWithDP(coins []int, amount int) int {
+
+	dp := make([]int, amount+1)
+	for i := range dp {
+		dp[i] = amount + 1
+	}
+
+	// base case
+	dp[0] = 0
+
+	for i := 1; i < len(dp); i++ {
+		for _, coin := range coins {
+			if i-coin < 0 {
+				continue
+			}
+			dp[i] = MinInt(dp[i-coin]+1, dp[i])
+		}
+	}
+
+	if dp[amount] == amount+1 {
+		return -1
+	}
+
+	return dp[amount]
 }
