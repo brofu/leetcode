@@ -65,3 +65,7 @@
 * LC354. Russian Doll Envelopes
     * Iiheat from LC300
     * Sort by width and height with different order
+
+| Types | Problems | Key Points | Possible Solutions | Comments |
+| :- | :- | :- |:- | :- | 
+| | [2263](https://leetcode.com/problems/make-array-non-decreasing-or-non-increasing/description/) | How to setup the status migration? | [code](backtrack_lc2263.go) | | 
