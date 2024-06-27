@@ -3,6 +3,7 @@ package dfs
 /**
 KP
 	1.	Note the input is '1' 0r '0', instead of 1 or 0.
+	2.	为什么每次遇到岛屿，都要用 DFS 算法把岛屿「淹了」呢？主要是为了省事，避免维护 visited 数组。 因为 dfs 函数遍历到值为 0 的位置会直接返回，所以只要把经过的位置都设置为 0，就可以起到不走回头路的作用。
 */
 func numIslands(grid [][]byte) int {
 
