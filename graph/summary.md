@@ -58,7 +58,7 @@
         }
         ```
 
-# Problems
+# Categories
 
 ### DAG 
 
@@ -68,19 +68,19 @@
 
 ### Bipartite Graph 
 
-##### Bipartite Graph Principles
+##### Problems
 
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/description/) | It's possible that the graph is NOT connected | DFS, BFS | [code](graph_lc785.go) | | 
 | [886. Possible Bipartition](https://leetcode.com/problems/possible-bipartition/description/) | How to transfer the problem to the Bipartite Graph Problem | DFS, BFS| [code](graph_lc886.go) | | 
 
-**Usage**
+###### Usage
 1. It's useful with `m:n` model. For example, reference between `movies` and `acters`. 
 2. Ford–Fulkerson algorithm
 
 
-**Code Frame**
+##### Code Frame
 ```
 func traverse(graph Graph, visited []bool, v int) {
 	visited[v] = true
@@ -94,7 +94,15 @@ func traverse(graph Graph, visited []bool, v int) {
 }
 ```
 
+### Ring Check
+
+##### Problems
+
+| Problems | Key Points | Possible Solutions | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/) | Difference of `visited` and `onPath` | DFS, BFS | [code](graph_lc207.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
 2. [Bipartite Problems](https://labuladong.online/algo/data-structure/bipartite-graph/)
+3. [Ring Check Problems](https://labuladong.online/algo/data-structure/topological-sort/)
