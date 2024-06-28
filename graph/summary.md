@@ -1,5 +1,5 @@
 
-# Principles
+# Core Principles
 
 * How to `traverse` a `graph`?    
     1. Similar as `tree` 
@@ -60,8 +60,35 @@
 
 # Problems
 
-### DAG Problems
+### DAG 
 
 | Problems | Key Points | Possible Solutions | Comments |
-| [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/) | | [code](graph_lc797.go) | | 
+| :- |:- |:- | :- | 
+| [797. All Paths From Source to Target](https://leetcode.com/problems/all-paths-from-source-to-target/description/) | DFS | [code](graph_lc797.go) | | 
 
+### Bipartite Graph 
+
+##### Bipartite Graph Principles
+
+**Usage**
+1. It's useful with `m:n` model. For example, reference between `movies` and `acters`. 
+2. Ford–Fulkerson algorithm
+
+
+**Code Frame**
+```
+func traverse(graph Graph, visited []bool, v int) {
+	visited[v] = true
+    // 遍历节点 v 的所有相邻节点 neighbor
+	for _, neighbor := range graph.Neighbors(v) {
+		if !visited[neighbor] { // not visted yet, visit it, and color it with different color.
+			traverse(graph, visited, neighbor)
+		} else { // visted, compare if the color is different. if NO, the graph is not bipartite
+		}
+	}
+}
+```
+
+
+# References
+1. https://labuladong.online/algo/data-structure/graph-traverse/
