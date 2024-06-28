@@ -72,7 +72,7 @@
 
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
-| [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/description/) | It's possible that the graph is NOT connected | DFS | [code](graph_lc785.go) | | 
+| [785. Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/description/) | It's possible that the graph is NOT connected | DFS, BFS | [code](graph_lc785.go) | | 
 
 **Usage**
 1. It's useful with `m:n` model. For example, reference between `movies` and `acters`. 

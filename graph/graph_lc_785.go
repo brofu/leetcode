@@ -40,3 +40,42 @@ func isBipartite(graph [][]int) bool {
 
 	return result
 }
+
+func isBipartiteBFS(graph [][]int) bool {
+
+	result := true
+	visited := make([]bool, len(graph))
+	colors := make([]bool, len(graph))
+
+	var bfs func(int)
+
+	bfs = func(node int) {
+
+		visited[node] = true
+		queue := []int{node}
+
+		for len(queue) > 0 && result {
+			node = queue[0]
+			queue = queue[1:]
+			for _, next := range graph[node] {
+				if !visited[next] {
+					visited[next] = true
+					colors[next] = !colors[node]
+					queue = append(queue, next)
+				} else {
+					if colors[next] == colors[node] {
+						result = false
+						return
+					}
+				}
+			}
+		}
+	}
+
+	for i := 0; i < len(graph); i++ {
+		if !visited[i] {
+			bfs(i)
+		}
+	}
+	return result
+}
