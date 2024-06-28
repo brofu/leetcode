@@ -100,9 +100,25 @@ func traverse(graph Graph, visited []bool, v int) {
 
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
-| [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/) | Difference of `visited` and `onPath` | DFS, BFS | [code](graph_lc207.go) | | 
+| [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/) | * Difference of `visited` and `onPath`<br>* Construct graph | DFS, BFS | [code](graph_lc207.go) | | 
+
+
+### Topological Sorting
+
+##### Concepts
+
+What's `Topological Sorting`?
+>直观地说就是，让你把一幅图「拉平」，而且这个「拉平」的图里面，所有箭头方向都是一致的，比如上图所有箭头都是朝右的。很显然，如果一幅有向图中存在环，是无法进行拓扑排序的，因为肯定做不到所有箭头方向一致；反过来，如果一幅图是「有向无环图」，那么一定可以进行拓扑排序。As for problem 210, 如果把课程抽象成节点，课程之间的依赖关系抽象成有向边，那么这幅图的拓扑排序结果就是上课顺序。
+
+##### Problems
+
+| Problems | Key Points | Possible Solutions | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/) | * Directions mean `Depending on` or `Depended by`? <br>* Pre-order or Post-order to collect the current node? | DFS, BFS | [code](graph_lc210.go) | | 
+
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
 2. [Bipartite Problems](https://labuladong.online/algo/data-structure/bipartite-graph/)
 3. [Ring Check Problems](https://labuladong.online/algo/data-structure/topological-sort/)
+4. [Topological Sorting](https://labuladong.online/algo/data-structure/topological-sort/)
