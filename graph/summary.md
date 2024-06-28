@@ -96,4 +96,5 @@ func traverse(graph Graph, visited []bool, v int) {
 
 
 # References
-1. https://labuladong.online/algo/data-structure/graph-traverse/
+1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
+2. [Bipartite Problems](https://labuladong.online/algo/data-structure/bipartite-graph/)
