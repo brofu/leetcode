@@ -13,7 +13,7 @@ Time Complexity: O(lgN)
 type UFWithSize struct {
 	count  int
 	parent []int // use array to implement the connection of the trees
-	size   []int // how many sub-nodes in the tree with node x as root
+	size   []int // how many sub-nodes in the tree with node x as root. Balance the tree
 }
 
 func (uf *UFWithSize) Union(x, y int) {
@@ -68,9 +68,9 @@ func NewUFWithSize(n int) UnionFind {
 
 /**
 An implementation of algorithm of Union Find.
-Time Complexity: O(1)
-	*  based on the `path compression`
+Time Complexity: O(1). How? Basically, we don't care about the struct of the tree, we just care about the `ROOT` of the tree. So, we may `compress the path` (make all the nodes have the `root` node as its parent node)
 */
+
 type UF struct {
 	count  int
 	parent []int // use array to implement the connection of the trees
@@ -87,7 +87,7 @@ func (uf *UF) Union(x, y int) {
 
 func (uf *UF) find(x int) int {
 	if uf.parent[x] != x {
-		uf.parent[x] = uf.find(uf.parent[x])
+		uf.parent[x] = uf.find(uf.parent[x]) // compress the path here.
 	}
 	return uf.parent[x]
 }

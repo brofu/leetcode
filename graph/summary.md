@@ -117,6 +117,28 @@ What's `Topological Sorting`?
 | [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/) | * Directions mean `Depending on` or `Depended by`? <br>* Pre-order or Post-order to collect the current node? | DFS, BFS | [code](graph_lc210.go) | | 
 
 
+### Connectivity Problems - Union Find 
+
+##### Concepts
+
+>Connectivity problems of graph
+>自反性,对称性,传递性
+
+
+
+##### Skills 
+
+>使用森林（若干棵树）来表示图的动态连通性，用数组来具体实现这个森林。
+
+Code frame and optimization refer to [code](./common.go)
+
+##### Problems
+
+| Problems | Key Points | Possible Solutions | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/) | | | [code](graph_lc323.go) | | 
+| [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) | * DFS(islands problem) | | [code](graph_lc130.go) | | 
+
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
 2. [Bipartite Problems](https://labuladong.online/algo/data-structure/bipartite-graph/)
