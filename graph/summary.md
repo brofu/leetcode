@@ -137,7 +137,7 @@ Code frame and optimization refer to [code](./common.go)
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/) | | | [code](graph_lc323.go) | | 
-| [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) | * DFS(islands problem) | | [code](graph_lc130.go) | | 
+| [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) | * DFS(islands problem) <br>* Union Find | | [code](graph_lc130.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
