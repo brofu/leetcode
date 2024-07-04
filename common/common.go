@@ -153,3 +153,11 @@ func MaxInt(a, b int) int {
 	}
 	return b
 }
+
+func AbsIntSub(a, b int) int {
+	sub := a - b
+	if sub >= 0 {
+		return sub
+	}
+	return -sub
+}

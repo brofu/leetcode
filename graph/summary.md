@@ -157,7 +157,7 @@ Code frame and optimization refer to [code](./common.go)
 
 * Minimum Spanning Tree
 
-> 先说「树」和「图」的根本区别：树不会包含环，图可以包含环.
+  > 先说「树」和「图」的根本区别：树不会包含环，图可以包含环.
 如果一幅图没有环，完全可以拉伸成一棵树的模样。树就是「无环连通图」。
 那么什么是图的「生成树」呢，就是在图中找一棵包含图中的所有节点的树。生成树是含有图中所有顶点的「无环连通子图」。
 一幅图可以有很多不同的生成树，对于加权图，每条边都有权重，所以每棵生成树都有一个权重和。
@@ -165,8 +165,9 @@ Code frame and optimization refer to [code](./common.go)
 
 ##### Skills 
 
-How to generate a MST?
-> 1、包含图中的所有节点。
+* How to generate a MST?
+
+  > 1、包含图中的所有节点。
 2、形成的结构是树结构（即不存在环）。
 3、权重和最小。
 前两条其实可以很容易地利用 Union-Find 算法做到，关键在于第 3 点，如何保证得到的这棵生成树是权重和最小的。
@@ -180,6 +181,7 @@ How to generate a MST?
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/) | | Union Find + Greedy | [code](graph_lc1135.go) | | 
+| [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/) | | Union Find + Greedy | [code](graph_lc1584.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
