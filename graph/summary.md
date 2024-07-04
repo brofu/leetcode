@@ -181,7 +181,7 @@ Code frame and optimization refer to [code](./common.go)
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/) | | Union Find + Greedy | [code](graph_lc1135.go) | | 
-| [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/) | | Union Find + Greedy | [code](graph_lc1584.go) | | 
+| [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/) | | * Union Find + Greedy <br> * [For-Loop](graph_lc1584.go#L47) | [code](graph_lc1584.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
