@@ -134,9 +134,10 @@ What's `Topological Sorting`?
 ##### Skills 
 
 >使用森林（若干棵树）来表示图的动态连通性，用数组来具体实现这个森林。
-* 用 parent 数组记录每个节点的父节点，相当于指向父节点的指针，所以 parent 数组内实际存储着一个森林（若干棵多叉树）。
-* 用 size 数组记录着每棵树的重量，目的是让 union 后树依然拥有平衡性，保证各个 API 时间复杂度为 O(logN)，而不会退化成链表影响操作效率。
-* 在 find 函数中进行路径压缩，保证任意树的高度保持在常数，使得各个 API 时间复杂度为 O(1)。使用了路径压缩之后，可以不使用 size 数组的平衡优化。
+>
+>1. 用 parent 数组记录每个节点的父节点，相当于指向父节点的指针，所以 parent 数组内实际存储着一个森林（若干棵多叉树）。
+>2. 用 size 数组记录着每棵树的重量，目的是让 union 后树依然拥有平衡性，保证各个 API 时间复杂度为 O(logN)，而不会退化成链表影响操作效率。
+>3. 在 find 函数中进行路径压缩，保证任意树的高度保持在常数，使得各个 API 时间复杂度为 O(1)。使用了路径压缩之后，可以不使用 size 数组的平衡优化。
 
 Code frame and optimization refer to [code](./common.go)
 
@@ -145,8 +146,8 @@ Code frame and optimization refer to [code](./common.go)
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/) | | Union Find | [code](graph_lc323.go) | | 
-| [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) | * DFS(islands problem) <br>* Union Find | | [code](graph_lc130.go) | | 
-| [990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/) | Union Find | | [code](graph_lc990.go) | | 
+| [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) |  | * DFS(islands problem) <br>* Union Find | [code](graph_lc130.go) | | 
+| [990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/) | | Union Find | [code](graph_lc990.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
