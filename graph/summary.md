@@ -148,6 +148,7 @@ Code frame and optimization refer to [code](./common.go)
 | [323. Number of Connected Components in an Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/) | | Union Find | [code](graph_lc323.go) | | 
 | [130. Surrounded Regions](https://leetcode.com/problems/surrounded-regions/description/) |  | * DFS(islands problem) <br>* Union Find | [code](graph_lc130.go) | | 
 | [990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/) | | Union Find | [code](graph_lc990.go) | | 
+| [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/description/) | * How to separate the graph and tree? | Union Find | [code](graph_lc261.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
