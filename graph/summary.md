@@ -150,9 +150,41 @@ Code frame and optimization refer to [code](./common.go)
 | [990. Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/description/) | | Union Find | [code](graph_lc990.go) | | 
 | [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/description/) | * How to separate the graph and tree? | Union Find | [code](graph_lc261.go) | | 
 
+
+### Kruskal Algorithm
+
+##### Concepts
+
+* Minimum Spanning Tree
+
+> 先说「树」和「图」的根本区别：树不会包含环，图可以包含环.
+如果一幅图没有环，完全可以拉伸成一棵树的模样。树就是「无环连通图」。
+那么什么是图的「生成树」呢，就是在图中找一棵包含图中的所有节点的树。生成树是含有图中所有顶点的「无环连通子图」。
+一幅图可以有很多不同的生成树，对于加权图，每条边都有权重，所以每棵生成树都有一个权重和。
+权重和最小的那棵生成树就叫「最小生成树」。
+
+##### Skills 
+
+How to generate a MST?
+> 1、包含图中的所有节点。
+2、形成的结构是树结构（即不存在环）。
+3、权重和最小。
+前两条其实可以很容易地利用 Union-Find 算法做到，关键在于第 3 点，如何保证得到的这棵生成树是权重和最小的。
+这里就用到了贪心思路：
+将所有边按照权重从小到大排序，从权重最小的边开始遍历，如果这条边和 mst 中的其它边不会形成环，则这条边是最小生成树的一部分，将它加入 mst 集合；否则，这条边不是最小生成树的一部分，不要把它加入 mst 集合。
+
+
+
+##### Problems
+
+| Problems | Key Points | Possible Solutions | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/) | | Union Find + Greedy | [code](graph_lc1135.go) | | 
+
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
 2. [Bipartite Problems](https://labuladong.online/algo/data-structure/bipartite-graph/)
 3. [Ring Check Problems](https://labuladong.online/algo/data-structure/topological-sort/)
 4. [Topological Sorting](https://labuladong.online/algo/data-structure/topological-sort/)
 5. [Union Find](https://labuladong.online/algo/data-structure/union-find/)
+6. [Kruskal Algorithm](https://labuladong.online/algo/data-structure/kruskal/)
