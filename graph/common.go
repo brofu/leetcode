@@ -113,3 +113,30 @@ func NewUF(n int) UnionFind {
 	}
 	return &uf
 }
+
+/**
+Priority Queue of `state`
+*/
+type statePriorityQueue []*state
+
+func (this statePriorityQueue) Less(i, j int) bool {
+	return this[i].distanceFromStart < this[j].distanceFromStart
+}
+
+func (this statePriorityQueue) Len() int {
+	return len(this)
+}
+
+func (this statePriorityQueue) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func (this *statePriorityQueue) Push(x any) {
+	*this = append(*this, x.(*state))
+}
+
+func (this *statePriorityQueue) Pop() any {
+	x := (*this)[0]
+	*this = (*this)[1:]
+	return x
+}

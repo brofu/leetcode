@@ -56,6 +56,7 @@ func minCostConnectPointsWithoutUF(points [][]int) int {
 
 	for i := 0; i < n-1; i++ {
 		for j := i + 1; j < n; j++ {
+			// calculate the distances[i+1], and store the smallest point to points[i+1]
 			distances[j] = common.MinInt(distances[j], common.AbsIntSub(points[i][0], points[j][0])+common.AbsIntSub(points[i][1], points[j][1]))
 			if distances[i+1] > distances[j] {
 				distances[i+1], distances[j] = distances[j], distances[i+1]

@@ -174,14 +174,15 @@ Code frame and optimization refer to [code](./common.go)
 这里就用到了贪心思路：
 将所有边按照权重从小到大排序，从权重最小的边开始遍历，如果这条边和 mst 中的其它边不会形成环，则这条边是最小生成树的一部分，将它加入 mst 集合；否则，这条边不是最小生成树的一部分，不要把它加入 mst 集合。
 
+In short, `Kruskal MST` can be considered as `Union Find` + `Greedy`
 
 
 ##### Problems
 
 | Problems | Key Points | Possible Solutions | code| Comments |
 | :- |:- |:- | :- | :-- |
-| [1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/) | | Union Find + Greedy | [code](graph_lc1135.go) | | 
-| [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/) | | * Union Find + Greedy <br> * [For-Loop](graph_lc1584.go#L47) | [code](graph_lc1584.go) | | 
+| [1135. Connecting Cities With Minimum Cost](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/) | | * Kruskal MST | [code](graph_lc1135.go) | | 
+| [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points/description/) | | * Kruskal MST <br> * [For-Loop](graph_lc1584.go#L47) | [code](graph_lc1584.go) | | 
 
 # References
 1. [Graph Traverse](https://labuladong.online/algo/data-structure/graph-traverse/)
@@ -190,3 +191,4 @@ Code frame and optimization refer to [code](./common.go)
 4. [Topological Sorting](https://labuladong.online/algo/data-structure/topological-sort/)
 5. [Union Find](https://labuladong.online/algo/data-structure/union-find/)
 6. [Kruskal Algorithm](https://labuladong.online/algo/data-structure/kruskal/)
+7. []
