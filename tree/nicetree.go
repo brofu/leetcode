@@ -6,6 +6,7 @@ NICE tree means
 1. root.val = 0
 2. if it has left child, the val is 2 * root.val + 1
 2. if it has right child, the val is 2 * root.right + 2
+T: O(lgN) N is the target
 */
 func Query(root *TreeNode, target int) bool {
 
