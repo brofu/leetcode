@@ -172,3 +172,36 @@ func (this *stateXYPriorityQueue) Pop() any {
 	*this = (*this)[1:]
 	return x
 }
+
+type stateFloat64 struct {
+	id          int
+	probability float64
+}
+
+/**
+Priority Queue of `stateFloat64`
+*/
+type stateFloat64PriorityQueue []*stateFloat64
+
+func (this stateFloat64PriorityQueue) Less(i, j int) bool {
+	return this[i].probability > this[j].probability
+}
+
+func (this stateFloat64PriorityQueue) Len() int {
+	return len(this)
+}
+
+func (this stateFloat64PriorityQueue) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func (this *stateFloat64PriorityQueue) Push(x any) {
+	*this = append(*this, x.(*stateFloat64))
+}
+
+func (this *stateFloat64PriorityQueue) Pop() any {
+	length := this.Len()
+	x := (*this)[length-1]
+	*this = (*this)[:length-1]
+	return x
+}
