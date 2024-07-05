@@ -140,3 +140,35 @@ func (this *statePriorityQueue) Pop() any {
 	*this = (*this)[1:]
 	return x
 }
+
+type stateXY struct {
+	x, y              int
+	distanceFromStart int
+}
+
+/**
+Priority Queue of `stateXY`
+*/
+type stateXYPriorityQueue []*stateXY
+
+func (this stateXYPriorityQueue) Less(i, j int) bool {
+	return this[i].distanceFromStart < this[j].distanceFromStart
+}
+
+func (this stateXYPriorityQueue) Len() int {
+	return len(this)
+}
+
+func (this stateXYPriorityQueue) Swap(i, j int) {
+	this[i], this[j] = this[j], this[i]
+}
+
+func (this *stateXYPriorityQueue) Push(x any) {
+	*this = append(*this, x.(*stateXY))
+}
+
+func (this *stateXYPriorityQueue) Pop() any {
+	x := (*this)[0]
+	*this = (*this)[1:]
+	return x
+}
