@@ -2,7 +2,6 @@ package graph
 
 import (
 	"container/heap"
-	"fmt"
 	"math"
 
 	"github.com/brofu/leetcode/common"
@@ -20,13 +19,12 @@ func minimumEffortPath(heights [][]int) int {
 		}
 	}
 	distanceTo[0][0] = 0
-	fmt.Println("flag", distanceTo)
 	pq := make(stateXYPriorityQueue, 0)
 	heap.Init(&pq)
 	heap.Push(&pq, &stateXY{0, 0, 0})
 
 	for pq.Len() > 0 {
-		currendNode := pq.Pop().(*stateXY)
+		currendNode := heap.Pop(&pq).(*stateXY)
 
 		currentX, currentY := currendNode.x, currendNode.y
 

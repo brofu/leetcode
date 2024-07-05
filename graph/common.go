@@ -168,8 +168,9 @@ func (this *stateXYPriorityQueue) Push(x any) {
 }
 
 func (this *stateXYPriorityQueue) Pop() any {
-	x := (*this)[0]
-	*this = (*this)[1:]
+	length := this.Len()
+	x := (*this)[length-1]
+	*this = (*this)[:length-1]
 	return x
 }
 
