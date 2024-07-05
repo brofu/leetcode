@@ -1,7 +1,6 @@
 package tree
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -14,6 +13,5 @@ func init() {
 func test(n int) int {
 	var once sync.Once
 	once.Do(func() {})
-	fmt.Println("I am here", n)
 	return n
 }

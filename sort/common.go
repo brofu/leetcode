@@ -113,3 +113,36 @@ func heapifyPV1(nums []int, length, index int) {
 		heapify(nums, length, largest)
 	}
 }
+
+func HeapSortPV2(nums []int) {
+
+	for i := (len(nums) - 1) / 2; i >= 0; i-- { // construct max heap, sink from index (len(nums)-1)/2
+		heapifyPV2(nums, len(nums), i)
+	}
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		nums[i], nums[0] = nums[0], nums[i] // swap the largest to nums[i]
+		heapifyPV2(nums, i, 0)
+	}
+
+}
+
+func heapifyPV2(nums []int, length, index int) {
+
+	largest := index
+	left := 2*index + 1
+	right := 2*index + 2
+
+	if left < length && nums[left] > nums[largest] {
+		largest = left
+	}
+
+	if right < length && nums[right] > nums[largest] {
+		largest = right
+	}
+
+	if largest != index {
+		nums[largest], nums[index] = nums[index], nums[largest]
+		heapifyPV2(nums, length, largest)
+	}
+}

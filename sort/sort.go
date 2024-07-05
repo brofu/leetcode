@@ -1,7 +1,7 @@
 package sort
 
 // InsertionSort
-// T O(n) S O(1)
+// T O(n^2) S O(1)
 // Skill: reduce the set value
 
 func InsertionSort(nums []int) {
