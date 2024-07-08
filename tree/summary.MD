@@ -42,7 +42,8 @@
 
 | Problems | Solutions | Key Points | code| Comments |
 | :- |:- |:- | :- | :-- |
-| [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) | 1. post-order DFS<br>2. Track the path from root to target node| 1. Only 2 situations: one left, on right and one is parent of another <br> 2. The loop order of the track slice| [code](tree_lc236.go) | | 
+| [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) | 1. post-order DFS<br>2. Track the path from root to target node and compare the slice | 1. Only 2 situations: one left, on right and one is parent of another <br> 2. The loop order of the track slice| [code](tree_lc236.go) | | 
+| [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) | Same solutions as 236 | 1. Utilize the character of BST | [code](tree_lc235.go) | | 
 
 
 **Binary Tree**
@@ -148,12 +149,6 @@
     * Key Points.
         * Recursive
 * LC95. Unique Binary Search Trees II
-
-* LC235. Lowest Common Ancestor of a Binary Search Tree
-  * Key Points.
-    * Convert to find the nodes in sub trees. Both at left sub tree, both at right sub tree, or 1 at right, 1 at left
-    * Utilize the BST character.
-
 
 
 **Binary Indexed Tree**
