@@ -48,6 +48,17 @@
 | [1257. Smallest Common Region](https://leetcode.com/problems/smallest-common-region/description/) | Same solutions as 1650 | | [code](tree_lc1257.go) | | 
 
 
+### BST Problems
+
+| Problems | Solutions | Key Points | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) | | | [code](tree_lc108.go) | | 
+
+### Other Problems
+| Problems | Solutions | Key Points | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [1530. Number of Good Leaf Nodes Pairs](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/) | DFS | * Count the pairs of left sub-tree, right sub-tree and current node <br> * How to calculate the distance? Utilized height | [code](tree_lc1530.go) | | 
+
 **Binary Tree**
 
 * LC105. Construct binary tree from preorder and inorder array
