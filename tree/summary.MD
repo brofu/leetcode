@@ -53,6 +53,8 @@
 | Problems | Solutions | Key Points | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) | | | [code](tree_lc108.go) | | 
+| [1382. Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/description/) | in-order traverse + convert ordered array to BST | | [code](tree_lc1382.go) | | 
+
 
 ### Other Problems
 | Problems | Solutions | Key Points | code| Comments |
