@@ -44,6 +44,7 @@
 | :- |:- |:- | :- | :-- |
 | [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) | 1. post-order DFS<br>2. Track the path from root to target node and compare the slice | 1. Only 2 situations: one left, on right and one is parent of another <br> 2. The loop order of the track slice| [code](tree_lc236.go) | | 
 | [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) | Same solutions as 236 | 1. Utilize the character of BST | [code](tree_lc235.go) | | 
+| [1650. Lowest Common Ancestor of a Binary Tree III](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/description/) | Linked list | 1. Check the public node 2 linked list | [code](tree_lc1650.go) | | 
 
 
 **Binary Tree**
@@ -101,10 +102,6 @@
 * LC1664. Lowest Common Ancestor of a Binary Tree II.
   * Key Points.
     * Keep the idea of pre-order, in-order, post-order traverse...
-* LC1650. Lowest Common Ancestor of a Binary Tree III.
-  * Key Points.
-      * Cache the parents in array for p and q 
-      * Convert the problem of `get the 1st common node of 2 linked list`
 * LC1676. Lowest Common Ancestor of a Binary Tree IV
   * Key Point.
     * Difference from LC1664??
