@@ -60,6 +60,7 @@
 | Problems | Solutions | Key Points | code| Comments |
 | :- |:- |:- | :- | :-- |
 | [1530. Number of Good Leaf Nodes Pairs](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/) | DFS | * Count the pairs of left sub-tree, right sub-tree and current node <br> * How to calculate the distance? Utilized height | [code](tree_lc1530.go) | | 
+| [993. Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/description/) | DFS, BFS | | [code](tree_lc993.go) | | 
 
 **Binary Tree**
 
