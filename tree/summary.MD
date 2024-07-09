@@ -57,6 +57,10 @@
 
 ### BST Problems - Construction
 | [96. Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/description/) | DFS post-order | How to set memo effectively | [code](tree_lc96.go) | | 
+| [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/description/) | DFS post-order | Edged case of `low > high` and `low == high` | [code](tree_lc95.go) | | 
+
+Reference
+1. https://labuladong.online/algo/data-structure/bst-part3/
 
 ### Other Problems
 | Problems | Solutions | Key Points | code| Comments |
