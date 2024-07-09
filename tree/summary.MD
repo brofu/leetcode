@@ -163,9 +163,6 @@ Reference
 * LC701. Insert into a Binary Search Tree.
 * LC450. Delete Node in a BST
 
-* LC95. Unique Binary Search Trees II
-
-
 **Binary Indexed Tree**
 
 ![](../images/tree_bit.png?raw=true)

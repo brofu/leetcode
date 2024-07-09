@@ -69,3 +69,11 @@
 | Types | Problems | Key Points | Possible Solutions | Comments |
 | :- | :- | :- |:- | :- | 
 | | [2263](https://leetcode.com/problems/make-array-non-decreasing-or-non-increasing/description/) | How to setup the status migration? | [code](backtrack_lc2263.go) | | 
+
+
+### Sub Sequences Problems
+
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/) | 1. DP <br> 2. BIT | 1. DP <br> * How to setup/update dp array for `dpCount`? | [code](backtrack_lc2263.go) | | 
