@@ -19,3 +19,8 @@ func sortQuickSort(nums []int) []int {
 	QuickSort(nums, 0, len(nums)-1)
 	return nums
 }
+
+func sortArrayPV1(nums []int) []int {
+	common.MergeSortV2(nums)
+	return nums
+}
