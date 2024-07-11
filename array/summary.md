@@ -13,3 +13,12 @@
 | :- | :- | :- |:- | :- | 
 | [674. Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/) | | Edged case: the array ALL is increasing | [code](array_lc674.go) | |
 
+
+### MergeSort Related Problems
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [315. Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) |* Merge Sort<br>*Binary Indexed Tree<br>* Segment Tree | Principle why merge sort can work (R1) | [code](array_lc674.go) | |
+
+
+Reference:
+R1. https://labuladong.online/algo/practice-in-action/merge-sort/
