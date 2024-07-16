@@ -36,7 +36,8 @@ R1. https://labuladong.online/algo/practice-in-action/merge-sort/
 
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
-| [303. Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable/description/) | Presum | | [code](array_lc303.go) | |
+| [303. Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable/description/) | Presum | * If the `left` num is included | [code](array_lc303.go) | |
+| [304. Range Sum Query 2D - Immutable](https://leetcode.com/problems/range-sum-query-2d-immutable/description/) | Presum | * if `left` is included<br> * the set calculation | [code](array_lc304.go) | |
 
 
 Reference:

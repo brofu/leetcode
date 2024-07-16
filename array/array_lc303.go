@@ -12,8 +12,7 @@ func Constructor(nums []int) NumArray {
 	return NumArray{preSum: sum}
 }
 
+// KP. the left number is included in the range
 func (this *NumArray) SumRange(left int, right int) int {
-
 	return this.preSum[right+1] - this.preSum[left]
-
 }
