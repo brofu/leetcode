@@ -57,6 +57,8 @@
 | [314. Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/) | | | [code](tree_lc314.go) | | 
 
 ### BST Problems - Construction
+| Problems | Solutions | Key Points | code| Comments |
+| :- |:- |:- | :- | :-- |
 | [96. Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/description/) | DFS post-order | How to set memo effectively | [code](tree_lc96.go) | | 
 | [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/description/) | DFS post-order | Edged case of `low > high` and `low == high` | [code](tree_lc95.go) | | 
 
@@ -69,12 +71,18 @@ Reference
 | [1530. Number of Good Leaf Nodes Pairs](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/) | DFS | * Count the pairs of left sub-tree, right sub-tree and current node <br> * How to calculate the distance? Utilized height | [code](tree_lc1530.go) | | 
 | [993. Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/description/) | DFS, BFS | | [code](tree_lc993.go) | | 
 
+
+
+### BT Problems
+
+### BT Problems - Construction
+
+| Problems | Solutions | Key Points | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/) | preorder inorder | Boundary of array | [code](tree_lc105.go) | | 
+
 **Binary Tree**
 
-* LC105. Construct binary tree from preorder and inorder array
-    * Recursively.
-    * Key points
-      * Bound of array
 * LC106. Construct binary tree from preorder and inorder array
     * Recursively.
     * Key points
