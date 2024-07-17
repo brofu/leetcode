@@ -54,6 +54,7 @@
 | :- |:- |:- | :- | :-- |
 | [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/) | | | [code](tree_lc108.go) | | 
 | [1382. Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/description/) | in-order traverse + convert ordered array to BST | | [code](tree_lc1382.go) | | 
+| [314. Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/) | | | [code](tree_lc314.go) | | 
 
 ### BST Problems - Construction
 | [96. Unique Binary Search Trees](https://leetcode.com/problems/unique-binary-search-trees/description/) | DFS post-order | How to set memo effectively | [code](tree_lc96.go) | | 
