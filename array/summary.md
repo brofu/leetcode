@@ -42,3 +42,10 @@ R1. https://labuladong.online/algo/practice-in-action/merge-sort/
 
 Reference:
 R1. https://labuladong.online/algo/practice-in-action/merge-sort://labuladong.online/algo/data-structure/prefix-sum/ 
+
+
+### BitMask Problems
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [2506. Count Pairs Of Similar Strings](https://leetcode.com/problems/count-pairs-of-similar-strings/description/) | bitmask | should contain SAME characters | [code](array_lc2506.go) | |
