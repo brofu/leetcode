@@ -60,4 +60,4 @@ R1. https://labuladong.online/algo/practice-in-action/merge-sort://labuladong.on
 ### Others
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
-| [1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/) | |* The idea of loop logic.<br> * Stop loop in advance and edged case| [code](array_lc1062.go) | |
+| [1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/) | |* 1.1 The idea of loop logic.<br> * 1.2 Stop loop in advance and edged case<br>* 2 The idea of binary search with possible length| [code](array_lc1062.go) | |

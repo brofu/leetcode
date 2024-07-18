@@ -26,6 +26,12 @@ func longestRepeatingSubstring(s string) int {
 	return result
 }
 
+/**
+KP.
+	1.	Idea of use possible length as the 1st loop.
+	2.	The edged case
+	3.	Break the loop in advance
+*/
 func longestRepeatingSubstringV2(s string) int {
 
 	result := 0
@@ -47,4 +53,37 @@ func longestRepeatingSubstringV2(s string) int {
 		}
 	}
 	return result
+}
+
+/**
+KP.
+	1.	Check the possible length with binary search idea
+*/
+func longestRepeatingSubstringV3(s string) int {
+
+	data := make(map[string]struct{})
+
+	search := func(length int) bool {
+		for i := 0; i <= len(s)-length; i++ {
+			sub := s[i : i+length]
+			if _, ok := data[sub]; ok {
+				return true
+			} else {
+				data[sub] = struct{}{}
+			}
+		}
+		return false
+	}
+
+	low, high := 1, len(s)
+
+	for low <= high { // KP. User binary search ideas for the length checking
+		mid := (low + high) / 2
+		if search(mid) {
+			low = mid + 1
+		} else {
+			high = mid - 1
+		}
+	}
+	return low - 1
 }
