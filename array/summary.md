@@ -55,3 +55,9 @@ R1. https://labuladong.online/algo/practice-in-action/merge-sort://labuladong.on
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [1010. Pairs of Songs With Total Durations Divisible by 60](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/) | |*get the idea of % 60.<br>* Edged case of length = 0 or 30 | [code](array_lc1010.go) | |
+
+
+### Others
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [1062. Longest Repeating Substring](https://leetcode.com/problems/longest-repeating-substring/description/) | |* The idea of loop logic.<br> * Stop loop in advance and edged case| [code](array_lc1062.go) | |
