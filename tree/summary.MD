@@ -81,6 +81,14 @@ Reference
 | :- |:- |:- | :- | :-- |
 | [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/) | preorder inorder | Boundary of array | [code](tree_lc105.go) | | 
 
+
+### BT Problems - Widt & Column Related
+
+| Problems | Solutions | Key Points | code| Comments |
+| :- |:- |:- | :- | :-- |
+| [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/description/) | BFS | Edged case | [code](tree_lc662.go) | | 
+
+
 **Binary Tree**
 
 * LC106. Construct binary tree from preorder and inorder array
