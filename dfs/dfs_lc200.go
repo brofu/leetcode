@@ -41,3 +41,38 @@ func numIslands(grid [][]byte) int {
 
 	return result
 }
+
+func numIslandsPV1(grid [][]byte) int {
+
+	count := 0
+	m, n := len(grid), len(grid[0])
+
+	directions := [][]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+	var dfs func(int, int)
+	dfs = func(i, j int) {
+		if i < 0 || i >= m || j < 0 || j >= n {
+			return
+		}
+
+		if grid[i][j] == 0 {
+			return
+		}
+
+		grid[i][j] = 0
+
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < m; j++ {
+			if grid[i][j] == 1 {
+				count += 1
+				dfs(i, j)
+			}
+		}
+	}
+
+	return count
+}
