@@ -140,3 +140,35 @@ func lowestCommonAncestorPV1(root, p, q *TreeNode) *TreeNode {
 
 	return parentsP[i+1]
 }
+
+func lowestCommonAncestorPV2(root, p, q *TreeNode) *TreeNode {
+
+	var traverse func(root, p, q *TreeNode) *TreeNode
+
+	traverse = func(root, p, q *TreeNode) *TreeNode {
+		if root == nil {
+			return root
+		}
+		if root != nil && (root.Val == p.Val || root.Val == q.Val) {
+			return root
+		}
+
+		left := traverse(root.Left, p, q)
+		right := traverse(root.Right, p, q)
+
+		if left != nil && right != nil {
+			return root
+		}
+
+		if left != nil {
+			return left
+		}
+		if right != nil {
+			return right
+		}
+
+		return nil
+	}
+
+	return traverse(root, p, q)
+}

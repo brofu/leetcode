@@ -199,3 +199,52 @@ func Test_lowestCommonAncestorPV1(t *testing.T) {
 		})
 	}
 }
+
+func Test_lowestCommonAncestorPV2(t *testing.T) {
+	type args struct {
+		input []int
+		root  *TreeNode
+		p     *TreeNode
+		q     *TreeNode
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				input: []int{3, 5, 1, 6, 2, 0, 8, math.MaxInt, math.MaxInt, 7, 4},
+				p: &TreeNode{
+					Val: 5,
+				},
+				q: &TreeNode{
+					Val: 1,
+				},
+			},
+			want: 3,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				input: []int{3, 5, 1, 6, 2, 0, 8, math.MaxInt, math.MaxInt, 7, 4},
+				p: &TreeNode{
+					Val: 5,
+				},
+				q: &TreeNode{
+					Val: 4,
+				},
+			},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.args.root = GenerateBinaryTreeFromSlice(tt.args.input, 0)
+			if got := lowestCommonAncestorPV2(tt.args.root, tt.args.p, tt.args.q); !reflect.DeepEqual(got.Val, tt.want) {
+				t.Errorf("lowestCommonAncestorPV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
