@@ -49,3 +49,9 @@ R1. https://labuladong.online/algo/practice-in-action/merge-sort://labuladong.on
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [2506. Count Pairs Of Similar Strings](https://leetcode.com/problems/count-pairs-of-similar-strings/description/) | bitmask | should contain SAME characters | [code](array_lc2506.go) | |
+
+### Math Related Problems
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [1010. Pairs of Songs With Total Durations Divisible by 60](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/) | |*get the idea of % 60.<br>* Edged case of length = 0 or 30 | [code](array_lc1010.go) | |
