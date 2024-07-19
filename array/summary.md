@@ -18,6 +18,7 @@ Notes
 | :- | :- | :- |:- | :- | 
 | [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/) | Sliding Window | operate the supporting vars at the same time| [code](array_lc76.go) | |
 | [159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/description/) | Sliding Window | The `extend and shrunk window` logic is different from problem 76 | [code](array_lc159.go) | |
+| [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) | Sliding Window | Version v2 and PV1. PV1 shows the standard workflow of `Sliding Window` clearly  | [code](array_lc3.go) | |
 
 **Reference**
 1. https://labuladong.online/algo/essential-technique/sliding-window-framework-2/

@@ -1,4 +1,4 @@
-package str
+package array
 
 // adopt the sliding window framework
 // https://labuladong.online/algo/essential-technique/sliding-window-framework/#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A1%86%E6%9E%B6%E6%A6%82%E8%A7%88
@@ -48,4 +48,38 @@ func lengthOfLongestSubstringV2(s string) int {
 	}
 
 	return res
+}
+
+/**
+KP.
+	1.	This version can show the standard workflows of `Sliding Window`
+*/
+func lengthOfLongestSubstringPV1(s string) int {
+
+	records := make(map[byte]int)
+	result := 0
+	left, right := 0, 0
+
+	for ; right < len(s); right++ {
+
+		// extend the window
+		c := s[right]
+		index, ok := records[c]
+		if !ok {
+			records[c] = right
+			continue
+		}
+
+		// a valid result
+		if result < right-left {
+			result = right - left
+		}
+		records[c] = right
+
+		// shrunk the window
+		if left <= index {
+			left = index + 1
+		}
+	}
+	return result
 }
