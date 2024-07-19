@@ -121,6 +121,13 @@ func Test_lengthOfLongestSubstringPV1(t *testing.T) {
 			},
 			want: 3,
 		},
+		{
+			name: "lc case4",
+			args: args{
+				s: " ",
+			},
+			want: 1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

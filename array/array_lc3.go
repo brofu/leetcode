@@ -81,5 +81,9 @@ func lengthOfLongestSubstringPV1(s string) int {
 			left = index + 1
 		}
 	}
+
+	if result < right-left {
+		result = right - left
+	}
 	return result
 }
