@@ -13,12 +13,14 @@
 
 Notes
 1. The logic of `extend window` and `shrunk window` maybe different from problem to problem. For example, it's different for problem 76 and 159. 
+2. The workflow maybe different from problem to problem also. For example, problem 395. 
 
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/) | Sliding Window | operate the supporting vars at the same time| [code](array_lc76.go) | |
 | [159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/description/) | Sliding Window | The `extend and shrunk window` logic is different from problem 76 | [code](array_lc159.go) | |
 | [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) | Sliding Window | Version v2 and PV1. PV1 shows the standard workflow of `Sliding Window` clearly  | [code](array_lc3.go) | |
+| [395. Longest Substring with At Least K Repeating Characters](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/) | Sliding Window | the workflow is different from the framework. Extend, shrunk, and the check if we have a valid result | [code](array_lc395.go) | |
 
 **Reference**
 1. https://labuladong.online/algo/essential-technique/sliding-window-framework-2/
