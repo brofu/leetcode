@@ -143,3 +143,69 @@ func solveNQueensPV1(n int) [][]string {
 	trackback(board, 0, &result)
 	return result
 }
+
+func solveNQueensPV2(n int) [][]string {
+
+	result := make([][]string, 0, n)
+	board := make([]string, n)
+	for i := 0; i < len(board); i++ {
+		board[i] = strings.Repeat(".", n)
+	}
+
+	valid := func(board []string, row, col int) bool {
+
+		// check same col
+		for i := 0; i < row; i++ {
+			if board[i][col] == 'Q' {
+				return false
+			}
+		}
+
+		// check up-left
+		for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+			if board[i][j] == 'Q' {
+				return false
+			}
+		}
+
+		// check up-right
+		for i, j := row-1, col+1; i >= 0 && j < n; i, j = i-1, j+1 {
+			if board[i][j] == 'Q' {
+				return false
+			}
+		}
+		return true
+	}
+
+	var tb func([]string, int)
+
+	tb = func(board []string, row int) {
+		// base case
+		if row == n {
+			temp := append([]string{}, board...)
+			result = append(result, temp)
+			return
+		}
+
+		for col := 0; col < n; col++ {
+			// pruning.
+			if !valid(board, row, col) {
+				continue
+			}
+
+			// choose
+			raw := []byte(board[row])
+			raw[col] = 'Q'
+			board[row] = string(raw)
+
+			// next layer
+			tb(board, row+1)
+			// cancel choose
+			raw[col] = '.'
+			board[row] = string(raw)
+		}
+	}
+
+	tb(board, 0)
+	return result
+}
