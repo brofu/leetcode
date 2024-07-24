@@ -46,3 +46,33 @@ func MergeSortV2(nums []int) {
 
 	mergeSort(nums, 0, len(nums)-1)
 }
+
+func QuickSort(nums []int) {
+
+	var quickSortHelper func([]int, int, int)
+
+	quickSortHelper = func(nums []int, low, high int) {
+		if low < high {
+
+			// similar to pre-order of bt
+			p := high
+			v := nums[p]
+			cursor := low
+			for i := low; i < high; i++ {
+				if nums[i] < v {
+					nums[i], nums[cursor] = nums[cursor], nums[i]
+					cursor++
+				}
+			}
+			nums[cursor], nums[high] = nums[high], nums[cursor]
+			p = cursor
+
+			// left tree
+			quickSortHelper(nums, low, p-1)
+			// right tree
+			quickSortHelper(nums, p+1, high)
+		}
+	}
+
+	quickSortHelper(nums, 0, len(nums)-1)
+}
