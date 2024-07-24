@@ -2,6 +2,8 @@ package dp
 
 import (
 	"math"
+
+	"github.com/brofu/leetcode/common"
 )
 
 /**
@@ -172,6 +174,38 @@ func coinChangeWithDP(coins []int, amount int) int {
 				continue
 			}
 			dp[i] = MinInt(dp[i-coin]+1, dp[i])
+		}
+	}
+
+	if dp[amount] == amount+1 {
+		return -1
+	}
+
+	return dp[amount]
+}
+
+/**
+KP.
+	1. Down to top with DP table approach
+*/
+func coinChangePV2(coins []int, amount int) int {
+
+	// KP.	The meaning of DP.
+	// dp[i] the min change ways for amount i.
+	dp := make([]int, amount+1)
+	for i := 1; i < len(dp); i++ {
+		dp[i] = amount + 1 // KP. Why amount+1?, why not math.MaxInt?
+		//dp[i] = math.MaxInt
+
+	}
+	dp[0] = 0
+
+	for i := 1; i < len(dp); i++ {
+		for _, coin := range coins {
+			if i-coin < 0 { // amount i < the value of this coin, skip
+				continue
+			}
+			dp[i] = common.MinInt(dp[i], dp[i-coin]+1)
 		}
 	}
 

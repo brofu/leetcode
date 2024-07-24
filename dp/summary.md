@@ -52,8 +52,37 @@
 > 动态规划不就是从最简单的 base case 往后推导吗，可以想象成一个链式反应，以小博大。但只有符合最优子结构的问题，才有发生这种链式反应的性质。 找最优子结构的过程，其实就是证明状态转移方程正确性的过程，方程符合最优子结构就可以写暴力解了，写出暴力解就可以看出有没有重叠子问题了，有则优化，无则 OK。这也是套路，经常刷题的读者应该能体会。
 
 
+### DP Analyse Example
 
-**Problmes**
+Use problem [LC322](https://leetcode.com/problems/coin-change/description/) as an example. 
+
+**最优子结构**
+
+>这个问题是动态规划问题，因为它具有「最优子结构」的.要符合「最优子结构」，子问题间必须互相独立。
+>回到凑零钱问题，为什么说它符合最优子结构呢？ 假设你有面值为 1, 2, 5 的硬币，你想求 amount = 11 时的最少硬币数（原问题），如果你知道凑出 amount = 10, 9, 6 的最少硬币数（子问题），你只需要把子问题的答案加一（再选一枚面值为 1, 2, 5 的硬币），求个最小值，就是原问题的答案。因为硬币的数量是没有限制的，所以子问题之间没有相互制，是互相独立的。
+
+
+**状态转移方程**
+
+> 那么，既然知道了这是个动态规划问题，就要思考如何列出正确的状态转移方程？
+1、确定「状态」，也就是原问题和子问题中会变化的变量。由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case 靠近，所以唯一的「状态」就是目标金额 amount。
+2、确定「选择」，也就是导致「状态」产生变化的行为。目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是你的「选择」。
+3、明确 dp 函数(Top to Down)/dp数组(Down to Top)的定义。
+
+> Top to Down 
+> 我们这里讲的是自顶向下的解法，所以会有一个递归的 dp 函数，一般来说函数的参数就是状态转移中会变化的量，也就是上面说到的「状态」；函数的返回值就是题目要求我们计算的量。就本题来说，状态只有一个，即「目标金额」，题目要求我们计算凑出目标金额所需的最少硬币数量。
+所以我们可以这样定义 dp 函数：dp(n) 表示，输入一个目标金额 n，返回凑出目标金额 n 所需的最少硬币数量。
+> Down to Top
+当然，我们也可以自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，dp 数组的定义和刚才 dp 函数类似，也是把「状态」，也就是目标金额作为变量。不过 dp 函数体现在函数参数，而 dp 数组体现在数组索引：
+dp 数组的定义：当目标金额为 i 时，至少需要 dp[i] 枚硬币凑出。
+
+
+### Problems
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [322. Coin Change](https://leetcode.com/problems/coin-change/description/) | DP | | [code](dp_lc322.go) | | 
+
 * LC509. Fibonacci Number
     * Recursive with middle result cached.
     * Recurrence
@@ -76,4 +105,4 @@
 
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
-| [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/) | 1. DP <br> 2. BIT | 1. DP <br> * How to setup/update dp array for `dpCount`? | [code](backtrack_lc2263.go) | | 
+| [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/) | 1. DP <br> 2. BIT | 1. DP <br> * How to setup/update dp array for `dpCount`? | [code](dp_lc2263.go) | | 
