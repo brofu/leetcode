@@ -1,5 +1,7 @@
 package trietree
 
+import "fmt"
+
 type TrieTreeNode struct {
 	Val      interface{}
 	Children [26]*TrieTreeNode // only support 26 letters
@@ -58,12 +60,9 @@ func (tm *TrieMap) Get(key string) interface{} {
 }
 
 func (tm *TrieMap) Put(key string, val interface{}) {
-	// check if contains
-	// if contains, just return for now
-	if tm.ContainsKey(key) {
-		return
+	if !tm.ContainsKey(key) {
+		tm.size++
 	}
-	tm.size++
 	tm.root = tm.putNode(tm.root, key, val, 0)
 }
 
@@ -96,12 +95,94 @@ func (tm *TrieMap) ShortestPrefix(key string) string {
 	if p != nil && p.Val != nil { // KP. why need to check this case?
 		return key
 	}
-
 	return ""
 }
 
 func (tm *TrieMap) HasKeyWithPattern(pattern string) bool {
 	return tm.hasKeyWithPattern(tm.root, pattern, 0)
+}
+
+func (tm *TrieMap) KeysWithPrefix(prefix string) []string {
+	result := []string{}
+	//	for i := 0; i < len(prefix); i++ {
+	//		if p == nil {
+	//			return result
+	//		}
+	//		c := prefix[i]
+	//		p = p.Children[getIndexLowerCase(c)]
+	//	}
+	// can result getNode
+
+	p := tm.getNode(tm.root, prefix)
+	if p == nil {
+		return result
+	}
+
+	var dfs func(*TrieTreeNode, []byte)
+	dfs = func(root *TrieTreeNode, bytes []byte) {
+		if root == nil {
+			return
+		}
+
+		if root.Val != nil { // get a key
+			result = append(result, string(bytes))
+			return
+		}
+
+		// backtrack framework
+		for index, node := range root.Children {
+			// choose, next layer and cancel
+			c := getLowerCaseFromIndex(index)
+			dfs(node, append(bytes, c))
+		}
+	}
+
+	dfs(p, []byte(prefix))
+
+	fmt.Println("flag", result)
+	return result
+}
+
+// Remove remove a key
+func (tm *TrieMap) Remove(key string) {
+	tm.removeKey(tm.root, key, 0)
+}
+
+/**
+removeKey removes a key from the tree
+
+KP.
+	1.	Cursively, handle the children nodes frist
+	2.	Post-order to check 2 more condition (about if this node can be deleted)
+		a.	if the node.val == nil
+		b.	if there are children node
+	2.  and if a node can be delete, return nil to parent node
+*/
+
+func (tm *TrieMap) removeKey(node *TrieTreeNode, key string, index int) *TrieTreeNode {
+	if node == nil { // the node is nil. means the key doesn't exist
+		return nil
+	}
+
+	// get the key, remove the value
+	if index == len(key) { // node is the last node of the key
+		node.Val = nil // but not the time to delete the node yet, why? (it may have children.)
+	} else { // delete the child cursively.
+		c := getIndexLowerCase(key[index])
+		node.Children[c] = tm.removeKey(node.Children[c], key, index+1) // similar as add new key
+	}
+
+	if node.Val != nil { // the node has val. it is a prefix of key
+		return node
+	}
+
+	for _, next := range node.Children { // this node has children
+		if next != nil {
+			return node
+		}
+	}
+
+	return nil // the node delete itself
 }
 
 // hasKeyWithPattern check if there is key with the pattern
@@ -121,15 +202,14 @@ func (tm *TrieMap) hasKeyWithPattern(node *TrieTreeNode, pattern string, index i
 	c := pattern[index]
 
 	// KP. logic to handle "."
-	if c != '.' {
+	if c != '.' { // Not "."
 		node = node.Children[getIndexLowerCase(c)]
 		return tm.hasKeyWithPattern(node, pattern, index+1)
-	} else {
-		for i := 0; i < 26; i++ {
-			cNode := node.Children[i] // any one is ok
-			if tm.hasKeyWithPattern(cNode, pattern, index+1) {
-				return true
-			}
+	}
+	// Is "."
+	for i := 0; i < 26; i++ { // any one is ok
+		if tm.hasKeyWithPattern(node.Children[i], pattern, index+1) {
+			return true
 		}
 	}
 
@@ -170,4 +250,8 @@ func (tm *TrieMap) getNode(root *TrieTreeNode, key string) *TrieTreeNode {
 
 func getIndexLowerCase(r byte) int {
 	return int(r - 'a')
+}
+
+func getLowerCaseFromIndex(index int) byte {
+	return byte(index) + 'a'
 }
