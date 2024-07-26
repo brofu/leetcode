@@ -32,6 +32,10 @@ func (ts *TrieSet) ShortestPrefix(key string) string {
 	return ts.tmap.ShortestPrefix(key)
 }
 
+func (ts *TrieSet) HasKeyWithPattern(pattern string) bool {
+	return ts.tmap.HasKeyWithPattern(pattern)
+}
+
 type TrieMap struct {
 	size int
 	root *TrieTreeNode
@@ -94,6 +98,42 @@ func (tm *TrieMap) ShortestPrefix(key string) string {
 	}
 
 	return ""
+}
+
+func (tm *TrieMap) HasKeyWithPattern(pattern string) bool {
+	return tm.hasKeyWithPattern(tm.root, pattern, 0)
+}
+
+// hasKeyWithPattern check if there is key with the pattern
+// "." in the pattern means any letter
+// KP. The logic to handle "." match
+
+func (tm *TrieMap) hasKeyWithPattern(node *TrieTreeNode, pattern string, index int) bool {
+
+	if node == nil {
+		return false
+	}
+
+	if index == len(pattern) {
+		return node.Val != nil // if the val != nil, means there is a key
+	}
+
+	c := pattern[index]
+
+	// KP. logic to handle "."
+	if c != '.' {
+		node = node.Children[getIndexLowerCase(c)]
+		return tm.hasKeyWithPattern(node, pattern, index+1)
+	} else {
+		for i := 0; i < 26; i++ {
+			cNode := node.Children[i] // any one is ok
+			if tm.hasKeyWithPattern(cNode, pattern, index+1) {
+				return true
+			}
+		}
+	}
+
+	return false
 }
 
 // putNode put (key, val) from the root node, and return the inserted root node
