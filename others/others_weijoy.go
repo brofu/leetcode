@@ -1,5 +1,7 @@
 package others
 
+import "github.com/brofu/leetcode/tree/trietree"
+
 func resovle(s []string) string {
 
 	if len(s) == 0 {
@@ -27,4 +29,15 @@ func resovle(s []string) string {
 	}
 
 	return result
+}
+
+func resovleV2(s []string) string {
+	if len(s) == 0 {
+		return ""
+	}
+	tm := trietree.NewTrieMap()
+	for _, w := range s {
+		tm.Put(w, struct{}{})
+	}
+	return tm.LongestPrefixV2()
 }

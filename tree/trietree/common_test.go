@@ -181,3 +181,81 @@ func TestTrieMap_ShortestPrefix(t *testing.T) {
 		})
 	}
 }
+
+func TestTrieMap_LongestPrefix(t *testing.T) {
+	type fields struct {
+		size int
+		root *TrieTreeNode
+	}
+	type args struct {
+		key   string
+		words []string
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   string
+	}{
+		{
+			name: "case 1",
+			args: args{
+				words: []string{"the", "them", "there"},
+				key:   "they",
+			},
+			want: "the",
+		},
+		{
+			name: "case 2",
+			args: args{
+				words: []string{"the", "them", "there", "they"},
+				key:   "they",
+			},
+			want: "they",
+		},
+		{
+			name: "case 3",
+			args: args{
+				words: []string{"the", "them", "there", "they"},
+				key:   "theo",
+			},
+			want: "the",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tm := NewTrieMap()
+			for _, word := range tt.args.words {
+				tm.Put(word, struct{}{})
+			}
+			if got := tm.LongestPrefix(tt.args.key); got != tt.want {
+				t.Errorf("TrieMap.LongestPrefix() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestTrieMap_LongestPrefixV2(t *testing.T) {
+	type fields struct {
+		size int
+		root *TrieTreeNode
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   string
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tm := &TrieMap{
+				size: tt.fields.size,
+				root: tt.fields.root,
+			}
+			if got := tm.LongestPrefixV2(); got != tt.want {
+				t.Errorf("TrieMap.LongestPrefixV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

@@ -1,7 +1,5 @@
 package trietree
 
-import "fmt"
-
 type TrieTreeNode struct {
 	Val      interface{}
 	Children [26]*TrieTreeNode // only support 26 letters
@@ -98,6 +96,56 @@ func (tm *TrieMap) ShortestPrefix(key string) string {
 	return ""
 }
 
+func (tm *TrieMap) LongestPrefix(key string) string {
+	p := tm.root
+	i := 0
+	maxLen := 0
+
+	for ; i < len(key); i++ {
+		if p == nil {
+			break
+		}
+		if p.Val != nil { // find a prefix
+			maxLen = i
+		}
+		c := getIndexLowerCase(key[i])
+		p = p.Children[c]
+	}
+	if p != nil && p.Val != nil {
+		return key
+	}
+	return key[:maxLen]
+}
+
+/**
+LongestPrefixV2 returns the longest prefix of all the keys
+
+KP. Map has better formance for `Children`
+*/
+func (tm *TrieMap) LongestPrefixV2() string {
+	p := tm.root
+	result := ""
+	for p != nil {
+		count := 0
+		var c int
+		for index, node := range p.Children {
+			if node != nil {
+				c = index
+				count++
+				if count > 1 {
+					break
+				}
+			}
+		}
+		if count != 1 {
+			return result
+		}
+		result += string(byte(c + 'a'))
+		p = p.Children[c]
+	}
+	return result
+}
+
 func (tm *TrieMap) HasKeyWithPattern(pattern string) bool {
 	return tm.hasKeyWithPattern(tm.root, pattern, 0)
 }
@@ -139,7 +187,6 @@ func (tm *TrieMap) KeysWithPrefix(prefix string) []string {
 
 	dfs(p, []byte(prefix))
 
-	fmt.Println("flag", result)
 	return result
 }
 
