@@ -28,6 +28,10 @@ func (ts *TrieSet) HasKeyWithPrefix(prefix string) bool {
 	return ts.tmap.HasKeyWithPrefix(prefix)
 }
 
+func (ts *TrieSet) ShortestPrefix(key string) string {
+	return ts.tmap.ShortestPrefix(key)
+}
+
 type TrieMap struct {
 	size int
 	root *TrieTreeNode
@@ -65,6 +69,31 @@ func (tm *TrieMap) ContainsKey(key string) bool {
 
 func (tm *TrieMap) HasKeyWithPrefix(prefix string) bool {
 	return tm.getNode(tm.root, prefix) != nil
+}
+
+// ShortestPrefix returns the key of short prefix
+func (tm *TrieMap) ShortestPrefix(key string) string {
+
+	p := tm.root
+
+	for i := 0; i < len(key); i++ {
+		if p == nil {
+			return ""
+		}
+		//result += string(key[i]) // KP: why this is wrong?
+		if p.Val != nil {
+			//return result
+			return key[:i]
+		}
+		c := getIndexLowerCase(key[i])
+		p = p.Children[c]
+	}
+
+	if p != nil && p.Val != nil { // KP. why need to check this case?
+		return key
+	}
+
+	return ""
 }
 
 // putNode put (key, val) from the root node, and return the inserted root node

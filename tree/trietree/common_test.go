@@ -127,3 +127,57 @@ func TestTrieMap_getNode(t *testing.T) {
 		})
 	}
 }
+
+func TestTrieMap_ShortestPrefix(t *testing.T) {
+	type fields struct {
+		size int
+		root *TrieTreeNode
+	}
+	type args struct {
+		existingKeys []string
+		key          string
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   string
+	}{
+		{
+			name: "case 1",
+			args: args{
+				existingKeys: []string{"the", "th", "they", "them", "there"},
+				key:          "them",
+			},
+			want: "th",
+		},
+		{
+			name: "case 2",
+			args: args{
+				existingKeys: []string{"the", "th", "they", "them", "there"},
+				key:          "the",
+			},
+			want: "th",
+		},
+		{
+			name: "case 3",
+			args: args{
+				existingKeys: []string{"the", "th", "they", "them", "there"},
+				key:          "th",
+			},
+			want: "th",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tm := NewTrieMap()
+			got := tm.ShortestPrefix(tt.args.key)
+			assert.Equal(t, "", got)
+			for _, s := range tt.args.existingKeys {
+				tm.Put(s, struct{}{})
+			}
+			got = tm.ShortestPrefix(tt.args.key)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
