@@ -3,9 +3,17 @@
 
 ### Binary Search 
 
+**Key Points**
+1. The border of [left, right], or [left, right)?
+
+
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [704. Binary Search](https://leetcode.com/problems/binary-search/description/) | BS |* The border of [left, right] | [code](array_lc704.go) | |
+| [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/) | BS |* The border of [left, right]<br>* Control the left most or right most index<br>* The edged case | [code](array_lc34.go) | |
+
+Reference:
+1. https://labuladong.online/algo/essential-technique/binary-search-framework-2/
 
 ### Sliding Window 
 
