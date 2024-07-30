@@ -12,6 +12,7 @@
 | [704. Binary Search](https://leetcode.com/problems/binary-search/description/) | BS |* The border of [left, right] | [code](array_lc704.go) | |
 | [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/) | BS |* The border of [left, right]<br>* Control the left most or right most index<br>* The edged case | [code](array_lc34.go) | |
 | [875. Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/description/) | BS |* How to abstract the problem to Binary Search | [code](array_lc875.go) | |
+| [1011. Capacity To Ship Packages Within D Days](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/) | BS |* How to abstract the problem to Binary Search | [code](array_lc1011.go) | |
 
 Reference:
 1. https://labuladong.online/algo/essential-technique/binary-search-framework-2/
