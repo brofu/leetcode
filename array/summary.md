@@ -1,6 +1,12 @@
 
 # Problems
 
+### Binary Search 
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [704. Binary Search](https://leetcode.com/problems/binary-search/description/) | BS |* The border of [left, right] | [code](array_lc704.go) | |
+
 ### Sliding Window 
 
 **Key Principle**
@@ -55,6 +61,7 @@ Break down the problems into sub problems and the merge. `Divide and Conquer`
 
 Reference:
 R1. https://labuladong.online/algo/practice-in-action/merge-sort/
+
 
 ### PreSum Problems
 
