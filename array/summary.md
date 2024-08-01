@@ -6,6 +6,7 @@
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/) | Double Pointers || [code](array_lc26.go) | |
+| [83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/) | Double Pointers | Edged case of `head == nil` | [code](array_lc83.go) | |
 
 ### Binary Search 
 
