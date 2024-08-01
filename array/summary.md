@@ -3,10 +3,24 @@
 
 ### Double Pointers
 
+**Key Principle**
+
+>在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类：左右指针和快慢指针。
+>
+>所谓左右指针，就是两个指针相向而行或者相背而行；而所谓快慢指针，就是两个指针同向而行，一快一慢。
+>
+>对于单链表来说，大部分技巧都属于快慢指针，单链表的六大解题套路 都涵盖了，比如链表环判断，倒数第 K 个链表节点等问题，它们都是通过一个 fast 快指针和一个 slow 慢指针配合完成任务。
+>
+> 在数组中并没有真正意义上的指针，但我们可以把索引当做数组中的指针，这样也可以在数组中施展双指针技巧，本文主要讲数组相关的双指针算法。
+
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/) | Double Pointers || [code](array_lc26.go) | |
 | [83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/) | Double Pointers | Edged case of `head == nil` | [code](array_lc83.go) | |
+| [27. Remove Element](https://leetcode.com/problems/remove-element/description/) | Double Pointers | | [code](array_lc27.go) | |
+
+Reference:
+1. https://labuladong.online/algo/essential-technique/array-two-pointers-summary-2/
 
 ### Binary Search 
 
