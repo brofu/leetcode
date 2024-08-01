@@ -23,6 +23,7 @@
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/description/) | Double Pointers, slow + fast |* Similar as Problem 27. Just remove the 0, and pad the index from k with 0| [code](array_lc283.go) | |
 | [167. Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | Double Pointers, left + right| | [code](array_lc167.go) | |
 | [344. Reverse String](https://leetcode.com/problems/reverse-string/description/) | Double Pointers, left + right| | [code](array_lc344.go) | |
+| [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/) | Double Pointers, left + right, from central to both sides | * 找回文串的难点在于，回文串的的长度可能是奇数也可能是偶数，解决该问题的核心是从中心向两端扩散的双指针技巧| [code](array_lc5.go) | |
 
 Reference:
 1. https://labuladong.online/algo/essential-technique/array-two-pointers-summary-2/
