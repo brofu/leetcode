@@ -18,6 +18,7 @@
 | [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/) | Double Pointers || [code](array_lc26.go) | |
 | [83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/) | Double Pointers | Edged case of `head == nil` | [code](array_lc83.go) | |
 | [27. Remove Element](https://leetcode.com/problems/remove-element/description/) | Double Pointers | | [code](array_lc27.go) | |
+| [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/description/) | Double Pointers |*Similar as Problem 27. Just remove the 0, and pad the index from k with 0| [code](array_lc283.go) | |
 
 Reference:
 1. https://labuladong.online/algo/essential-technique/array-two-pointers-summary-2/
