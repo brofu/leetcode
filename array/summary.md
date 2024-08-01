@@ -22,6 +22,7 @@
 | [27. Remove Element](https://leetcode.com/problems/remove-element/description/) | Double Pointers, slow + fast  | | [code](array_lc27.go) | |
 | [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/description/) | Double Pointers, slow + fast |* Similar as Problem 27. Just remove the 0, and pad the index from k with 0| [code](array_lc283.go) | |
 | [167. Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/) | Double Pointers, left + right| | [code](array_lc167.go) | |
+| [344. Reverse String](https://leetcode.com/problems/reverse-string/description/) | Double Pointers, left + right| | [code](array_lc344.go) | |
 
 Reference:
 1. https://labuladong.online/algo/essential-technique/array-two-pointers-summary-2/
