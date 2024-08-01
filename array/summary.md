@@ -1,6 +1,12 @@
 
 # Problems
 
+### Double Pointers
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/) | Double Pointers || [code](array_lc26.go) | |
+
 ### Binary Search 
 
 **Key Points**
