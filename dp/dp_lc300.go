@@ -54,3 +54,29 @@ func lengthOfLISWithBS(nums []int) int {
 
 	return piles
 }
+
+func lengthOfLISWithBSPV1(nums []int) int {
+
+	top := make([]int, len(nums)+1)
+	top[0] = -10001
+	piles := 0
+
+	for _, num := range nums {
+
+		left, right := 0, piles
+		for left <= right {
+			mid := left + (right-left)/2
+			if top[mid] < num {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+		}
+		if left == piles+1 {
+			piles++
+		}
+
+		top[left] = num
+	}
+	return piles
+}
