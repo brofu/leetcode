@@ -115,3 +115,4 @@ Use problem [LC322](https://leetcode.com/problems/coin-change/description/) as a
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/) | 1. DP <br> 2. BIT | 1. DP <br> * How to setup/update dp array for `dpCount`? | [code](dp_lc2263.go) | | 
+| [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/) | * DP<br>* Sliding Window<br>* Prefix Sum | * How to define the dp table <br>* Compress space complexity | [code](dp_lc53.go) | | 
