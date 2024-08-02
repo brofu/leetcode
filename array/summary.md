@@ -28,6 +28,13 @@
 Reference:
 1. https://labuladong.online/algo/essential-technique/array-two-pointers-summary-2/
 
+### Palindromic String Problem
+
+| Problems | Possible Solutions | Key Points | Code | Comments |
+| :- | :- | :- |:- | :- | 
+| [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/) | Double Pointers, left + right, from central to both sides | * 找回文串的难点在于，回文串的的长度可能是奇数也可能是偶数，解决该问题的核心是从中心向两端扩散的双指针技巧| [code](array_lc5.go) | |
+| [214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome/description/) | * Double Pointers <br> * KMP? | Refer to the code for the `Double Pointers` approach | [code](array_lc214.go) | |
+
 ### Binary Search 
 
 **Key Points**
