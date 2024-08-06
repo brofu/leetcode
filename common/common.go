@@ -161,6 +161,16 @@ func MinInt(a, b int) int {
 	return a
 }
 
+func MinIntMultiple(nums ...int) int {
+	result := nums[0]
+	for _, num := range nums {
+		if result > num {
+			result = num
+		}
+	}
+	return result
+}
+
 func AbsIntSub(a, b int) int {
 	sub := a - b
 	if sub >= 0 {
