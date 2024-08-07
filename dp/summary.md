@@ -130,37 +130,39 @@ Usually there 2 templates for `sub sequences problems`,
 > 在这个思路中 dp 数组的定义是：
 >
 > 在子数组 arr[0..i] 中，以 arr[i] 结尾的子序列的(最值)长度是 dp[i]。==> Why not define it as `the LIS of arr[0...i]? Refer to 1.
+>
 > For example, `300. Longest Increasing Subsequence` and `53. Maximum Subarray`
 >
 > 第二种思路模板是一个二维的 dp 数组：
 >
+> ```
+> n := len(arr)
+> dp := make([][]int, n)
+> // 初始化 dp 数组
+> for i := 0; i < n; i++ {
+>     dp[i] = make([]int, n)
+>     for j := 0; j < n; j++ {
+>         if arr[i] == arr[j] {
+>             // 当 arr[i] 与 arr[j] 相等时，可以做出选择，做出选择的结果是...
+>             dp[i][j] = dp[i][j] + ...
+>         } else {
+>             // 当 arr[i] 与 arr[j] 不相等时，可以做出选择，做出选择的结果是 ...
+>             dp[i][j] = min(...)
+>         }
+>     }
+> }
+> ```
+> 涉及两个字符串/数组的场景，dp 数组的定义如下：
 >
-```
-n := len(arr)
-dp := make([][]int, n)
-// 初始化 dp 数组
-for i := 0; i < n; i++ {
-    dp[i] = make([]int, n)
-    for j := 0; j < n; j++ {
-        if arr[i] == arr[j] {
-            // 当 arr[i] 与 arr[j] 相等时，可以做出选择，做出选择的结果是...
-            dp[i][j] = dp[i][j] + ...
-        } else {
-            // 当 arr[i] 与 arr[j] 不相等时，可以做出选择，做出选择的结果是 ...
-            dp[i][j] = min(...)
-        }
-    }
-}
-```
->涉及两个字符串/数组的场景，dp 数组的定义如下：
+> 在 子数组 arr1[0..i] 和子数组 arr2[0..j] 中，我们要求的子序列长度为 dp[i][j]
 >
-在子数组 arr1[0..i] 和子数组 arr2[0..j] 中，我们要求的子序列长度为 dp[i][j]
->For example, `1143. Longest Common Subsequence` and `72. Edit Distance`
+> For example, `1143. Longest Common Subsequence` and `72. Edit Distance`
 >
->只涉及一个字符串/数组的场景，dp 数组的定义如下：
+> 只涉及一个字符串/数组的场景，dp 数组的定义如下：
 >
-在子数组 array[i..j] 中，我们要求的子序列的长度为 dp[i][j]。
-For example, `516. Longest Palindromic Subsequence`
+> 在 子数组 array[i..j] 中，我们要求的子序列的长度为 dp[i][j]。
+> 
+> For example, `516. Longest Palindromic Subsequence`
 
 
 
