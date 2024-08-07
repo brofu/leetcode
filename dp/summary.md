@@ -1,4 +1,4 @@
-# Dynamic Programming
+
 
 **Workflows**
 1. Base case
@@ -111,8 +111,74 @@ Use problem [LC322](https://leetcode.com/problems/coin-change/description/) as a
 
 ### Sub Sequences Problems
 
+**Key Points**
+
+Usually there 2 templates for `sub sequences problems`, 
+
+> 一个一维的 dp 数组：
+>
+> ```
+int n = array.length;
+int[] dp = new int[n];
+for (int i = 1; i < n; i++) {
+    for (int j = 0; j < i; j++) {
+        dp[i] = 最值(dp[i], dp[j] + ...)
+    }
+}
+```
+
+> `最长递增子序列` 和 `最大子数组和` 都是这个思路。
+>
+>在这个思路中 dp 数组的定义是：
+>
+>在子数组 arr[0..i] 中，以 arr[i] 结尾的子序列的(最值)长度是 dp[i]。==> Why not define it as `the LIS of arr[0...i]? Refer to 1.
+>For example, `300. Longest Increasing Subsequence` and `53. Maximum Subarray`
+>
+>第二种思路模板是一个二维的 dp 数组：
+>
+>```
+n := len(arr)
+dp := make([][]int, n)
+// 初始化 dp 数组
+for i := 0; i < n; i++ {
+    dp[i] = make([]int, n)
+    for j := 0; j < n; j++ {
+        if arr[i] == arr[j] {
+            // 当 arr[i] 与 arr[j] 相等时，可以做出选择，做出选择的结果是...
+            dp[i][j] = dp[i][j] + ...
+        } else {
+            // 当 arr[i] 与 arr[j] 不相等时，可以做出选择，做出选择的结果是 ...
+            dp[i][j] = min(...)
+        }
+    }
+}
+```
+>涉及两个字符串/数组的场景，dp 数组的定义如下：
+>
+在子数组 arr1[0..i] 和子数组 arr2[0..j] 中，我们要求的子序列长度为 dp[i][j]
+>For example, `1143. Longest Common Subsequence` and `72. Edit Distance`
+>
+>只涉及一个字符串/数组的场景，dp 数组的定义如下：
+>
+在子数组 array[i..j] 中，我们要求的子序列的长度为 dp[i][j]。
+For example, `516. Longest Palindromic Subsequence`
+
+
+
+
+
+
 
 | Problems | Possible Solutions | Key Points | Code | Comments |
 | :- | :- | :- |:- | :- | 
 | [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/) | 1. DP <br> 2. BIT | 1. DP <br> * How to setup/update dp array for `dpCount`? | [code](dp_lc2263.go) | | 
+| [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/) | * DP | * How to define the dp table <br>* Compress space complexity | [code](dp_lc300.go) | | 
 | [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/) | * DP<br>* Sliding Window<br>* Prefix Sum | * How to define the dp table <br>* Compress space complexity | [code](dp_lc53.go) | | 
+| [72. Edit Distance](https://leetcode.com/problems/edit-distance/description/) | * DP table 2-D DP table <br> * DP function | * How to define dp function<br>* How to define DP table <br>* how to compress space with O(N)| [code](dp_lc72.go) | | 
+| [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/) | * DP table 2-D DP table <br> * DP function | * How to define dp function<br>* How to define DP table <br>* how to compress space with O(N)* DP 2-D DP table| [code](dp_lc1143.go) | Almost same as problem 72.| 
+
+
+**Reference**
+* https://labuladong.online/algo/dynamic-programming/maximum-subarray/
+*
+
