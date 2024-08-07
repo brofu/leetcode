@@ -117,22 +117,22 @@ Usually there 2 templates for `sub sequences problems`,
 
 > 一个一维的 dp 数组：
 > ```
-int n = array.length;
-int[] dp = new int[n];
-for (int i = 1; i < n; i++) {
-    for (int j = 0; j < i; j++) {
-        dp[i] = 最值(dp[i], dp[j] + ...)
-    }
-}
-```
+> int n = array.length;
+> int[] dp = new int[n];
+> for (int i = 1; i < n; i++) {
+>    for (int j = 0; j < i; j++) {
+>        dp[i] = 最值(dp[i], dp[j] + ...)
+>    }
+> }
+> ```
 > `最长递增子序列` 和 `最大子数组和` 都是这个思路。
 >
->在这个思路中 dp 数组的定义是：
+> 在这个思路中 dp 数组的定义是：
 >
->在子数组 arr[0..i] 中，以 arr[i] 结尾的子序列的(最值)长度是 dp[i]。==> Why not define it as `the LIS of arr[0...i]? Refer to 1.
->For example, `300. Longest Increasing Subsequence` and `53. Maximum Subarray`
+> 在子数组 arr[0..i] 中，以 arr[i] 结尾的子序列的(最值)长度是 dp[i]。==> Why not define it as `the LIS of arr[0...i]? Refer to 1.
+> For example, `300. Longest Increasing Subsequence` and `53. Maximum Subarray`
 >
->第二种思路模板是一个二维的 dp 数组：
+> 第二种思路模板是一个二维的 dp 数组：
 >
 >
 ```
