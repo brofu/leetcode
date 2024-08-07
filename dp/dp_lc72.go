@@ -88,8 +88,51 @@ func minDistanceDPTable(word1 string, word2 string) int {
 	return dp[m][n]
 }
 
+/**
+DP table version with space compress.
+It's tricky to understand.
+
+KP.
+	1.	The overall logic is same as the DP table version, but need to reuse dp table for each `i` for `word1`
+	2.	In the inner loop at each `j` on `word2`,
+		a.	before dp[j] is updated, dp[j] is actually dp[i-1][j], and
+		b.	after dp[j] is updated, dp[j] is actually dp[i][j]
+*/
 func minDistanceDPTableWithSpaceCompress(word1 string, word2 string) int {
 
-	//TODO
-	return 0
+	dp := make([]int, len(word2)+1)
+
+	for i := range dp {
+		dp[i] = i
+	}
+
+	for i := 1; i <= len(word1); i++ {
+		topLeft := dp[0] // KP1: topLeft actually is dp[i-1][0]
+		dp[0]++
+
+		for j := 1; j <= len(word2); j++ {
+
+			// KP2:
+			// this is tricky
+			// if i == 1, actually, topLeft is dp[i-1][0]
+			// if i != 1, actually, topLeft is dp[i-1][j-1], why? Refer to KP3, KP4, and KP5
+			if word1[i-1] == word2[j-1] {
+				dp[j], topLeft = topLeft, dp[j]
+				// same code, better to understand
+				// tmp := dp[j]
+				// dp[j] = topLeft
+				// topLeft = tmp
+				continue
+			}
+
+			tmp := dp[j] // KP3: before dp[j] is updated, it's actually dp[i-1][j]
+			dp[j] = 1 + common.MinIntMultiple(
+				dp[j-1], // insert
+				dp[j],   //delete
+				topLeft, //replacement
+			) // KP4: after dp[j] is updated, it's dp[i][j]
+			topLeft = tmp // KP5: topLeft here actually is dp[i-1][j]
+		}
+	}
+	return dp[len(word2)]
 }
