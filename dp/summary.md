@@ -116,7 +116,6 @@ Use problem [LC322](https://leetcode.com/problems/coin-change/description/) as a
 Usually there 2 templates for `sub sequences problems`, 
 
 > 一个一维的 dp 数组：
->
 > ```
 int n = array.length;
 int[] dp = new int[n];
@@ -126,7 +125,6 @@ for (int i = 1; i < n; i++) {
     }
 }
 ```
-
 > `最长递增子序列` 和 `最大子数组和` 都是这个思路。
 >
 >在这个思路中 dp 数组的定义是：
@@ -136,7 +134,8 @@ for (int i = 1; i < n; i++) {
 >
 >第二种思路模板是一个二维的 dp 数组：
 >
->```
+>
+```
 n := len(arr)
 dp := make([][]int, n)
 // 初始化 dp 数组
