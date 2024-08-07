@@ -136,3 +136,36 @@ func minDistanceDPTableWithSpaceCompress(word1 string, word2 string) int {
 	}
 	return dp[len(word2)]
 }
+
+func minDistanceDPTablePV1(word1 string, word2 string) int {
+
+	m, n := len(word1), len(word2)
+
+	// setup 2-D DP table
+	dp := make([][]int, m+1)
+	for i := 0; i < len(dp); i++ {
+		dp[i] = make([]int, n+1)
+	}
+	for i := 0; i <= m; i++ {
+		dp[i][0] = i
+	}
+	for j := 0; j <= n; j++ {
+		dp[0][j] = j
+	}
+
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
+			if word1[i-1] == word2[j-1] {
+				dp[i][j] = dp[i-1][j-1]
+			} else {
+				dp[i][j] = 1 + common.MinIntMultiple(
+					dp[i-1][j],   // delete
+					dp[i][j-1],   // insert
+					dp[i-1][j-1], // replacement
+				)
+			}
+		}
+	}
+
+	return dp[m][n]
+}

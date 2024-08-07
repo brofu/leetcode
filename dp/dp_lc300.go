@@ -86,7 +86,7 @@ func lengthOfLISWithBSPV1(nums []int) int {
 func lengthOfLISPV1(nums []int) int {
 
 	result := 0
-	dp := make([]int, len(nums)) // the LIS of of nums[0...i]
+	dp := make([]int, len(nums)) // the LIS ends with nums[i]
 	for i := range dp {
 		dp[i] = 1
 	}
