@@ -1,5 +1,7 @@
 package dp
 
+import "github.com/brofu/leetcode/common"
+
 // nums has at least 1 element
 func lengthOfLIS(nums []int) int {
 
@@ -79,4 +81,29 @@ func lengthOfLISWithBSPV1(nums []int) int {
 		top[left] = num
 	}
 	return piles
+}
+
+func lengthOfLISPV1(nums []int) int {
+
+	result := 0
+	dp := make([]int, len(nums)) // the LIS of of nums[0...i]
+	for i := range dp {
+		dp[i] = 1
+	}
+
+	for i := 1; i < len(nums); i++ {
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				dp[i] = common.MaxInt(dp[i], dp[j]+1)
+			}
+		}
+	}
+
+	for _, dis := range dp {
+		if result < dis {
+			result = dis
+		}
+	}
+
+	return result
 }
