@@ -172,3 +172,35 @@ func lowestCommonAncestorPV2(root, p, q *TreeNode) *TreeNode {
 
 	return traverse(root, p, q)
 }
+
+func lowestCommonAncestorPV3(root, p, q *TreeNode) *TreeNode {
+
+	var dfs func(*TreeNode, *TreeNode, *TreeNode) *TreeNode
+
+	dfs = func(root, p, q *TreeNode) *TreeNode {
+
+		// base case
+		if root == nil {
+			return nil
+		}
+		if root.Val == p.Val || root.Val == q.Val {
+			return root
+		}
+
+		left := dfs(root.Left, p, q)   // search left
+		right := dfs(root.Right, p, q) // search right
+
+		if left != nil && right != nil { // p, q in different child tree
+			return root
+		}
+
+		if left != nil {
+			return left
+		}
+
+		return right
+	}
+
+	result := dfs(root, p, q)
+	return result
+}
