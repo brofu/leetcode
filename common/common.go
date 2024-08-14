@@ -178,3 +178,26 @@ func AbsIntSub(a, b int) int {
 	}
 	return -sub
 }
+
+// CheckAndFormatAlphanumeric check if a rune is Alphanumeric
+// if yes, bool is true, other false
+// if yes, and if `r` is character, return the lowercase
+func CheckAndFormatAlphanumeric(r byte) (int, bool) {
+	if r < 48 {
+		return -1, false
+	}
+
+	if r >= 48 && r <= 57 {
+		return int(r), true
+	}
+
+	if r >= 65 && r <= 90 {
+		return int(r) + 32, true
+	}
+
+	if r >= 97 && r <= 122 {
+		return int(r), true
+	}
+
+	return -1, false
+}
