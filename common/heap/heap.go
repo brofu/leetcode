@@ -1,5 +1,7 @@
 package heap
 
+import "fmt"
+
 type IntHeap []int
 
 func (this IntHeap) Len() int {
@@ -29,4 +31,73 @@ func (h *IntHeap) Pop() any {
 	x := (*h)[len(*h)-1]
 	*h = (*h)[:len(*h)-1]
 	return x
+}
+
+// BinaryHeapInt  is full implmentation of binary heap on int
+// No need the `capability` property
+type BinaryHeapInt struct {
+	data []int
+}
+
+func NewBinaryHeapInt() *BinaryHeapInt {
+	return &BinaryHeapInt{
+		data: []int{},
+	}
+}
+
+func (this *BinaryHeapInt) Empty() bool {
+	return len(this.data) == 0
+}
+
+func (this *BinaryHeapInt) Size() int {
+	return len(this.data)
+}
+
+func (this *BinaryHeapInt) Push(val int) {
+	this.data = append(this.data, val)
+	this.swim(len(this.data) - 1)
+}
+
+func (this *BinaryHeapInt) Pop() int {
+	this.swap(0, len(this.data)-1)
+	val := this.data[len(this.data)-1]
+	this.data = this.data[:len(this.data)-1]
+	this.sink(0)
+	return val
+}
+
+func (this *BinaryHeapInt) Debug(msg string) {
+	fmt.Println(msg, "size: ", len(this.data), "data:", this.data)
+}
+
+func (this *BinaryHeapInt) sink(index int) {
+	smallest := index
+	left, right := 2*index+1, 2*index+2
+
+	if left < len(this.data) && this.data[smallest] > this.data[left] {
+		smallest = left
+	}
+	if right < len(this.data) && this.data[smallest] > this.data[right] {
+		smallest = right
+	}
+
+	if smallest != index {
+		this.swap(index, smallest)
+		this.sink(smallest)
+	}
+}
+
+func (this *BinaryHeapInt) swim(index int) {
+	parent := (index - 1) / 2
+	if parent < 0 {
+		return
+	}
+	if this.data[index] < this.data[parent] {
+		this.swap(index, parent)
+		this.swim(parent)
+	}
+}
+
+func (this *BinaryHeapInt) swap(i, j int) {
+	this.data[i], this.data[j] = this.data[j], this.data[i]
 }
