@@ -48,3 +48,19 @@ func twoSumRightVersion(nums []int, target int) []int {
 	}
 	return result
 }
+
+func twoSumPV1(nums []int, target int) []int {
+	result := []int{}
+	record := make(map[int]int)
+
+	for index, num := range nums {
+		left := target - num
+		if v, ok := record[left]; ok {
+			result = []int{v, index}
+			break
+		}
+		record[num] = index
+	}
+
+	return result
+}
