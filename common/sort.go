@@ -81,10 +81,10 @@ func QuickSortInt(nums []int) {
 
 	var quickSortHelper func(int, int)
 	quickSortHelper = func(low, high int) {
-		if low < high {
+		if low <= high {
 			pivot := high
 			cursor := low
-			for i := low; i < high; i++ {
+			for i := low; i <= high; i++ {
 				if nums[i] < nums[pivot] {
 					nums[i], nums[cursor] = nums[cursor], nums[i]
 					cursor++
@@ -99,4 +99,50 @@ func QuickSortInt(nums []int) {
 	}
 
 	quickSortHelper(0, len(nums)-1)
+}
+
+func MergeSortPV2(nums []int) {
+
+	tmp := make([]int, len(nums))
+
+	var mergeSortHelper func(int, int)
+	mergeSortHelper = func(low, high int) {
+
+		// base case
+		if low == high {
+			return
+		}
+
+		mid := (low + high) / 2
+		mergeSortHelper(low, mid)
+		mergeSortHelper(mid+1, high)
+
+		// KP. Note the location of this statement
+		for i := low; i <= high; i++ {
+			tmp[i] = nums[i]
+		}
+
+		// merge. postorder logic
+		i, j, k := low, mid+1, low
+
+		for i <= mid && j <= high {
+			if tmp[i] <= tmp[j] {
+				nums[k] = tmp[i]
+				i++
+			} else {
+				nums[k] = tmp[j]
+				j++
+			}
+			k++
+		}
+
+		for ; i <= mid; i, k = i+1, k+1 {
+			nums[k] = tmp[i]
+		}
+		for ; j <= mid; j, k = j+1, k+1 {
+			nums[k] = tmp[j]
+		}
+
+	}
+	mergeSortHelper(0, len(nums)-1)
 }
