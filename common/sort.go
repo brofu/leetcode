@@ -76,3 +76,27 @@ func QuickSort(nums []int) {
 
 	quickSortHelper(nums, 0, len(nums)-1)
 }
+
+func QuickSortInt(nums []int) {
+
+	var quickSortHelper func(int, int)
+	quickSortHelper = func(low, high int) {
+		if low < high {
+			pivot := high
+			cursor := low
+			for i := low; i < high; i++ {
+				if nums[i] < nums[pivot] {
+					nums[i], nums[cursor] = nums[cursor], nums[i]
+					cursor++
+				}
+			}
+			pivot = cursor
+			nums[cursor], nums[high] = nums[high], nums[cursor]
+
+			quickSortHelper(low, pivot-1)
+			quickSortHelper(pivot+1, high)
+		}
+	}
+
+	quickSortHelper(0, len(nums)-1)
+}
