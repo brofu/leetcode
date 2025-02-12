@@ -54,14 +54,14 @@ func (this *MyLinkedListV2) DeleteAtIndex(index int) {
  * obj.DeleteAtIndex(index);
  */
 
-/**
+/*
+*
 Version 2
 
 Maintain the slice info at application level, including
-	*	size
-	*	extend the capability
-	*	move the elements
-
+  - size
+  - extend the capability
+  - move the elements
 */
 type MyLinkedList struct {
 	data []int
