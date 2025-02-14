@@ -1,5 +1,11 @@
 package tree
 
+import (
+	"math"
+
+	"github.com/brofu/leetcode/common"
+)
+
 /*
 BFS version
 T: O(n)
@@ -74,4 +80,67 @@ func minDepthV2(root *TreeNode) int {
 	helper(root, 1)
 
 	return depth
+}
+
+/*
+DFS version
+*/
+func minDepthDFSP1(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+
+	minDepth := math.MaxInt
+	depth := 0
+
+	var traverse func(*TreeNode)
+	traverse = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		depth++
+		if root.Left == nil && root.Right == nil {
+			minDepth = common.MinInt(minDepth, depth)
+		}
+		traverse(root.Left)
+		traverse(root.Right)
+		depth--
+	}
+
+	traverse(root)
+	return minDepth
+}
+
+/*
+BFS version
+Worst: O(n)
+Best: O(logN)
+*/
+func minDepthBFSP1(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+	minDepth := 0
+	q := []*TreeNode{root}
+
+	for len(q) > 0 {
+		minDepth++
+		size := len(q)
+		for idx := 0; idx < size; idx++ {
+			node := q[idx]
+			if node.Left == nil && node.Right == nil {
+				return minDepth
+			}
+			if node.Left != nil {
+				q = append(q, node.Left)
+			}
+			if node.Right != nil {
+				q = append(q, node.Right)
+			}
+		}
+		q = q[size:]
+	}
+	return minDepth
 }
