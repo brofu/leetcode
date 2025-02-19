@@ -28,6 +28,9 @@ func buildTreePV1(preorder []int, inorder []int) *TreeNode {
 /*
 Sub Task
 Construct left tree, and right tree, and the root
+
+Key Point
+Complexity analyze
 */
 func buildTreeSubTaskPV2(preorder []int, inorder []int) *TreeNode {
 
@@ -43,6 +46,7 @@ func buildTreeSubTaskPV2(preorder []int, inorder []int) *TreeNode {
 		for idx, val := range inorder {
 			if val == preorder[0] {
 				index = idx
+				break
 			}
 		}
 
