@@ -24,3 +24,35 @@ func buildTreePV1(preorder []int, inorder []int) *TreeNode {
 
 	return node
 }
+
+/*
+Sub Task
+Construct left tree, and right tree, and the root
+*/
+func buildTreeSubTaskPV2(preorder []int, inorder []int) *TreeNode {
+
+	var traverse func([]int, []int) *TreeNode
+
+	traverse = func(preorder, inorder []int) *TreeNode {
+
+		if len(preorder) == 0 || len(inorder) == 0 || len(preorder) != len(inorder) {
+			return nil
+		}
+
+		index := -1
+		for idx, val := range inorder {
+			if val == preorder[0] {
+				index = idx
+			}
+		}
+
+		root := &TreeNode{
+			Val:   preorder[0],
+			Left:  traverse(preorder[1:index+1], inorder[:index]),
+			Right: traverse(preorder[index+1:], inorder[index+1:]),
+		}
+
+		return root
+	}
+	return traverse(preorder, inorder)
+}
