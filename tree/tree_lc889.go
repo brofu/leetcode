@@ -4,7 +4,7 @@ package tree
 Sub Task
 
 Key Point
-  - Need to check if it's a skewed tree, if yes, put it on the left or the right. Both is OK
+  - Need to check if current node has ONLY 1 child, if yes, put it on the left or the right. Both is OK
 */
 
 func constructFromPrePostSubTaskPV1(preorder []int, postorder []int) *TreeNode {
