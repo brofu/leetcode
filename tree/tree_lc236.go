@@ -1,7 +1,9 @@
 package tree
 
-/**
+/*
+*
 KP.
+
 	traverse the tree and get the ancestors
 	compare the ancestors
 	Why need to loop with reversed order?
@@ -203,4 +205,53 @@ func lowestCommonAncestorPV3(root, p, q *TreeNode) *TreeNode {
 
 	result := dfs(root, p, q)
 	return result
+}
+
+/*
+Sub Task
+1. Check left child
+2. Check right child
+3. Different scenarios
+
+Optimization
+1.	If LCA is already found, can return directly.
+2. What's the best location to do the check?
+*/
+func lowestCommonAncestorSubTaskPV4(root, p, q *TreeNode) *TreeNode {
+
+	var lca *TreeNode
+	var traverse func(*TreeNode, *TreeNode, *TreeNode) *TreeNode
+
+	traverse = func(root, p, q *TreeNode) *TreeNode {
+
+		if root == nil {
+			return root
+		}
+
+		if root.Val == p.Val || root.Val == q.Val {
+			return root
+		}
+
+		left := traverse(root.Left, p, q)
+
+		// if already found lca
+		// in-order location check
+		if lca != nil {
+			return lca
+		}
+
+		right := traverse(root.Right, p, q)
+
+		// found on both side
+		if left != nil && right != nil {
+			lca = root
+			return root
+		}
+
+		if left != nil {
+			return left
+		}
+		return right
+	}
+	return traverse(root, p, q)
 }
