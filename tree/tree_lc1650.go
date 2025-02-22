@@ -68,3 +68,24 @@ func lowestCommonAncestorIIIV2PV1(p, q *NodeWithParent) *NodeWithParent {
 	}
 	return pp
 }
+
+func lowestCommonAncestorIIIPV2(p *NodeWithParent, q *NodeWithParent) *NodeWithParent {
+	a := p
+	b := p
+
+	for a != b {
+		if a == nil {
+			a = q
+		} else {
+			a = a.Parent
+		}
+
+		if b == nil {
+			b = p
+		} else {
+			b = b.Parent
+		}
+	}
+
+	return a
+}
