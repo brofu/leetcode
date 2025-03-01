@@ -30,3 +30,29 @@ func rightSideView(root *TreeNode) []int {
 
 	return res
 }
+
+func rightSideViewDFS(root *TreeNode) []int {
+
+	temp := make(map[int]int)
+	deepth := 0
+	var traverse func(*TreeNode)
+
+	traverse = func(root *TreeNode) {
+		if root == nil {
+			return
+		}
+		deepth++
+		temp[deepth] = root.Val
+
+		traverse(root.Left)
+		traverse(root.Right)
+		deepth--
+	}
+
+	traverse(root)
+	res := make([]int, len(temp))
+	for idx := 0; idx < len(res); idx++ {
+		res[idx] = temp[idx+1]
+	}
+	return res
+}
