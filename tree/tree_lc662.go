@@ -93,3 +93,35 @@ func widthOfBinaryTree(root *TreeNode) int {
 	}
 	return result
 }
+
+func widthOfBinaryTreePV1(root *TreeNode) int {
+
+	if root == nil {
+		return 0
+	}
+
+	maxWidth := 0
+
+	type QueueNode struct {
+		node *TreeNode
+		col  int
+	}
+	q := []QueueNode{QueueNode{root, 1}}
+
+	for len(q) > 0 {
+		size := len(q)
+		for idx := 0; idx < size; idx++ {
+			qn := q[idx]
+			if qn.node.Left != nil {
+				q = append(q, QueueNode{qn.node.Left, 2 * qn.col})
+			}
+			if qn.node.Right != nil {
+				q = append(q, QueueNode{qn.node.Right, 2*qn.col + 1})
+			}
+		}
+		maxWidth = common.MaxInt(maxWidth, q[size-1].col-q[0].col+1)
+		q = q[size:]
+	}
+
+	return maxWidth
+}

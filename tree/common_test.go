@@ -87,3 +87,30 @@ func TestBreadthFirstTraverseRecursive(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateBinaryTreeFromSliceBFS(t *testing.T) {
+	type args struct {
+		numbers []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "normal case 1",
+			args: args{
+				numbers: []int{2, 2, 1, math.MaxInt, 1, 0, math.MaxInt, 0},
+			},
+			want: []int{2, 2, 1, math.MaxInt, 1, 0, math.MaxInt, 0},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := GenerateBinaryTreeFromSliceBFS(tt.args.numbers)
+			want := GenerateSliceFromTreeNodeBFSWithPadding(got)
+			t.Log("result", want)
+			t.Log("wanted", tt.want)
+		})
+	}
+}

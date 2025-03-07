@@ -7,7 +7,7 @@ Key Point:
 传统的 traverse 函数是遍历二叉树的所有节点，但现在我们想遍历的其实是两个相邻节点之间的「空隙」。
 一棵二叉树被抽象成了一棵三叉树，三叉树上的每个节点就是原先二叉树的两个相邻节点。
 */
-func connectTraverse(root *Node) *Node {
+func connectTraverseXX(root *Node) *Node {
 	if root == nil {
 		return root
 	}
@@ -28,7 +28,7 @@ func connectTraverse(root *Node) *Node {
 /*
 BFS traverse the tree
 */
-func connect(root *Node) *Node {
+func connectxx(root *Node) *Node {
 	if root == nil {
 		return root
 	}

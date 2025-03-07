@@ -2,7 +2,7 @@ package common
 
 import "fmt"
 
-//Comparable is the interface which is comparable
+// Comparable is the interface which is comparable
 type Comparable interface {
 	// if a > b, a.CompareTo(b) return 1
 	// if a == b, a.CompareTo(b) return 0
@@ -161,6 +161,23 @@ func MinInt(a, b int) int {
 	return a
 }
 
+func MinString(a, b string) string {
+
+	idx := 0
+	for ; idx < len(a) && idx < len(b); idx++ {
+		if a[idx] < b[idx] {
+			return a
+		}
+		if a[idx] > b[idx] {
+			return b
+		}
+	}
+	if idx < len(a) {
+		return b
+	}
+	return a
+}
+
 func MinIntMultiple(nums ...int) int {
 	result := nums[0]
 	for _, num := range nums {
@@ -200,4 +217,12 @@ func CheckAndFormatAlphanumeric(r byte) (int, bool) {
 	}
 
 	return -1, false
+}
+
+func ReverseSlice(input []string) []string {
+
+	for i, j := 0, len(input)-1; i < j; i, j = i+1, j-1 {
+		input[i], input[j] = input[j], input[i]
+	}
+	return input
 }

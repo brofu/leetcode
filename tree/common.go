@@ -38,6 +38,49 @@ func MaxInt(a, b int) int {
 	return b
 }
 
+// GenerateBinaryTreeFromSliceBFS construct the tree from slice with BFS
+// leetcode style
+func GenerateBinaryTreeFromSliceBFS(numbers []int) *TreeNode {
+	if len(numbers) == 0 {
+		return nil
+	}
+	root := &TreeNode{numbers[0], nil, nil}
+	q := []*TreeNode{root}
+	numbers = numbers[1:]
+
+	for len(q) > 0 {
+		size := len(q)
+		for idx := 0; idx < size; idx++ {
+			node := q[idx]
+			if 2*idx < len(numbers) {
+				num := numbers[2*idx]
+				if num != math.MaxInt {
+					leftNode := &TreeNode{num, nil, nil}
+					node.Left = leftNode
+					q = append(q, leftNode)
+				}
+			}
+			if 2*idx+1 < len(numbers) {
+				num := numbers[2*idx+1]
+				if num != math.MaxInt {
+					rightNode := &TreeNode{num, nil, nil}
+					node.Right = rightNode
+					q = append(q, rightNode)
+				}
+			}
+		}
+		q = q[size:]
+
+		if 2*size < len(numbers) {
+			numbers = numbers[2*size:]
+		} else {
+			break
+		}
+	}
+
+	return root
+}
+
 func GenerateBinaryTreeFromSlice(numbers []int, index int) *TreeNode {
 
 	if index > len(numbers)-1 {
@@ -176,6 +219,67 @@ func BreadthFirstTraverseRecursiveWrapper(res *[]int, nodes []*TreeNode) {
 }
 func GenerateSliceFromTreeNode(root *TreeNode) []int {
 	return BreadthFirstTraverseRecursive(root)
+}
+
+func GenerateSliceFromTreeNodeBFS(root *TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	q := []*TreeNode{root}
+	result := []int{}
+
+	for len(q) > 0 {
+
+		size := len(q)
+
+		for idx := 0; idx < size; idx++ {
+			node := q[idx]
+			result = append(result, node.Val)
+			if node.Left != nil {
+				q = append(q, node.Left)
+			}
+			if node.Right != nil {
+				q = append(q, node.Right)
+			}
+		}
+		q = q[size:]
+	}
+
+	return result
+}
+
+func GenerateSliceFromTreeNodeBFSWithPadding(root *TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+	q := []*TreeNode{root}
+	result := []int{}
+
+	for len(q) > 0 {
+
+		size := len(q)
+
+		for idx := 0; idx < size; idx++ {
+			node := q[idx]
+			if node == nil {
+				result = append(result, math.MaxInt)
+				continue
+			}
+
+			result = append(result, node.Val)
+
+			if node.Left == nil && node.Right == nil {
+				continue
+			}
+			q = append(q, node.Left)
+			q = append(q, node.Right)
+		}
+		q = q[size:]
+	}
+	if len(result) > 0 && result[len(result)-1] == math.MaxInt {
+		result = result[:len(result)-1]
+	}
+	return result
 }
 
 func GenerateNodeFromSlice(numbers []int, index int) *Node {

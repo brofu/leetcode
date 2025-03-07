@@ -148,3 +148,39 @@ func TestDeepEqualIntSlice(t *testing.T) {
 		})
 	}
 }
+
+func TestMinString(t *testing.T) {
+	type args struct {
+		a string
+		b string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "case 1",
+			args: args{
+				a: "ab",
+				b: "abc",
+			},
+			want: "ab",
+		},
+		{
+			name: "case 2",
+			args: args{
+				a: "ba",
+				b: "abc",
+			},
+			want: "abc",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := MinString(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("MinString() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
