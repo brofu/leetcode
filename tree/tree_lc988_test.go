@@ -46,7 +46,7 @@ func Test_smallestFromLeaf(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tt.args.root = GenerateBinaryTreeFromSliceBFS(tt.args.numbers)
+			tt.args.root = GenerateTreeNodeFromSliceBFS(tt.args.numbers)
 			if got := smallestFromLeaf(tt.args.root); got != tt.want {
 				t.Errorf("smallestFromLeaf() = %v, want %v", got, tt.want)
 			}
@@ -103,7 +103,7 @@ func Test_smallestFromLeafDFS(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
-			tt.args.root = GenerateBinaryTreeFromSliceBFS(tt.args.numbers)
+			tt.args.root = GenerateTreeNodeFromSliceBFS(tt.args.numbers)
 			if got := smallestFromLeafDFS(tt.args.root); got != tt.want {
 				t.Errorf("smallestFromLeafDFS() = %v, want %v", got, tt.want)
 			}

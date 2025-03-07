@@ -38,9 +38,9 @@ func MaxInt(a, b int) int {
 	return b
 }
 
-// GenerateBinaryTreeFromSliceBFS construct the tree from slice with BFS
+// GenerateTreeNodeFromSliceBFS construct the tree from slice with BFS
 // leetcode style
-func GenerateBinaryTreeFromSliceBFS(numbers []int) *TreeNode {
+func GenerateTreeNodeFromSliceBFS(numbers []int) *TreeNode {
 	if len(numbers) == 0 {
 		return nil
 	}
