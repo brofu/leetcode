@@ -60,3 +60,32 @@ func buildTreeSubTaskPV2(preorder []int, inorder []int) *TreeNode {
 	}
 	return traverse(preorder, inorder)
 }
+
+func buildTreePV2(preorder []int, inorder []int) *TreeNode {
+
+	var traverse func([]int, []int) *TreeNode
+
+	traverse = func(preorder []int, inorder []int) *TreeNode {
+
+		if len(preorder) == 0 {
+			return nil
+		}
+
+		root := &TreeNode{
+			Val: preorder[0],
+		}
+		index := 0
+		for idx, num := range inorder {
+			if preorder[0] == num {
+				index = idx
+				break
+			}
+		}
+		root.Left = traverse(preorder[1:index+1], inorder[:index])
+		root.Right = traverse(preorder[index+1:], inorder[index+1:])
+
+		return root
+	}
+
+	return traverse(preorder, inorder)
+}
