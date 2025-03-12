@@ -11,6 +11,7 @@ Key Points
     b. If n = 5, then, 1 left, 3 right, and 3 left, 1 right
     c. And so on...
     d. And for each <left, right> pair, there maybe different combines...
+3. Pruning with map
 */
 
 func allPossibleFBT(n int) []*TreeNode {
