@@ -56,10 +56,6 @@ Pointers
 */
 func connectWtihConstantSpace(root *Node) *Node {
 
-	if root == nil {
-		return root
-	}
-
 	leftmost := root
 
 	for leftmost != nil {

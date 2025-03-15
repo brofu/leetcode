@@ -125,3 +125,40 @@ func widthOfBinaryTreePV1(root *TreeNode) int {
 
 	return maxWidth
 }
+
+/*
+DFS
+
+Key Points:
+1. Record the index of each node
+2. Record the leftmost node index, and calculate the width of each layer
+*/
+func widthOfBinaryTreeDFS(root *TreeNode) int {
+
+	result := 0
+	if root == nil {
+		return 0
+	}
+
+	var traverse func(*TreeNode, int, int)
+
+	leftmostMap := make(map[int]int)
+	traverse = func(root *TreeNode, nodeIndex, depth int) {
+		if root == nil {
+			return
+		}
+
+		if idx, exists := leftmostMap[depth]; exists {
+			result = common.MaxInt(result, nodeIndex-idx+1)
+		} else {
+			leftmostMap[depth] = nodeIndex
+			result = common.MaxInt(result, 1)
+		}
+
+		traverse(root.Left, nodeIndex*2, depth+1)
+		traverse(root.Right, nodeIndex*2+1, depth+1)
+	}
+
+	traverse(root, 1, 1)
+	return result
+}
