@@ -17,6 +17,8 @@ There scenarios:
 1. [1, null, 3]
 2. [1, 2, 3, 4, null, 6]
 3. [1, 2, null, 4]
+
+And there is a simpler version
 */
 func isCompleteTree(root *TreeNode) bool {
 
