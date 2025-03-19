@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/brofu/leetcode/tree"
 	"github.com/brofu/leetcode/version"
 )
 
@@ -23,6 +22,6 @@ func main() {
 	}
 	fmt.Println("Hello.")
 
-	result := tree.Permute([]int{5, 4, 6, 2})
-	fmt.Println("Hello.", result)
+	//result := tree.Permute([]int{5, 4, 6, 2})
+	//fmt.Println("Hello.", result)
 }
