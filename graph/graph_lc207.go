@@ -99,3 +99,52 @@ func canFinishPV1(numCourses int, prerequisites [][]int) bool {
 
 	return !hasCycle
 }
+
+/*
+Key Point of BFS
+
+1. Make sure all the pre-node of one node is handled (the in-dgree[x] array is 0)
+2. Utilize the in-degree array, with additional O(n) space complexity
+*/
+func canFinishBFS(numCourses int, prerequisites [][]int) bool {
+
+	// construct the graph
+	graph := make([][]int, numCourses)
+	for _, record := range prerequisites {
+		from, to := record[1], record[0]
+		graph[from] = append(graph[from], to)
+	}
+
+	// construct in-degree array
+	indegree := make([]int, numCourses)
+	for _, record := range prerequisites {
+		to := record[0]
+		indegree[to]++
+	}
+
+	q := []int{}
+
+	for root, ind := range indegree {
+		if ind == 0 {
+			q = append(q, root)
+		}
+	}
+
+	count := 0
+	for len(q) > 0 {
+		size := len(q)
+		for idx := 0; idx < size; idx++ {
+			val := q[idx]
+			count++
+			for _, next := range graph[val] {
+				indegree[next]--
+				if indegree[next] == 0 { // make sure all the pre node in front of it
+					q = append(q, next)
+				}
+			}
+		}
+		q = q[size:]
+	}
+
+	return count == numCourses
+}
