@@ -177,3 +177,54 @@ func findOrderPV1(numCourses int, prerequisites [][]int) []int {
 
 	return path
 }
+
+func findOrderBFS(numCourses int, prerequisites [][]int) []int {
+
+	// construct graph
+	graph := make([][]int, numCourses)
+
+	for _, record := range prerequisites {
+		from, to := record[1], record[0]
+		graph[from] = append(graph[from], to)
+	}
+
+	// construct in-degree array
+	indegree := make([]int, numCourses)
+
+	for _, record := range prerequisites {
+		to := record[0]
+		indegree[to]++
+	}
+
+	// initialize q
+	q := []int{}
+
+	for root, ind := range indegree {
+		if ind == 0 {
+			q = append(q, root)
+		}
+	}
+
+	result := []int{}
+	count := 0
+	for len(q) > 0 {
+		size := len(q)
+		for idx := 0; idx < size; idx++ {
+			count++
+			val := q[idx]
+			result = append(result, val)
+			for _, next := range graph[val] {
+				indegree[next]--
+				if indegree[next] == 0 { // mean no pre node any more
+					q = append(q, next)
+				}
+			}
+		}
+		q = q[size:]
+	}
+
+	if count == numCourses {
+		return result
+	}
+	return []int{}
+}

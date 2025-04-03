@@ -104,8 +104,9 @@ func canFinishPV1(numCourses int, prerequisites [][]int) bool {
 Key Point of BFS
 
 1. Make sure all the pre-node of one node is handled (the in-dgree[x] array is 0)
-2. Utilize the in-degree array, with additional O(n) space complexity
+2. If there is cycle, then, there would be nodes that in-degree[x] != 0
 */
+
 func canFinishBFS(numCourses int, prerequisites [][]int) bool {
 
 	// construct the graph
