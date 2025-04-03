@@ -4,12 +4,13 @@ import (
 	"github.com/brofu/leetcode/common/array"
 )
 
-/**
+/*
+*
 KP
-	1.	Direction between the nodes is imported. `Depending on` or `Depended By`?
-		`graph[from] = append(graph[from], to)` is `Depended By`. Need to reverse the order
-		`graph[to] = append(graph[to], from)` is `depending on`. No need to reverse the order.
-	2.	PostOrder is used. ==> what about preorder?
+ 1. Direction between the nodes is imported. `Depending on` or `Depended By`?
+    `graph[from] = append(graph[from], to)` is `Depended By`. Need to reverse the order
+    `graph[to] = append(graph[to], from)` is `depending on`. No need to reverse the order.
+ 2. PostOrder is used. ==> what about preorder?
 */
 func findOrder(numCourses int, prerequisites [][]int) []int {
 
@@ -62,10 +63,11 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 	return result
 }
 
-/**
+/*
+*
 KP
-	1.	WRONG
-	2.  The `preorder` version is WRONG. Because, we need to
+ 1. WRONG
+ 2. The `preorder` version is WRONG. Because, we need to
 */
 func findOrderPerOrder(numCourses int, prerequisites [][]int) []int {
 
@@ -113,4 +115,65 @@ func findOrderPerOrder(numCourses int, prerequisites [][]int) []int {
 	}
 
 	return result
+}
+
+func findOrderPV1(numCourses int, prerequisites [][]int) []int {
+
+	// construct graph
+	graph := make([][]int, numCourses)
+
+	for _, record := range prerequisites {
+		from, to := record[1], record[0]
+		graph[from] = append(graph[from], to)
+	}
+
+	var traverse func(val int)
+
+	hasCycle := false
+	onPath := make([]bool, numCourses)
+	visited := make([]bool, numCourses)
+	path := []int{}
+
+	traverse = func(val int) {
+
+		// base case
+		if hasCycle {
+			return
+		}
+
+		if onPath[val] {
+			hasCycle = true
+			return
+		}
+
+		if visited[val] {
+			return
+		}
+
+		// pre-order location
+		onPath[val] = true
+		visited[val] = true
+
+		for _, number := range graph[val] {
+			traverse(number)
+		}
+
+		//post-order location
+		onPath[val] = false
+		path = append(path, val)
+	}
+
+	for index := range graph {
+		traverse(index)
+	}
+
+	if hasCycle {
+		return []int{}
+	}
+
+	for i, j := 0, len(path)-1; i < j; i, j = i+1, j-1 {
+		path[i], path[j] = path[j], path[i]
+	}
+
+	return path
 }
