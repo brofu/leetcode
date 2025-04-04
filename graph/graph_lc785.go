@@ -1,8 +1,9 @@
 package graph
 
-/**
+/*
+*
 KP.
-	1. Pay attention that, the graph may be not `connected`
+ 1. Pay attention that, the graph may be not `connected`
 */
 func isBipartite(graph [][]int) bool {
 	result := true
@@ -78,4 +79,47 @@ func isBipartiteBFS(graph [][]int) bool {
 		}
 	}
 	return result
+}
+
+func isBipartiteDFSPV1(graph [][]int) bool {
+
+	var traverse func(v int)
+
+	isBipartite := true
+
+	visited := make([]bool, len(graph))
+	color := make([]bool, len(graph))
+
+	traverse = func(v int) {
+
+		// base case
+		if !isBipartite {
+			return
+		}
+
+		if visited[v] {
+			return
+		}
+
+		// pre-order location
+		visited[v] = true
+
+		for _, next := range graph[v] {
+			if !visited[next] {
+				color[next] = !color[v]
+				traverse(next)
+			} else {
+				if color[next] == color[v] {
+					isBipartite = false
+					return
+				}
+			}
+		}
+	}
+
+	for idx := 0; idx < len(graph); idx++ {
+		traverse(idx)
+	}
+
+	return isBipartite
 }
