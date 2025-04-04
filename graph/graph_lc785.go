@@ -123,3 +123,55 @@ func isBipartiteDFSPV1(graph [][]int) bool {
 
 	return isBipartite
 }
+
+/*
+Key Point
+
+1. The difference of BFS from problem `Cycle Detection` and `Topological Sorting` (Directed Graph)
+2. This problems is UnDirecte Graph
+*/
+
+func isBipartiteBFSPV1(graph [][]int) bool {
+
+	isBipartite := true
+	visited := make([]bool, len(graph))
+	color := make([]bool, len(graph))
+
+	bfs := func(v int) {
+
+		if !isBipartite {
+			return
+		}
+
+		q := []int{v}
+		visited[v] = true
+
+		for len(q) > 0 {
+			size := len(q)
+			for idx := 0; idx < size; idx++ {
+				v := q[idx]
+				for _, next := range graph[v] {
+					if !visited[next] {
+						color[next] = !color[v]
+						q = append(q, next)
+						visited[next] = true
+					} else {
+						if color[next] == color[v] {
+							isBipartite = false
+							return
+						}
+					}
+				}
+			}
+			q = q[size:]
+		}
+	}
+
+	for idx := range graph {
+		if !visited[idx] {
+			bfs(idx)
+		}
+	}
+
+	return isBipartite
+}
