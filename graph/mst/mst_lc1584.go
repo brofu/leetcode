@@ -12,6 +12,9 @@ Kruskal
 Key Point:
 
 1. How to present point info? Use the index in the `points`
+
+Time Complexity
+O(N^2logN^2) = O(2N^2logN)
 */
 func minCostConnectPoints(points [][]int) int {
 
