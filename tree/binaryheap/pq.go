@@ -1,10 +1,12 @@
 package binaryheap
 
+import "fmt"
+
 type PriorityQueue interface {
 	Push(interface{})
 	Pop() interface{}
-	Peek() interface{}
 	Size() int
+	Debug()
 }
 
 /*
@@ -59,6 +61,7 @@ func (pq *PQBasedOnBinaryHeap) Pop() interface{} {
 	val := pq.slice[1]
 
 	pq.slice[1] = pq.slice[pq.size]
+	pq.slice[pq.size] = nil
 	pq.size--
 	pq.sink(1)
 
@@ -110,4 +113,8 @@ func (pq *PQBasedOnBinaryHeap) right(index int) int {
 
 func (pq *PQBasedOnBinaryHeap) swap(i, j int) {
 	pq.slice[i], pq.slice[j] = pq.slice[j], pq.slice[i]
+}
+
+func (pq *PQBasedOnBinaryHeap) Debug() {
+	fmt.Println(pq.slice)
 }

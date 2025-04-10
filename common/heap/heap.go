@@ -101,3 +101,37 @@ func (this *BinaryHeapInt) swim(index int) {
 func (this *BinaryHeapInt) swap(i, j int) {
 	this.data[i], this.data[j] = this.data[j], this.data[i]
 }
+
+func NewInterfacePriorityQueue(lessFunc func([]interface{}, int, int) bool) *InterfacePriorityQueue {
+	return &InterfacePriorityQueue{
+		slice:    make([]interface{}, 0),
+		lessFunc: lessFunc,
+	}
+}
+
+type InterfacePriorityQueue struct {
+	slice    []interface{}
+	lessFunc func([]interface{}, int, int) bool
+}
+
+func (ipq *InterfacePriorityQueue) Len() int {
+	return len(ipq.slice)
+}
+
+func (ipq *InterfacePriorityQueue) Swap(i, j int) {
+	ipq.slice[i], ipq.slice[j] = ipq.slice[j], ipq.slice[i]
+}
+
+func (ipq *InterfacePriorityQueue) Less(i, j int) bool {
+	return ipq.lessFunc(ipq.slice, i, j)
+}
+
+func (ipq *InterfacePriorityQueue) Push(x any) {
+	ipq.slice = append(ipq.slice, x)
+}
+
+func (ipq *InterfacePriorityQueue) Pop() any {
+	v := ipq.slice[len(ipq.slice)-1]
+	ipq.slice = ipq.slice[:len(ipq.slice)-1]
+	return v
+}
