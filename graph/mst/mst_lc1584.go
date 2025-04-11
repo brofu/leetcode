@@ -1,8 +1,11 @@
 package mst
 
 import (
+	"container/heap"
+	"fmt"
 	"sort"
 
+	heaplib "github.com/brofu/leetcode/common/heap"
 	uflib "github.com/brofu/leetcode/graph/union_find"
 )
 
@@ -48,4 +51,68 @@ func Abs(a, b int) int {
 		return a - b
 	}
 	return b - a
+}
+
+/*
+Prime
+
+Key Point:
+1. Use the index in the points array as the node
+2. MUST construct the FULL graph (ALL the side between any two nodes. Otherwise, there would be sides missing. Refer to the case in case 1
+*/
+func minCostConnectPointsPrim(points [][]int) int {
+
+	// build graph
+	graph := make([][][]int, len(points))
+	for i := 0; i < len(points); i++ {
+		for j := i + 1; j < len(points); j++ {
+			cost := Abs(points[i][0], points[j][0]) + Abs(points[i][1], points[j][1])
+			graph[i] = append(graph[i], []int{j, cost})
+			graph[j] = append(graph[j], []int{i, cost})
+		}
+	}
+
+	fmt.Println("flag", points)
+	fmt.Println("flag", graph)
+	pq := heaplib.NewInterfacePriorityQueue(func(data []interface{}, i, j int) bool {
+		return data[i].([]int)[2] < data[j].([]int)[2]
+	})
+	inMST := make([]bool, len(points))
+	sum := 0
+
+	var cut = func(n int) {
+		for _, neigher := range graph[n] {
+			if len(neigher) == 0 {
+				continue
+			}
+			to, weight := neigher[0], neigher[1]
+			if inMST[to] {
+				continue
+			}
+			heap.Push(pq, []int{n, to, weight})
+		}
+	}
+
+	// start from 0
+	inMST[0] = true
+	cut(0)
+
+	for pq.Len() > 0 {
+		current := heap.Pop(pq).([]int)
+		to, weight := current[1], current[2]
+		if inMST[to] {
+			continue
+		}
+		inMST[to] = true
+		sum += weight
+		fmt.Println("flag2", sum, current)
+		cut(to)
+	}
+
+	return sum
+}
+
+func minCostConnectPointsPrimV2(points [][]int) int {
+
+	return 0
 }
