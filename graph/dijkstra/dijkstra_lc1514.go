@@ -39,10 +39,9 @@ func maxProbability(n int, edges [][]int, succProb []float64, start_node int, en
 		current := heap.Pop(hp).(probS)
 		currentNode, currentProb := current.to, current.prob
 
-		// already have bigger one. This should NOT happen
-		//if currentProb < probToNode[currentNode] {
-		//	continue
-		//}
+		if currentProb < probToNode[currentNode] {
+			continue
+		}
 
 		if currentNode == end_node {
 			return currentProb

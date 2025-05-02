@@ -151,3 +151,31 @@ func permuteV2(nums []int) [][]int {
 
 	return result
 }
+
+func permutePV3(nums []int) [][]int {
+
+	result := [][]int{}
+	hit := make([]bool, len(nums))
+
+	var backtrack func([]int, []int)
+
+	backtrack = func(path, nums []int) {
+
+		if len(path) == len(nums) { // base case
+			result = append(result, path)
+			return
+		}
+
+		for i, num := range nums {
+			if hit[i] {
+				continue
+			}
+			hit[i] = true
+			backtrack(append(path, num), nums)
+			hit[i] = false
+		}
+	}
+
+	backtrack([]int{}, nums)
+	return result
+}
