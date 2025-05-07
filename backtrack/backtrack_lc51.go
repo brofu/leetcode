@@ -228,12 +228,17 @@ func solveNQueensPV3(n int) [][]string {
 				return false
 			}
 		}
+
+		// KEY POINTS:
+		// Why not need to check the row?
+		// => there is `cancel` operation at the post-order location
 		// check the row
-		for i := 0; i < n; i++ {
-			if board[row][i] == 'Q' {
-				return false
-			}
-		}
+		//for i := 0; i < n; i++ {
+		//	if board[row][i] == 'Q' {
+		//		return false
+		//	}
+		//}
+
 		// check the line
 		for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
 			if board[i][j] == 'Q' {
