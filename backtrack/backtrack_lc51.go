@@ -209,3 +209,85 @@ func solveNQueensPV2(n int) [][]string {
 	tb(board, 0)
 	return result
 }
+
+/*
+Key Points:
+
+How to control the flow?
+ 1. LC37, for the Sudoku problem, we need to choose a number for each `grad`
+ 2. N-Queen problem, we need to choose a location for each `row`
+*/
+
+func solveNQueensPV3(n int) [][]string {
+
+	isValid := func(board []string, row, col int) bool {
+
+		// check the col
+		for i := 0; i < row; i++ {
+			if board[i][col] == 'Q' {
+				return false
+			}
+		}
+		// check the row
+		for i := 0; i < n; i++ {
+			if board[row][i] == 'Q' {
+				return false
+			}
+		}
+		// check the line
+		for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+			if board[i][j] == 'Q' {
+				return false
+			}
+		}
+
+		for i, j := row-1, col+1; i >= 0 && j < n; i, j = i-1, j+1 {
+			if board[i][j] == 'Q' {
+				return false
+			}
+		}
+		return true
+	}
+
+	result := [][]string{}
+
+	var tb func([]string, int)
+
+	tb = func(board []string, row int) {
+
+		// base case
+		if row == n {
+			temp := make([]string, n)
+			copy(temp, board)
+			result = append(result, temp)
+			return
+		}
+
+		for col := 0; col < n; col++ {
+			// prune
+			if !isValid(board, row, col) {
+				continue
+			}
+
+			// choose
+			rowData := []byte(board[row])
+			rowData[col] = 'Q'
+			board[row] = string(rowData)
+
+			// next layer
+			tb(board, row+1)
+
+			// cancel choose
+			rowData[col] = '.'
+			board[row] = string(rowData)
+		}
+	}
+
+	board := make([]string, n)
+	for i := 0; i < n; i++ {
+		board[i] = strings.Repeat(".", n)
+	}
+
+	tb(board, 0)
+	return result
+}
