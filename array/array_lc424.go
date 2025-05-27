@@ -94,3 +94,31 @@ func characterReplacementV2(s string, k int) int {
 
 	return result
 }
+
+func characterReplacementPV3(s string, k int) int {
+	result := 0
+
+	maxFrequency := 0
+	frequency := make(map[byte]int) // KP. array has better performance.
+	for left, right := 0, 0; right < len(s); right++ {
+
+		// extend the window
+		r := s[right]
+		frequency[r]++
+		maxFrequency = common.MaxInt(maxFrequency, frequency[r])
+
+		if right-left+1-maxFrequency <= k {
+			result = common.MaxInt(result, right-left+1)
+			continue
+		}
+
+		// shrunk the window
+		o := s[left]
+		frequency[o]--
+		left++
+
+		//result = common.MaxInt(result, right-left+1)
+	}
+
+	return result
+}

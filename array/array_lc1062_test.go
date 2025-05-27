@@ -130,3 +130,43 @@ func Test_longestRepeatingSubstringV3(t *testing.T) {
 		})
 	}
 }
+
+func Test_longestRepeatingSubstringV4(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				s: "abcd",
+			},
+			want: 0,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				s: "abbaba",
+			},
+			want: 2,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				s: "aabcaabdaab",
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := longestRepeatingSubstringV4(tt.args.s); got != tt.want {
+				t.Errorf("longestRepeatingSubstringV3() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

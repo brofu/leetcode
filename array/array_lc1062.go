@@ -26,11 +26,12 @@ func longestRepeatingSubstring(s string) int {
 	return result
 }
 
-/**
+/*
+*
 KP.
-	1.	Idea of use possible length as the 1st loop.
-	2.	The edged case
-	3.	Break the loop in advance
+ 1. Idea of use possible length as the 1st loop.
+ 2. The edged case
+ 3. Break the loop in advance
 */
 func longestRepeatingSubstringV2(s string) int {
 
@@ -55,9 +56,10 @@ func longestRepeatingSubstringV2(s string) int {
 	return result
 }
 
-/**
+/*
+*
 KP.
-	1.	Check the possible length with binary search idea
+ 1. Check the possible length with binary search idea
 */
 func longestRepeatingSubstringV3(s string) int {
 
@@ -86,4 +88,30 @@ func longestRepeatingSubstringV3(s string) int {
 		}
 	}
 	return low - 1
+}
+
+// wrong
+func longestRepeatingSubstringV4(s string) int {
+
+	if len(s) <= 1 {
+		return len(s)
+	}
+
+	left, right := 0, 1
+	result := 0
+
+	for ; right < len(s); right++ {
+
+		if s[right] == s[right-1] {
+			continue
+		}
+
+		if result < right-left {
+			result = right - left
+		}
+
+		left = right
+	}
+
+	return result
 }
