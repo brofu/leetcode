@@ -66,3 +66,27 @@ func combineV2(n int, k int) [][]int {
 	bt(n, k, 1, track, &result)
 	return result
 }
+
+func combineV3(n int, k int) [][]int {
+
+	result := make([][]int, 0)
+	var bt func(start int, path []int)
+	bt = func(start int, path []int) {
+
+		//base case
+		if len(path) == k {
+			temp := make([]int, len(path))
+			copy(temp, path)
+			result = append(result, temp)
+			return
+		}
+
+		for idx := start; idx <= n; idx++ {
+			bt(idx+1, append(path, idx))
+		}
+
+	}
+
+	bt(1, []int{})
+	return result
+}
