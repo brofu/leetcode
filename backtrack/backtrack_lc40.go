@@ -61,6 +61,9 @@ func combinationSum2V2(candidates []int, target int) [][]int {
 			if i > start && candidates[i] == candidates[i-1] {
 				continue
 			}
+			if target-candidates[i] < 0 { // KP. Another prune
+				continue
+			}
 			bt(i+1, target-candidates[i], append(path, candidates[i]))
 		}
 	}
