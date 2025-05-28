@@ -39,3 +39,32 @@ func combinationSum2(candidates []int, target int) [][]int {
 	bt(candidates, track, sum, target, 0, &result)
 	return result
 }
+
+func combinationSum2V2(candidates []int, target int) [][]int {
+
+	result := make([][]int, 0)
+	sort.Ints(candidates)
+
+	var bt func(int, int, []int)
+
+	bt = func(start, target int, path []int) {
+
+		//base case
+		if target == 0 {
+			temp := make([]int, len(path))
+			copy(temp, path)
+			result = append(result, temp)
+			return
+		}
+
+		for i := start; i < len(candidates); i++ {
+			if i > start && candidates[i] == candidates[i-1] {
+				continue
+			}
+			bt(i+1, target-candidates[i], append(path, candidates[i]))
+		}
+	}
+
+	bt(0, target, []int{})
+	return result
+}
