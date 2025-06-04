@@ -30,6 +30,30 @@ KP
 		}
 
 		当出现重复元素时，比如输入 nums = [1,2,2',2'']，2' 只有在 2 已经被使用的情况下才会被选择，同理，2'' 只有在 2' 已经被使用的情况下才会被选择，这就保证了相同元素在排列中的相对位置保证固定。
+
+	2. Draw the recursive tree for pruning.
+		*	sort, and use `preNum`.
+		*	Non-sort, use a map. At each recursive depth, n + (n-1) + (n-2) + ... + 1 = O(n^2)
+
+
+Time Complexity
+1. Recursive call times: ==> Wrong
+	* if there are k repeated elements, with pruning:
+	* then we have 1 + (n-k) + (n-k)(n-k-1) + ... + (n-k)!
+	* totally we have e*(n-k)! times of recursive call
+1. Recursive call times: ==> Right
+	* let m as the number of distinct elements
+	* Ki as the repeat times of the ith number in m
+	* then, the `leaf nodes` are n!/(k1!*K2!*...*Km!)
+2. Copy time cost O(n)
+3. Sort (if we use sort): O(n*lgn)
+4. Overall (n*n!/(K1!*K2!*...*Km!))
+
+Space Complexity
+1. Recursive stack O(n)
+2. `visited` array O(n)
+3. `hitMap` (if we use map) n + (n-1) + (n-2) + ... + 1 = O(n^2)
+4. Result store: O(n*R), R is the result, R < n!
 */
 
 func permuteUnique(nums []int) [][]int {
@@ -73,9 +97,10 @@ func permuteUnique(nums []int) [][]int {
 	return result
 }
 
-/**
+/*
+*
 KP
-	1.	A simpler pruning solution
+ 1. A simpler pruning solution
 */
 func permuteUniqueV2(nums []int) [][]int {
 	result := [][]int{}
@@ -117,5 +142,46 @@ func permuteUniqueV2(nums []int) [][]int {
 	}
 
 	bt(nums, track, used, &result)
+	return result
+}
+
+func permuteUniqueV3(nums []int) [][]int {
+
+	result := make([][]int, 0)
+	visted := make([]bool, len(nums))
+
+	var bt func(track []int)
+
+	bt = func(track []int) {
+
+		//base case
+		if len(track) == len(nums) {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		hitMap := make(map[int]struct{})
+		for i := 0; i < len(nums); i++ {
+
+			if visted[i] {
+				continue
+			}
+			if _, exists := hitMap[nums[i]]; exists {
+				continue
+			}
+
+			visted[i] = true
+			hitMap[nums[i]] = struct{}{} // no need to cancel
+
+			bt(append(track, nums[i]))
+
+			visted[i] = false
+
+		}
+	}
+
+	bt([]int{})
 	return result
 }
