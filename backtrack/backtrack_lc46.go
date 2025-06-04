@@ -1,5 +1,18 @@
 package backtrack
 
+/*
+KP
+
+# Time Complexity
+1. Recursive time : O(n!)
+2. Copy cost: O(n)
+3. Overall: O(n*n!)
+
+Space Complexity
+1. Recursive stack: O(n)
+2. Used array: O(n)
+3. Result: O(n*n!)
+*/
 func permute(nums []int) [][]int {
 
 	result := [][]int{}
@@ -177,5 +190,35 @@ func permutePV3(nums []int) [][]int {
 	}
 
 	backtrack([]int{}, nums)
+	return result
+}
+
+func permutePV4(nums []int) [][]int {
+
+	result := [][]int{}
+	used := make([]bool, len(nums))
+
+	var bt func([]int)
+
+	bt = func(track []int) {
+
+		//base case
+		if len(track) == len(nums) {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+		}
+
+		for i := 0; i < len(nums); i++ {
+			if used[i] { //prune
+				continue
+			}
+			used[i] = true
+			bt(append(track, nums[i]))
+			used[i] = false
+		}
+	}
+
+	bt([]int{})
 	return result
 }
