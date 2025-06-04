@@ -4,7 +4,14 @@ package backtrack
 KP
 
 # Time Complexity
-1. Recursive time : O(n!)
+ 1. Recursive call time : O(n!)
+    count ALL the nodes of the recursive tree:
+    1 + n + n*(n-1) + n*(n-1)*(n-2) + ... + n!
+    = sum(n!/(n-k)!) where k = 0, 1, ... n,
+    = sum(n!/d!) where d = n-k
+    = n! * sum(1/d!) where d = 0, 1, ... n, < n! * e
+    so, we have O(e*n!)
+
 2. Copy cost: O(n)
 3. Overall: O(n*n!)
 
