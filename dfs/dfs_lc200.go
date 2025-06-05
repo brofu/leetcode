@@ -1,9 +1,12 @@
 package dfs
 
-/**
+/*
+*
 KP
-	1.	Note the input is '1' 0r '0', instead of 1 or 0.
-	2.	为什么每次遇到岛屿，都要用 DFS 算法把岛屿「淹了」呢？主要是为了省事，避免维护 visited 数组。 因为 dfs 函数遍历到值为 0 的位置会直接返回，所以只要把经过的位置都设置为 0，就可以起到不走回头路的作用。
+ 1. Note the input is '1' 0r '0', instead of 1 or 0.
+ 2. 为什么每次遇到岛屿，都要用 DFS 算法把岛屿「淹了」呢？主要是为了省事，避免维护 visited 数组。 因为 dfs 函数遍历到值为 0 的位置会直接返回，所以只要把经过的位置都设置为 0，就可以起到不走回头路的作用。
+
+Time Complexity
 */
 func numIslands(grid [][]byte) int {
 
@@ -75,4 +78,38 @@ func numIslandsPV1(grid [][]byte) int {
 	}
 
 	return count
+}
+
+func numIslandsPV2(grid [][]byte) int {
+
+	result := 0
+	m, n := len(grid), len(grid[0])
+	directions := [][]int{{-1, 0}, {+1, 0}, {0, -1}, {0, +1}}
+
+	var dfs func(int, int)
+
+	dfs = func(i, j int) {
+
+		// base case
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+
+		grid[i][j] = 0
+
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				continue
+			}
+			result += 1
+			dfs(i, j)
+		}
+	}
+	return result
 }
