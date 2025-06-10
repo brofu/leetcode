@@ -103,3 +103,97 @@ func numEnclavesPV1(grid [][]int) int {
 
 	return result
 }
+
+func numEnclavesDFS(grid [][]int) int {
+
+	result := 0
+	m, n := len(grid), len(grid[0])
+	directions := [][]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+
+	var dfs func(int, int)
+	dfs = func(i, j int) {
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+		grid[i][j] = 0
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+	}
+
+	for _, row := range []int{0, m - 1} {
+		for idx := range grid[row] {
+			if grid[row][idx] == 1 {
+				dfs(row, idx)
+			}
+		}
+	}
+	for _, col := range []int{0, n - 1} {
+		for idx := 0; idx < m; idx++ {
+			if grid[idx][col] == 1 {
+				dfs(idx, col)
+			}
+		}
+	}
+	for i := 1; i < m-1; i++ {
+		for j := 1; j < n-1; j++ {
+			if grid[i][j] == 1 {
+				result++
+			}
+		}
+	}
+	return result
+}
+
+func numEnclavesBFS(grid [][]int) int {
+
+	result := 0
+	m, n := len(grid), len(grid[0])
+	directions := [][]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+
+	bfs := func(i, j int) {
+
+		grid[i][j] = 0
+		q := make([][]int, 1)
+		q[0] = []int{i, j}
+
+		for len(q) > 0 {
+			l := len(q)
+			for idx := 0; idx < l; idx++ {
+				for _, direction := range directions {
+					i := q[idx][0] + direction[0]
+					j := q[idx][1] + direction[1]
+					if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+						continue
+					}
+					q = append(q, []int{i, j})
+					grid[i][j] = 0
+				}
+			}
+			q = q[l:]
+		}
+	}
+
+	for _, row := range []int{0, m - 1} {
+		for idx := range grid[row] {
+			if grid[row][idx] == 1 {
+				bfs(row, idx)
+			}
+		}
+	}
+	for _, col := range []int{0, n - 1} {
+		for idx := 0; idx < m; idx++ {
+			if grid[idx][col] == 1 {
+				bfs(idx, col)
+			}
+		}
+	}
+	for i := 1; i < m-1; i++ {
+		for j := 1; j < n-1; j++ {
+			if grid[i][j] == 1 {
+				result++
+			}
+		}
+	}
+	return result
+}
