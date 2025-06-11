@@ -228,3 +228,92 @@ func findOrderBFS(numCourses int, prerequisites [][]int) []int {
 	}
 	return []int{}
 }
+
+func findOrderDFS(numCourses int, prerequisites [][]int) []int {
+
+	order := make([]int, 0)
+	grid := make([][]int, numCourses)
+	for _, pre := range prerequisites {
+		from, to := pre[0], pre[1]
+		grid[from] = append(grid[from], to)
+	}
+
+	var hasRing bool
+	onPath := make([]bool, len(grid))
+	visted := make([]bool, len(grid))
+
+	var dfs func(int)
+	dfs = func(node int) {
+		// base
+		if onPath[node] {
+			hasRing = true
+			return
+		}
+
+		if hasRing || visted[node] {
+			return
+		}
+
+		visted[node] = true
+		onPath[node] = true
+		for _, next := range grid[node] {
+			dfs(next)
+		}
+		onPath[node] = false
+		order = append(order, node)
+	}
+
+	for i := 0; i < numCourses; i++ {
+		if hasRing {
+			break
+		}
+		dfs(i)
+	}
+
+	if hasRing {
+		return []int{}
+	}
+
+	return order
+}
+
+func findOrderBFSPV1(numCourses int, prerequisites [][]int) []int {
+
+	grid := make([][]int, numCourses)
+	inDegrees := make([]int, numCourses)
+	result := make([]int, numCourses)
+
+	for _, pre := range prerequisites {
+		from, to := pre[1], pre[0]
+		grid[from] = append(grid[from], to)
+		inDegrees[to]++
+	}
+
+	q := make([]int, 0)
+	for node, inDegree := range inDegrees {
+		if inDegree == 0 {
+			q = append(q, node)
+		}
+	}
+	idx := 0
+	for len(q) > 0 {
+		l := len(q)
+		for i := 0; i < l; i++ {
+			result[idx] = q[i]
+			idx++
+
+			for _, next := range grid[q[i]] {
+				inDegrees[next]--
+				if inDegrees[next] == 0 {
+					q = append(q, next)
+				}
+			}
+		}
+		q = q[l:]
+	}
+	if idx == numCourses {
+		return result
+	}
+
+	return []int{}
+}
