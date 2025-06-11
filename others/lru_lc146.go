@@ -1,14 +1,14 @@
 package others
 
-type LRUCache struct {
+type LRUCacheV1 struct {
 	head *Node
 	tail *Node
 	size int
 	maps map[int]*Node
 }
 
-func Constructor(capacity int) LRUCache {
-	o := LRUCache{
+func ConstructorV1(capacity int) LRUCacheV1 {
+	o := LRUCacheV1{
 		head: &Node{},
 		tail: &Node{},
 		size: capacity,
@@ -20,7 +20,7 @@ func Constructor(capacity int) LRUCache {
 	return o
 }
 
-func (this *LRUCache) Get(key int) int {
+func (this *LRUCacheV1) Get(key int) int {
 	result := -1
 	if node, ok := this.maps[key]; ok {
 		result = node.Val
@@ -29,7 +29,7 @@ func (this *LRUCache) Get(key int) int {
 	return result
 }
 
-func (this *LRUCache) Put(key int, value int) {
+func (this *LRUCacheV1) Put(key int, value int) {
 	if node, ok := this.maps[key]; ok {
 		// adjust the value
 		node.Val = value
@@ -48,7 +48,7 @@ func (this *LRUCache) Put(key int, value int) {
 }
 
 // assume the node is NOT head or tail
-func (this *LRUCache) removeNode(node *Node) {
+func (this *LRUCacheV1) removeNode(node *Node) {
 	delete(this.maps, node.Key)
 	node.Pre.Next = node.Next
 	node.Next.Pre = node.Pre
@@ -56,7 +56,7 @@ func (this *LRUCache) removeNode(node *Node) {
 
 // assume the node is NOT head or tail
 // always add after the head
-func (this *LRUCache) addNode(node *Node) {
+func (this *LRUCacheV1) addNode(node *Node) {
 	this.maps[node.Key] = node
 	node.Next = this.head.Next
 	this.head.Next.Pre = node
@@ -64,7 +64,7 @@ func (this *LRUCache) addNode(node *Node) {
 	node.Pre = this.head
 }
 
-func (this *LRUCache) adjustLocation(node *Node) {
+func (this *LRUCacheV1) adjustLocation(node *Node) {
 	if node == this.head.Next { // already was the least used one
 		return
 	}
@@ -78,3 +78,82 @@ func (this *LRUCache) adjustLocation(node *Node) {
  * param_1 := obj.Get(key);
  * obj.Put(key,value);
  */
+
+type LRUCache struct {
+	head       *Node
+	tail       *Node
+	data       map[int]*Node
+	capability int
+}
+
+func Constructor(capability int) *LRUCache {
+
+	cache := &LRUCache{
+		head:       &Node{},
+		tail:       &Node{},
+		data:       make(map[int]*Node),
+		capability: capability,
+	}
+	cache.head.Next = cache.tail
+	cache.tail.Pre = cache.head
+	return cache
+}
+
+func (this *LRUCache) Get(key int) int {
+	node, exists := this.data[key]
+	if !exists {
+		return -1
+	}
+	this.promoteNode(node)
+	return node.Val
+}
+
+func (this *LRUCache) Put(key, val int) {
+
+	// key exists
+	node, exists := this.data[key]
+	if exists {
+		node.Val = val
+		this.promoteNode(node)
+		return
+	}
+
+	node = &Node{
+		Key: key,
+		Val: val,
+	}
+
+	this.data[key] = node
+	this.promoteNode(node)
+
+	//key not exists, not exceed the capability
+	// exceed the capability
+	if len(this.data) > this.capability {
+		tailNode := this.tail.Pre
+		if tailNode == this.head {
+			return
+		}
+
+		tailNode.Pre.Next = this.tail
+		this.tail.Pre = tailNode.Pre
+
+		delete(this.data, tailNode.Key)
+	}
+
+}
+
+func (this *LRUCache) promoteNode(node *Node) {
+	if this.head.Next == node {
+		return
+	}
+
+	if node.Pre != nil {
+		node.Pre.Next = node.Next
+		node.Next.Pre = node.Pre
+	}
+
+	this.head.Next.Pre = node
+	node.Next = this.head.Next
+	this.head.Next = node
+	node.Pre = this.head
+}
