@@ -6,10 +6,13 @@ import (
 )
 
 /*
-*
 KP.
+
  1. How to check if 2 islands are same?
     很显然我们得想办法把二维矩阵中的「岛屿」进行转化，变成比如字符串这样的类型，然后利用 HashSet 这样的数据结构去重，最终得到不同的岛屿的个数。如果想把岛屿转化成字符串，说白了就是序列化，序列化说白了就是遍历嘛，前文 二叉树的序列化和反序列化 讲了二叉树和字符串互转，这里也是类似的。 首先，对于形状相同的岛屿，如果从同一起点出发，dfs 函数遍历的顺序肯定是一样的。需要记录撤销操作的路径
+
+ 2. About BFS
+    如何利用坐标确定岛屿的形状？ BFS v.s. DFS?
 
 Time Complexity
 1. Recursive call times O(N+4N) = O(5N)
@@ -85,6 +88,51 @@ func numDistinctIslandsPV1(grid [][]int) int {
 				sb := &strings.Builder{}
 				dfs(i, j, sb, 5)
 				islandsMap[sb.String()] = struct{}{}
+			}
+		}
+	}
+
+	return len(islandsMap)
+}
+
+func numDistinctIslandsBFS(grid [][]int) int {
+
+	m, n := len(grid), len(grid[0])
+	directions := [][]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}} // directions and direction numbers
+	islandsMap := make(map[string]struct{})
+
+	bfs := func(i, j int) {
+
+		buf := strings.Builder{}
+
+		grid[i][j] = 0
+		q := [][]int{{i, j}}
+
+		for len(q) > 0 {
+			l := len(q)
+			for idx := 0; idx < l; idx++ {
+				current := q[idx]
+				for _, direction := range directions {
+					ni := current[0] + direction[0]
+					nj := current[1] + direction[1]
+					if ni < 0 || ni >= m || nj < 0 || nj >= n || grid[ni][nj] == 0 {
+						continue
+					}
+					grid[ni][nj] = 0
+					q = append(q, []int{ni, nj})
+					buf.WriteByte(byte(ni - i))
+					buf.WriteByte(byte(nj - j))
+				}
+			}
+			q = q[l:]
+		}
+		islandsMap[buf.String()] = struct{}{}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				bfs(i, j)
 			}
 		}
 	}
