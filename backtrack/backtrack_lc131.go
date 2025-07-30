@@ -34,15 +34,15 @@ func partition(s string) [][]string {
 			return
 		}
 
-		for idx := start; idx < len(s); idx++ {
+		for idx := start; idx < len(s); idx++ { // up to 2^(n-1) possible cutting position sets
 
 			//pruning
-			if !isPalindrome(s[start : idx+1]) {
+			if !isPalindrome(s[start : idx+1]) { // in-line palindrome checking. O(n)
 				continue
 			}
 
 			// choose
-			bt(idx+1, append(trace, s[start:idx+1]))
+			bt(idx+1, append(trace, s[start:idx+1])) // up to O(n) recursive depth
 			// cancel
 		}
 	}
