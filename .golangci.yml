@@ -1,0 +1,44 @@
+#file: noinspection YAMLSchemaValidation
+
+version: 2
+
+run:
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 10m
+  modules-download-mode: vendor
+  tests: false
+  # noinspection YAMLSchemaValidation
+  skip-dirs:
+    - test
+    - script
+  skip-files:
+    - ".*_test.go"
+
+issues:
+  max-same-issues: 0
+
+output:
+  format: tab
+  sort-results: true
+  print-issued-lines: false
+
+linters-settings:
+  govet:
+    disable:
+      - composites
+      - unreachable
+  staticcheck:
+    # https://staticcheck.dev/docs/checks/
+    checks: [ "all","-SA1006","-SA1012","-SA1019","-SA1029","-SA4004","-SA4006","-SA4009","-SA9003" ]
+
+# linter介绍 https://golangci-lint.run/usage/linters/
+linters:
+  disable-all: true
+  #  presets:
+  #    - bugs
+  #    - metalinter
+  enable:
+    - bodyclose
+    - govet
+    #- staticcheck
+    #- gocritic

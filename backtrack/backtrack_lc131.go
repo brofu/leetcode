@@ -26,7 +26,7 @@ func partition(s string) [][]string {
 	var bt func(int, []string)
 
 	bt = func(start int, trace []string) {
-		//base case
+		// base case
 		if start == len(s) {
 			temp := make([]string, len(trace))
 			copy(temp, trace)
