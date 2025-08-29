@@ -163,6 +163,14 @@ func openLockOptimized(deadends []string, target string) int {
 	return -1
 }
 
+/*
+KP. 双向BFS
+
+1. 不再使用队列存储元素，而是改用哈希集合，方便快速判两个集合是否有交集。
+2. 调整了 return step 的位置。因为双向 BFS 中不再是简单地判断是否到达终点，而是判断两个集合是否有交集，所以要在计算出邻居节点时就进行判断。
+3. 每次都遍历是元素数量较小的集合，这样可以一定程度减少搜索次数。 因为按照 BFS 的逻辑，队列（集合）中的元素越多，扩散邻居节点之后新的队列（集合）中的元素就越多；在双向 BFS 算法中，如果我们每次都选择一个较小的集合进行扩散，那么占用的空间增长速度就会慢一些，效率就会高一些。
+4. 时间复杂度都是一样的，双向BFS只是一种进阶技巧，算法运行的速度会相对快一点，
+*/
 func getNeighborsInt(current int) [8]int {
 
 	result := [8]int{}
@@ -178,4 +186,48 @@ func getNeighborsInt(current int) [8]int {
 	}
 
 	return result
+}
+
+func openLockOptimizedDouble(deadends []string, target string) int {
+
+	result := 0
+	targetInt, _ := strconv.Atoi(target)
+
+	visited := [10000]int{}
+	for _, str := range deadends {
+		n, _ := strconv.Atoi(str)
+		if n == 0 || n == targetInt {
+			return -1
+		}
+		visited[n] = 1
+	}
+
+	startM := map[int]struct{}{0: {}}
+	endM := map[int]struct{}{targetInt: {}}
+
+	for len(startM) > 0 && len(endM) > 0 {
+		newStartM := make(map[int]struct{})
+
+		for num := range startM {
+			if _, exists := endM[num]; exists {
+				return result
+			}
+			neighbors := getNeighborsInt(num)
+			for _, neighbor := range neighbors {
+				if visited[neighbor] == 1 {
+					continue
+				}
+				newStartM[neighbor] = struct{}{}
+				visited[neighbor] = 1
+			}
+		}
+
+		result++
+		startM = newStartM
+		if len(startM) < len(endM) {
+			startM, endM = endM, startM
+		}
+	}
+
+	return -1
 }
