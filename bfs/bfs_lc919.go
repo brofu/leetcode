@@ -1,10 +1,8 @@
 package bfs
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import "github.com/brofu/leetcode/tree"
+
+type TreeNode = tree.TreeNode
 
 /*
 
