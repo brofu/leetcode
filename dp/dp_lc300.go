@@ -1,6 +1,8 @@
 package dp
 
-import "github.com/brofu/leetcode/common"
+import (
+	"github.com/brofu/leetcode/common"
+)
 
 // nums has at least 1 element
 func lengthOfLIS(nums []int) int {
@@ -105,5 +107,57 @@ func lengthOfLISPV1(nums []int) int {
 		}
 	}
 
+	return result
+}
+
+func lengthOfLISPV2DPF(nums []int) int {
+
+	memo := make([]int, len(nums)+1)
+	for idx := range memo {
+		memo[idx] = -1
+	}
+
+	var dp func(n int) int
+	dp = func(n int) int {
+		if n == 0 {
+			return 1
+		}
+		if memo[n] != -1 {
+			return memo[n]
+		}
+		result := 1
+		for j := 0; j < n; j++ {
+			if nums[j] < nums[n] {
+				result = MaxInt(result, 1+dp(j))
+			}
+		}
+		memo[n] = result
+		return result
+	}
+
+	result := 1
+	for n := len(nums) - 1; n >= 0; n-- {
+		result = MaxInt(result, dp(n))
+	}
+	return result
+}
+
+func lengthOfLISPV2DPA(nums []int) int {
+
+	dp := make([]int, len(nums))
+	for idx := range dp {
+		dp[idx] = 1
+	}
+	for i := 1; i < len(nums); i++ {
+		for j := 0; j < i; j++ {
+			if nums[j] < nums[i] {
+				dp[i] = MaxInt(dp[i], dp[j]+1)
+			}
+		}
+	}
+	result := 0
+	for _, res := range dp {
+		result = MaxInt(result, res)
+	}
 	return result
 }
