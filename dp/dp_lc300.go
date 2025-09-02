@@ -142,6 +142,17 @@ func lengthOfLISPV2DPF(nums []int) int {
 	return result
 }
 
+/*
+KP
+1. From Down Top to get the 状态转移方程
+
+TC:
+1. O(N^2).
+
+SC:
+1. dp, O(N). Can optimized to O(2)
+*/
+
 func lengthOfLISPV2DPA(nums []int) int {
 
 	dp := make([]int, len(nums))
@@ -160,4 +171,66 @@ func lengthOfLISPV2DPA(nums []int) int {
 		result = MaxInt(result, res)
 	}
 	return result
+}
+
+/*
+KP
+Compare version of lengthOfLISWithBSPV2 and lengthOfLISWithBSPV3
+1. V2 using [left, right), half close, half open, while V3 using [left, right]
+2. V2 is better for this problem. Because, at the beginning, before there is actually a pile, there is NO data to check, that's [0, 0) can handle
+*/
+
+func lengthOfLISWithBSPV2(nums []int) int {
+
+	piles := 0
+	top := make([]int, len(nums))
+
+	for i := 0; i < len(nums); i++ {
+		left, right := 0, piles
+		current := nums[i]
+		for left < right { // KP1. [left, right), since right initialized as piles
+			// mid := (left + right) / 2 KP2. Risk of overflow
+			mid := left + (right-left)/2
+			if current > top[mid] {
+				left = mid + 1 // KP3. Close at both side. So, [mid+1, right)
+			} else if current < top[mid] {
+				right = mid // KP4. Close at both side. So, [left, mid)
+			} else {
+				right = mid // KP5. We need to find the left-most pile. So, keep going on, [left, mid)
+			}
+		}
+		if left == piles {
+			piles++
+		}
+		top[left] = current
+	}
+	return piles
+}
+
+func lengthOfLISWithBSPV3(nums []int) int {
+
+	piles := 0
+	top := make([]int, len(nums))
+	top[0] = -10001
+
+	for i := 0; i < len(nums); i++ {
+		left, right := 0, piles
+		current := nums[i]
+		for left <= right { // KP1. [left, right], since right initialized as piles
+			// mid := (left + right) / 2 KP2. Risk of overflow
+			mid := left + (right-left)/2
+			if current > top[mid] {
+				left = mid + 1 // KP3. Close at both side. So, [mid+1, right]
+			} else if current < top[mid] {
+				right = mid - 1 // KP4. Close at both side. So, [left, mid-1]
+			} else {
+				right = mid - 1 // KP5. We need to find the left-most pile. So, keep going on, [left, mid-1]
+			}
+		}
+		if left == piles+1 {
+			piles++
+		}
+		top[left] = current
+	}
+	return piles
 }
