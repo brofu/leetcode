@@ -13,3 +13,10 @@ func MaxInt(a, b int) int {
 	}
 	return b
 }
+
+func MinIntTrix(a, b, c int) int {
+	if a > b {
+		return MinInt(b, c)
+	}
+	return MinInt(a, c)
+}
