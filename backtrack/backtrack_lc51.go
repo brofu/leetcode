@@ -83,7 +83,6 @@ func solveNQueensPV1(n int) [][]string {
 	}
 
 	isValid := func(board []string, raw, col int) bool {
-
 		// check same col
 		for r := 0; r < raw; r++ {
 			if board[r][col] == 'Q' {
@@ -294,5 +293,96 @@ func solveNQueensPV3(n int) [][]string {
 	}
 
 	tb(board, 0)
+	return result
+}
+
+/*
+
+TC:
+	1. Worst case is n^n (at each layer, n choices and there are n recursive layers), but actually, it's more near to O(n!).
+		* The 1st layer has n choices, and
+		* the 2nd layer has n-1 choices.(actually should be less and n-1, the same column and the distinct)
+		* So, n * (n-1) * ... * 1 = n!
+	2. For each choice, need to check isValid,
+		* check column at each row, O(N)
+		* check distinct, O(N)
+		* overall O(N)
+	3. So overall for search ??
+	3. For each result, we need to copy, which is n^2
+
+SC:
+	1. Recursive depth is n
+	2. For each result found,
+
+
+*/
+func solveNQueensPV4(n int) [][]string {
+
+	var (
+		result [][]string
+		bt     func(int)
+		board  = make([][]string, n)
+	)
+
+	for idx := range board {
+		board[idx] = make([]string, n)
+		for i := 0; i < n; i++ {
+			board[idx][i] = "."
+		}
+	}
+
+	isValid := func(row, col int) bool {
+
+		for i := 0; i < row; i++ {
+			if board[i][col] == "Q" {
+				return false
+			}
+		}
+
+		for i, j := row, col; i >= 0 && j >= 0; i, j = i-1, j-1 {
+			if board[i][j] == "Q" {
+				return false
+			}
+		}
+
+		for i, j := row, col; i >= 0 && j < n; i, j = i-1, j+1 {
+			if board[i][j] == "Q" {
+				return false
+			}
+		}
+		return true
+	}
+
+	bt = func(layer int) {
+
+		// base case
+		if layer == n {
+			temp := make([]string, n)
+			for idx := range board {
+				temp[idx] = strings.Join(board[idx], "")
+			}
+			result = append(result, temp)
+			return
+		}
+
+		for i := 0; i < n; i++ {
+
+			//pruning
+			if !isValid(layer, i) {
+				continue
+			}
+
+			// choose
+			board[layer][i] = "Q"
+			// explore
+			bt(layer + 1)
+
+			// cancel choose
+			board[layer][i] = "."
+		}
+	}
+
+	bt(0)
+
 	return result
 }

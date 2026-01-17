@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 
+	"github.com/brofu/leetcode/backtrack"
 	"github.com/brofu/leetcode/version"
 )
 
@@ -22,6 +23,6 @@ func main() {
 	}
 	fmt.Println("Hello.")
 
-	//result := tree.Permute([]int{5, 4, 6, 2})
-	//fmt.Println("Hello.", result)
+	result := backtrack.Permute([]int{5, 4, 6, 2})
+	fmt.Println("Hello.", result)
 }
