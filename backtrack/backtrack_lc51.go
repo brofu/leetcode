@@ -303,16 +303,18 @@ TC:
 		* The 1st layer has n choices, and
 		* the 2nd layer has n-1 choices.(actually should be less and n-1, the same column and the distinct)
 		* So, n * (n-1) * ... * 1 = n!
-	2. For each choice, need to check isValid,
+	2. For search node, need to check isValid, and we need to check N choices.
 		* check column at each row, O(N)
 		* check distinct, O(N)
-		* overall O(N)
-	3. So overall for search ??
-	3. For each result, we need to copy, which is n^2
+		* overall O(N^2)
+	3. For each result, we need to copy, which is n^2, and if there are S results found, it's O(S*n^2)
+	3. So overall for is around O(n^2*(n!+S))??
 
 SC:
 	1. Recursive depth is n
-	2. For each result found,
+	2. The `board` is n^2
+	2. For each result found, the result is n^2.
+	3. Overall is O(S*n^2+n^2)
 
 
 */

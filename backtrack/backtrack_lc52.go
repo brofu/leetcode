@@ -245,3 +245,70 @@ func totalNQueensPV3(n int) int {
 	bt(0)
 	return result
 }
+
+func totalNQueensPV4(n int) int {
+
+	var (
+		board  = make([][]string, n)
+		result int
+	)
+
+	for idx := range board {
+		board[idx] = make([]string, n)
+		for i := range board[idx] {
+			board[idx][i] = "."
+		}
+	}
+
+	isValid := func(row, col int) bool {
+
+		for i := 0; i < row; i++ {
+			if board[i][col] == "Q" {
+				return false
+			}
+		}
+
+		for i, j := row-1, col-1; i >= 0 && j >= 0; i, j = i-1, j-1 {
+			if board[i][j] == "Q" {
+				return false
+			}
+		}
+
+		for i, j := row-1, col+1; i >= 0 && j < n; i, j = i-1, j+1 {
+			if board[i][j] == "Q" {
+				return false
+			}
+		}
+
+		return true
+	}
+
+	var bt func(int)
+
+	bt = func(row int) {
+
+		// base case, hit
+		if row == n {
+			result++
+			return
+		}
+
+		for col := 0; col < n; col++ {
+			if !isValid(row, col) {
+				continue
+			}
+
+			// choose
+			board[row][col] = "Q"
+
+			// explore
+			bt(row + 1)
+
+			// cancel choose
+			board[row][col] = "."
+		}
+	}
+
+	bt(0)
+	return result
+}
