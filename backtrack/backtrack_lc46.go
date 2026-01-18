@@ -229,3 +229,62 @@ func permutePV4(nums []int) [][]int {
 	bt([]int{})
 	return result
 }
+
+/*
+
+TC:
+	1. Total nodes in the recursive tree is around e*n!, so, that's O(n!)
+	2. In each node, we check all the possible choices, which is n, and of which the time complexity is around O(1)
+	3. So, the time complexity is around O(n*n!)
+	4. There are total n! results, and for each one, we need to copy. that's O(n*n!)
+	5. So, the overall time complexity is around O(n*n!)
+
+
+SC:
+	1. Recursive deepth is O(n)
+	2. Used is around O(n)
+	3. For results, it's O(n*n!)
+	4. So overall is around O(n*n!)
+
+*/
+func permutePV5(nums []int) [][]int {
+
+	var (
+		n      = len(nums)
+		result = make([][]int, 0, n)
+		bt     func([]int)
+		used   = make([]bool, n)
+	)
+
+	bt = func(path []int) {
+
+		// base case
+		if len(path) == n { //find an answer
+			temp := make([]int, n)
+			copy(temp, path)
+			result = append(result, temp)
+			return
+		}
+
+		for idx, num := range nums { // choices
+
+			// pruning
+			if used[idx] {
+				continue
+			}
+
+			// choose
+			used[idx] = true
+
+			// explore
+			bt(append(path, num))
+
+			// cancel choose
+			used[idx] = false
+		}
+	}
+
+	bt([]int{})
+
+	return result
+}
