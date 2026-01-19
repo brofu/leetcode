@@ -119,3 +119,95 @@ func subsetsV4(nums []int) [][]int {
 	bt(0, []int{})
 	return result
 }
+
+/*
+KP:
+	1. Worse control logic, comparing V6
+	2. All the possible results on leaf nodes, and only collect the results on leaf nodes
+
+
+TC:
+	1. All the search nodes are O(2^N+2^N-1), which is O(2^(N+1)-1)
+	2. Total results: O(2^n)
+	2. For each result, need to copy. Worst case O(n)
+	3. Overall, around O(N*2^N)
+
+SC:
+	1. Recursive depth: n
+	2. For the result, O(n*2^n).
+*/
+
+func subsetsV5(nums []int) [][]int {
+
+	var (
+		result [][]int
+		bt     func(int, []int)
+	)
+
+	bt = func(idx int, track []int) {
+		if idx == len(nums) {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		// choose, explore, cancel-choose
+		bt(idx+1, track)
+		bt(idx+1, append(track, nums[idx]))
+
+	}
+
+	bt(0, []int{})
+	return result
+}
+
+/*
+KP:
+	1. Better control logic, comparing with V5
+	2. Results on each node. Collect the results ON all the nodes.
+	3. All the search nodes are O(2^N)
+	4. Copy with each result, worst are O(N*2^N)
+
+
+TC:
+	1. total results: O(2^n)
+	2. for each result, need to copy. Worst case O(n)
+	3. Overall, around O(n*2^n)
+
+SC:
+	1. Recursive depth: n
+	2. For the result, O(n*2^n).
+*/
+
+func subsetsV6(nums []int) [][]int {
+
+	var (
+		result [][]int
+		bt     func(int, []int)
+	)
+
+	bt = func(idx int, track []int) {
+
+		// base case
+		if idx == len(nums)+1 {
+			return
+		}
+
+		// collect result
+		temp := make([]int, len(track))
+		copy(temp, track)
+		result = append(result, temp)
+
+		for i := idx; i < len(nums); i++ {
+
+			// choose
+			// explore
+			bt(i+1, append(track, nums[i]))
+			// cancel choose
+		}
+	}
+
+	bt(0, []int{})
+	return result
+}
