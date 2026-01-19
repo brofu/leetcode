@@ -185,3 +185,119 @@ func permuteUniqueV3(nums []int) [][]int {
 	bt([]int{})
 	return result
 }
+
+/*
+KP
+	1. Use layerMap to mark the usage of each layer
+
+TC:
+	1. The upper bound of number of search nodes is O(e*n!)
+	2. For each search node, need to check if it's used, with TC O(1)
+	3. For the final result, if there is U results, then, the tc is O(U*n), with copy n time for each result
+	4. U = n!/(d1!*d2!*...*dk!), if there is K duplicated number, and each of them occurs `di` times in numbs
+	5. So, the overall TC is around O(U*n)
+
+
+SC:
+	1. Recursive deepth: n
+	2. Used: n
+	3. Result: S*n
+	4. layerMap: n, for each recursive layer. so, n * n
+	5. So, overall SC is O(S*n + n^2)
+*/
+
+func permuteUniqueV5(nums []int) [][]int {
+
+	var (
+		result = make([][]int, 0)
+		n      = len(nums)
+		used   = make([]bool, n)
+		bt     func([]int)
+	)
+
+	bt = func(track []int) {
+
+		//base case
+		if len(track) == n {
+			temp := make([]int, n)
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		layerUsed := make(map[int]bool)
+		for idx, num := range nums {
+
+			// pruning
+			if used[idx] {
+				continue
+			}
+			if layerUsed[num] {
+				continue
+			}
+
+			layerUsed[num] = true
+
+			// choose
+			used[idx] = true
+
+			// explore
+			bt(append(track, num))
+
+			// cancel choose
+			used[idx] = false
+		}
+	}
+
+	bt([]int{})
+
+	return result
+}
+
+func permuteUniqueV6(nums []int) [][]int {
+
+	var (
+		result [][]int
+		used   = make([]bool, len(nums))
+		bt     func([]int)
+	)
+
+	sort.Ints(nums) // O(n*lgn)
+
+	bt = func(track []int) {
+
+		// base case
+		if len(track) == len(nums) {
+			temp := make([]int, len(nums))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		prev := 11
+		for idx, num := range nums {
+
+			// pruning
+			if used[idx] {
+				continue
+			}
+			if prev == num { // occurs in the same layer
+				continue
+			}
+
+			// choose
+			used[idx] = true
+			prev = num
+
+			// explore
+			bt(append(track, num))
+
+			// cancel choice
+			used[idx] = false
+
+		}
+	}
+
+	bt(make([]int, 0, len(nums)))
+	return result
+}
