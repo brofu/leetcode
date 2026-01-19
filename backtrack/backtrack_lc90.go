@@ -60,3 +60,56 @@ func subsetsWithDupPV1(nums []int) [][]int {
 	bt(0, []int{})
 	return result
 }
+
+/*
+KP
+	1. At each layer, the choices are changing
+
+
+TC:
+	1. Sort function O(N*lgN)
+	2. Total search node less than O(2^N)
+	3. With each node, we collect the data, the worst case is O(N*2^N),
+
+SC:
+	1. Recursive depth: O(N)
+	2. With each result, we collect the data, the worst case is O(N*2^N),
+*/
+func subsetsWithDupV2(nums []int) [][]int {
+
+	var (
+		result [][]int
+		bt     func(int, []int)
+	)
+
+	sort.Ints(nums)
+
+	bt = func(layer int, track []int) {
+
+		// base case
+		if layer == len(nums)+1 {
+			return
+		}
+
+		// collect result
+		temp := make([]int, len(track))
+		copy(temp, track)
+		result = append(result, temp)
+
+		pre := 11
+		for idx := layer; idx < len(nums); idx++ {
+
+			// pruning
+			if pre == nums[idx] {
+				continue
+			}
+			pre = nums[idx]
+
+			// choose, explore, cancel choose
+			bt(idx+1, append(track, nums[idx]))
+
+		}
+	}
+	bt(0, []int{})
+	return result
+}

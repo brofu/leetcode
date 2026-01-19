@@ -164,7 +164,7 @@ func subsetsV5(nums []int) [][]int {
 
 /*
 KP:
-	1. Better control logic, comparing with V5
+	1. Better control logic, comparing with V5 (At each layer, the choices are changing)
 	2. Results on each node. Collect the results ON all the nodes.
 	3. All the search nodes are O(2^N)
 	4. Copy with each result, worst are O(N*2^N)
@@ -187,10 +187,10 @@ func subsetsV6(nums []int) [][]int {
 		bt     func(int, []int)
 	)
 
-	bt = func(idx int, track []int) {
+	bt = func(layer int, track []int) {
 
 		// base case
-		if idx == len(nums)+1 {
+		if layer == len(nums)+1 {
 			return
 		}
 
@@ -199,7 +199,7 @@ func subsetsV6(nums []int) [][]int {
 		copy(temp, track)
 		result = append(result, temp)
 
-		for i := idx; i < len(nums); i++ {
+		for i := layer; i < len(nums); i++ {
 
 			// choose
 			// explore
