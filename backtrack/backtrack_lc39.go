@@ -138,3 +138,48 @@ func combinationSumPV2(candidates []int, target int) [][]int {
 	bt(0, 0, []int{})
 	return result
 }
+
+/*
+
+TC:
+	1. Recursive depth: O(T/m). T = Target, m = min(candidates)
+	2. And at each recursive layer, need to try N possibles.
+	3. So overall, it's O(N^(T/m))
+	4. And the lower bound is that, O(T/m*R). R is the number of the results. (The copy cost)
+
+SC:
+	1. Recursive depth: O(T/m)
+	2. For each result, Need to store
+*/
+
+func combinationSumPV3(candidates []int, target int) [][]int {
+
+	var (
+		result = [][]int{}
+		bt     func(int, int, []int)
+	)
+
+	bt = func(idx int, sum int, track []int) {
+
+		// base case: equal
+		if sum == target {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		// base case 2: greater
+		if sum > target {
+			return
+		}
+
+		for i := idx; i < len(candidates); i++ {
+			// choose, explore and cancel
+			bt(i, sum+candidates[i], append(track, candidates[i]))
+		}
+	}
+
+	bt(0, 0, []int{})
+	return result
+}
