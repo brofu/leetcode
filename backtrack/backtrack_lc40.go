@@ -71,3 +71,57 @@ func combinationSum2V2(candidates []int, target int) [][]int {
 	bt(0, target, []int{})
 	return result
 }
+
+/*
+
+TC:
+	1. If there is NO duplicate number, then, the number (upper bound) of results are C(n, target/m), m is the minimum is candidates
+	2. The overall time is O(C(n, target/m)*(target/m))
+
+SC:
+	1. Recursive depth: target/m
+	2. Copy result: target/m
+	3. Overall space complexity: O(C(n, target/m)*(target/m))
+
+*/
+func combinationSum2V3(candidates []int, target int) [][]int {
+
+	var (
+		result [][]int
+		bt     func(int, int, []int)
+	)
+
+	sort.Ints(candidates)
+
+	bt = func(idx, sum int, track []int) {
+
+		// base case
+		if sum == target {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+		if sum > target {
+			return
+		}
+		if idx == len(candidates) {
+			return
+		}
+
+		pre := 0
+		for i := idx; i < len(candidates); i++ {
+			// pruning
+			if pre == candidates[i] {
+				continue
+			}
+			pre = candidates[i]
+			// choose, explore, cancel-choose
+			bt(i+1, sum+candidates[i], append(track, candidates[i]))
+		}
+
+	}
+
+	bt(0, 0, []int{})
+	return result
+}
