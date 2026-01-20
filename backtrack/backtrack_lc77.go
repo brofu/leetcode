@@ -90,3 +90,43 @@ func combineV3(n int, k int) [][]int {
 	bt(1, []int{})
 	return result
 }
+
+/*
+
+TC:
+	1. O(C(n,k)*k)
+
+
+SC:
+	1. Recursive depth: O(k)
+	2. Result with copy, O(C(n, k)*k)
+
+*/
+func combineV4(n int, k int) [][]int {
+
+	var (
+		result [][]int
+		bt     func(int, []int)
+	)
+
+	bt = func(layer int, track []int) {
+
+		// base case
+		if len(track) == k {
+			temp := make([]int, len(track))
+			copy(temp, track)
+			result = append(result, temp)
+			return
+		}
+
+		for i := layer + 1; i <= n; i++ {
+
+			// choose, explore, cancel-choose
+			bt(i, append(track, i))
+		}
+
+	}
+
+	bt(0, []int{})
+	return result
+}
