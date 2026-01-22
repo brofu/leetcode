@@ -234,3 +234,91 @@ func lengthOfLISWithBSPV3(nums []int) int {
 	}
 	return piles
 }
+
+/*
+KP:
+	1. The dp function version.
+	2. dp(i), the LIS which ends with nums[i]
+
+SC:
+	1. With memo, the recursive depth should be O(N). N is the number of nums
+*/
+func lengthOfLISV1(nums []int) int {
+
+	var (
+		dp     func(int) int
+		memo   = make([]int, len(nums))
+		result = 1
+	)
+
+	for idx := range memo {
+		memo[idx] = 0
+	}
+
+	dp = func(idx int) int {
+		if idx == 0 {
+			return 1
+		}
+
+		if memo[idx] != 0 {
+			return memo[idx]
+		}
+
+		temp := 1
+		for i := 0; i < idx; i++ {
+			if nums[idx] > nums[i] {
+				result := dp(i)
+				if temp < result+1 {
+					temp = result + 1
+				}
+			}
+		}
+
+		memo[idx] = temp
+		return temp
+	}
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		temp := dp(i)
+		if result < temp {
+			result = temp
+		}
+	}
+
+	return result
+}
+
+/*
+
+KP:
+	1. The dp table version
+*/
+func lengthOfLISV2(nums []int) int {
+
+	var (
+		result int
+		dp     = make([]int, len(nums))
+	)
+
+	for idx := range dp {
+		dp[idx] = 1
+	}
+
+	for i := 1; i < len(nums); i++ {
+		for j := 0; j < i; j++ {
+			if nums[i] > nums[j] {
+				if dp[i] < dp[j]+1 {
+					dp[i] = dp[j] + 1
+				}
+			}
+		}
+	}
+
+	for _, n := range dp {
+		if result < n {
+			result = n
+		}
+	}
+
+	return result
+}

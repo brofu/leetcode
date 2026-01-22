@@ -388,3 +388,120 @@ func Test_lengthOfLISWithBSPV3(t *testing.T) {
 		})
 	}
 }
+
+func Test_lengthOfLISV1(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		enabled bool
+		args    args
+		want    int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				nums: []int{10, 9, 2, 5, 3, 7, 101, 18},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				nums: []int{0, 1, 0, 3, 2, 3},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				nums: []int{7, 7, 7, 7, 7, 7, 7},
+			},
+			want: 1,
+		},
+		{
+			name:    "lc case 4",
+			enabled: true,
+			args: args{
+				nums: []int{1, 3, 6, 7, 9, 4, 10, 5, 6},
+			},
+			want: 6,
+		},
+		{
+			name:    "lc case 5 - self",
+			enabled: true,
+			args: args{
+				nums: []int{1, 3, 4, 2},
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		if !tt.enabled {
+			continue
+		}
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLISV1(tt.args.nums); got != tt.want {
+				t.Errorf("lengthOfLISV1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_lengthOfLISV2(t *testing.T) {
+	type args struct {
+		nums []int
+	}
+	tests := []struct {
+		name    string
+		enabled bool
+		args    args
+		want    int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				nums: []int{10, 9, 2, 5, 3, 7, 101, 18},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				nums: []int{0, 1, 0, 3, 2, 3},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				nums: []int{7, 7, 7, 7, 7, 7, 7},
+			},
+			want: 1,
+		},
+		{
+			name:    "lc case 4",
+			enabled: true,
+			args: args{
+				nums: []int{1, 3, 6, 7, 9, 4, 10, 5, 6},
+			},
+			want: 6,
+		},
+		{
+			name:    "lc case 5 - self",
+			enabled: true,
+			args: args{
+				nums: []int{1, 3, 4, 2},
+			},
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLISV2(tt.args.nums); got != tt.want {
+				t.Errorf("lengthOfLISV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
