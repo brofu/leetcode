@@ -1,6 +1,7 @@
 package dfs
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 )
@@ -138,4 +139,87 @@ func numDistinctIslandsBFS(grid [][]int) int {
 	}
 
 	return len(islandsMap)
+}
+
+func numDistinctIslandsPV2(grid [][]int) int {
+
+	var (
+		islandMap  = make(map[string]struct{})
+		m, n       = len(grid), len(grid[0])
+		directions = [][]int{{-1, 0, 1}, {0, 1, 2}, {1, 0, 3}, {0, -1, 4}}
+		paths      []int
+		dfs        func(int, int, int)
+	)
+
+	dfs = func(i, j, path int) {
+
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+
+		paths = append(paths, path)
+		grid[i][j] = 0
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1], direction[2])
+		}
+		paths = append(paths, -path)
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				paths = make([]int, 0)
+				dfs(i, j, 0)
+				pathStrings := make([]string, len(paths))
+				for idx, value := range paths {
+					pathStrings[idx] = fmt.Sprintf("%d", value)
+				}
+				islandMap[strings.Join(pathStrings, "-")] = struct{}{}
+			}
+		}
+	}
+
+	return len(islandMap)
+}
+
+/*
+
+KP:
+	1. bytes.Buffer has better performance than []int -> []string -> then strings.Join()
+*/
+func numDistinctIslandsPV3(grid [][]int) int {
+
+	var (
+		islandMap  = make(map[string]struct{})
+		m, n       = len(grid), len(grid[0])
+		directions = [][]int{{-1, 0, 1}, {0, 1, 2}, {1, 0, 3}, {0, -1, 4}}
+		paths      bytes.Buffer
+		dfs        func(int, int, int)
+	)
+
+	dfs = func(i, j, path int) {
+
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+
+		paths.WriteByte(byte(path))
+		grid[i][j] = 0
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1], direction[2])
+		}
+		paths.WriteByte(byte(path + 4))
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				paths.Reset()
+				dfs(i, j, 0)
+				islandMap[paths.String()] = struct{}{}
+			}
+		}
+	}
+
+	return len(islandMap)
 }

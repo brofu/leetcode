@@ -132,3 +132,43 @@ func countSubIslandsBFS(grid1 [][]int, grid2 [][]int) int {
 	return result
 
 }
+
+func countSubIslandsV1(grid1 [][]int, grid2 [][]int) int {
+
+	var (
+		result     int
+		m, n       = len(grid1), len(grid1[0])
+		directions = [][]int{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
+		dfs        func(int, int)
+	)
+
+	dfs = func(i, j int) {
+		//base case
+		if i < 0 || i >= m || j < 0 || j >= n || grid2[i][j] == 0 {
+			return
+		}
+
+		grid2[i][j] = 0
+
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid2[i][j] == 1 && grid1[i][j] == 0 {
+				dfs(i, j)
+			}
+		}
+	}
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid2[i][j] == 1 {
+				result++
+				dfs(i, j)
+			}
+		}
+	}
+	return result
+}

@@ -174,3 +174,42 @@ func maxAreaOfIslandBFSV2(grid [][]int) int {
 
 	return result
 }
+
+func maxAreaOfIslandDFSV2(grid [][]int) int {
+
+	var (
+		result, tempCount int
+		m, n              = len(grid), len(grid[0])
+		directions        = [][]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}}
+		dfs               func(int, int)
+	)
+
+	dfs = func(i, j int) {
+
+		// base case
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+
+		grid[i][j] = 0
+		tempCount++
+
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				tempCount = 0
+				dfs(i, j)
+				if tempCount > result {
+					result = tempCount
+				}
+			}
+		}
+	}
+	return result
+}

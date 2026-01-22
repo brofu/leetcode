@@ -201,3 +201,79 @@ func Test_closedIslandBFS(t *testing.T) {
 		})
 	}
 }
+
+func Test_closedIslandV2(t *testing.T) {
+	type args struct {
+		grid [][]int
+	}
+	tests := []struct {
+		name    string
+		enabled bool
+		args    args
+		want    int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				grid: [][]int{
+					{1, 1, 1, 1, 1, 1, 1, 0},
+					{1, 0, 0, 0, 0, 1, 1, 0},
+					{1, 0, 1, 0, 1, 1, 1, 0},
+					{1, 0, 0, 0, 0, 1, 0, 1},
+					{1, 1, 1, 1, 1, 1, 1, 0},
+				},
+			},
+			want: 2,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				grid: [][]int{{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}},
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				grid: [][]int{{1, 1, 1, 1, 1, 1, 1},
+					{1, 0, 0, 0, 0, 0, 1},
+					{1, 0, 1, 1, 1, 0, 1},
+					{1, 0, 1, 0, 1, 0, 1},
+					{1, 0, 1, 1, 1, 0, 1},
+					{1, 0, 0, 0, 0, 0, 1},
+					{1, 1, 1, 1, 1, 1, 1},
+				},
+			},
+			want: 2,
+		},
+		{
+			name:    "lc case 4",
+			enabled: true,
+			args: args{
+				grid: [][]int{
+					{0, 0, 1, 1, 0, 1, 0, 0, 1, 0},
+					{1, 1, 0, 1, 1, 0, 1, 1, 1, 0},
+					{1, 0, 1, 1, 1, 0, 0, 1, 1, 0},
+					{0, 1, 1, 0, 0, 0, 0, 1, 0, 1},
+					{0, 0, 0, 0, 0, 0, 1, 1, 1, 0},
+					{0, 1, 0, 1, 0, 1, 0, 1, 1, 1},
+					{1, 0, 1, 0, 1, 1, 0, 0, 0, 1},
+					{1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
+					{1, 1, 1, 0, 0, 1, 0, 1, 0, 1},
+					{1, 1, 1, 0, 1, 1, 0, 1, 1, 0},
+				},
+			},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		if !tt.enabled {
+			continue
+		}
+		t.Run(tt.name, func(t *testing.T) {
+			if got := closedIslandV2(tt.args.grid); got != tt.want {
+				t.Errorf("closedIslandV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

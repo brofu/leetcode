@@ -110,6 +110,13 @@ func closedIslandPV1(grid [][]int) int {
 	return result
 }
 
+/*
+
+TC:
+	1. Clean. 2*(m+n)
+	2. Flood Fill. 4(m-1)*(n-1). So, overall is O(m*n)
+
+*/
 func closedIslandBFS(grid [][]int) int {
 
 	result := 0
@@ -166,6 +173,56 @@ func closedIslandBFS(grid [][]int) int {
 			}
 			result++
 			bfs(i, j)
+		}
+	}
+
+	return result
+}
+
+func closedIslandV2(grid [][]int) int {
+
+	var (
+		result     int
+		m, n       = len(grid), len(grid[0])
+		dfs        func(int, int)
+		directions = [][]int{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}
+	)
+
+	dfs = func(i, j int) {
+
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 1 {
+			return
+		}
+
+		grid[i][j] = 1
+
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1])
+		}
+	}
+
+	for _, i := range []int{0, m - 1} { //remove the un-closed islands
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				dfs(i, j)
+			}
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for _, j := range []int{0, n - 1} {
+			if grid[i][j] == 0 {
+				dfs(i, j)
+			}
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 0 {
+				result++
+				dfs(i, j)
+			}
 		}
 	}
 

@@ -197,3 +197,52 @@ func numEnclavesBFS(grid [][]int) int {
 	}
 	return result
 }
+
+func numEnclavesV2(grid [][]int) int {
+
+	var (
+		result     int
+		m, n       = len(grid), len(grid[0])
+		directions = [][]int{{-1, 0}, {0, -1}, {1, 0}, {0, 1}}
+		dfs        func(int, int, bool)
+	)
+
+	dfs = func(i, j int, record bool) {
+		if i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == 0 {
+			return
+		}
+
+		grid[i][j] = 0
+		if record {
+			result++
+		}
+		for _, direction := range directions {
+			dfs(i+direction[0], j+direction[1], record)
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for _, j := range []int{0, n - 1} {
+			if grid[i][j] == 1 {
+				dfs(i, j, false)
+			}
+		}
+	}
+
+	for _, i := range []int{0, m - 1} {
+		for j := 0; j < n; j++ {
+			if grid[i][j] == 1 {
+				dfs(i, j, false)
+			}
+		}
+	}
+
+	for i := 1; i < m-1; i++ {
+		for j := 1; j < n-1; j++ {
+			if grid[i][j] == 1 {
+				dfs(i, j, true)
+			}
+		}
+	}
+	return result
+}
