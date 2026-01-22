@@ -1,5 +1,7 @@
 package dp
 
+import "github.com/brofu/leetcode/common"
+
 /*
 TC:
 1. Initial dp[0], O(N)
@@ -123,5 +125,206 @@ func minFallingPathSumDFS(matrix [][]int) int {
 		dfs(0, idx, val)
 	}
 
+	return result
+}
+
+/*
+
+KP.
+	1. DP function without Memo
+	2. DP(i,j) means the min-fall-path which ends at matrix(i, j)
+	3. The state transition equation is
+		* matrix(0,j), if i = 0
+		* matrix(i,j) + min(dp(i-1, j-1), dp(i-1, j), dp(i-1, j+1)), if i > 0
+
+TC:
+	1. The recursive depth is N.
+	2. Every 1 upper layer, we need to calculate 3x nodes. That's to say,
+		* at N layer, calculate N
+		* at N-1 layer, calculate 3*N
+		* at N-2 layer, calculate 3^2N
+		* at 1 layer, calculate 3^(N-1)*N
+		* so, all the recursive nodes are 3^N
+
+SC:
+	1. Recursive depth is O(N)
+
+*/
+func minFallingPathSumV1(matrix [][]int) int {
+
+	var (
+		result     = 10001
+		n          = len(matrix)
+		directions = [][]int{{-1, -1}, {-1, 0}, {-1, 1}}
+		dp         func(int, int) int // the min-fall-path which ends at matrix(i, j)
+	)
+
+	dp = func(i, j int) int {
+
+		// base case
+		if j < 0 || j >= n {
+			return -10001
+		}
+		if i == 0 {
+			return matrix[0][j]
+		}
+
+		temp := 10001
+		for _, direction := range directions {
+			r := dp(i+direction[0], j+direction[1])
+			if r != -10001 && temp > matrix[i][j]+r {
+				temp = matrix[i][j] + r
+			}
+		}
+		return temp
+	}
+
+	for j := 0; j < n; j++ {
+		t := dp(n-1, j)
+		if result > t {
+			result = t
+		}
+	}
+	return result
+}
+
+/*
+
+TC:
+	1. If there is Memo, then, we actually need to calculate ALL the cells in the matrix.
+	2. That's O(N^2)
+	3. Initial memo, another N^2
+	4. Overall, TC is O(N^2)
+
+SC:
+	1. Recursive depth: N
+	2. Memo size: N^2
+	3. Overall O(N^2)
+*/
+func minFallingPathSumV1WithMemo(matrix [][]int) int {
+
+	var (
+		result     = 10001
+		n          = len(matrix)
+		memo       = make([][]int, len(matrix))
+		directions = [][]int{{-1, -1}, {-1, 0}, {-1, 1}}
+		dp         func(int, int) int // the min-fall-path which ends at matrix(i, j)
+	)
+
+	for i := 1; i < n; i++ { // O(N^2)
+		memo[i] = make([]int, len(matrix))
+		for j := 0; j < n; j++ {
+			memo[i][j] = -10001
+		}
+	}
+
+	dp = func(i, j int) int {
+
+		// base case
+		if j < 0 || j >= n {
+			return -10001
+		}
+		if i == 0 {
+			return matrix[0][j]
+		}
+
+		if memo[i][j] != -10001 {
+			return memo[i][j]
+		}
+
+		temp := 10001
+		for _, direction := range directions {
+			r := dp(i+direction[0], j+direction[1])
+			if r != -10001 && temp > matrix[i][j]+r {
+				temp = matrix[i][j] + r
+			}
+		}
+		memo[i][j] = temp
+		return temp
+	}
+
+	for j := 0; j < n; j++ {
+		t := dp(n-1, j)
+		if result > t {
+			result = t
+		}
+	}
+	return result
+}
+
+/*
+
+KP:
+	1. DP table version.
+
+
+TC:
+	1. Overall SC is O(N^2)
+
+SC:
+	1. DP table O(N^2)
+*/
+
+func minFallingPathSumV1WithDP(matrix [][]int) int {
+
+	if len(matrix) == 1 {
+		return matrix[0][0]
+	}
+
+	var (
+		result int
+		n      = len(matrix)
+		dp     = make([][]int, n)
+	)
+
+	dp[0] = make([]int, n)
+	copy(dp[0], matrix[0])
+	for i := 1; i < n; i++ {
+		dp[i] = make([]int, n)
+		for j := 0; j < n; j++ {
+			dp[i][j] = dp[i-1][j]
+		}
+	}
+
+	for i := 1; i < n; i++ {
+		dp[i][0] = common.MinInt(dp[i-1][0], dp[i-1][1]) + matrix[i][0]
+		for j := 1; j < n-1; j++ {
+			dp[i][j] = common.MinIntThree(dp[i-1][j-1], dp[i-1][j], dp[i-1][j+1]) + matrix[i][j]
+		}
+		dp[i][n-1] = common.MinInt(dp[i-1][n-2], dp[i-1][n-1]) + matrix[i][n-1]
+	}
+
+	result = dp[n-1][0]
+	for j := 1; j < n; j++ {
+		if result > dp[n-1][j] {
+			result = dp[n-1][j]
+		}
+	}
+	return result
+}
+
+func minFallingPathSumV1WithDPCompressed(matrix [][]int) int {
+
+	if len(matrix) == 1 {
+		return matrix[0][0]
+	}
+
+	var (
+		result int
+		n      = len(matrix)
+		dp     = make([]int, n)
+	)
+
+	copy(dp, matrix[0])
+
+	for i := 1; i < n; i++ {
+	}
+
+	result = dp[0]
+	for i := 1; i < n; i++ {
+		if result > dp[i] {
+			result = dp[i]
+		}
+	}
 	return result
 }
