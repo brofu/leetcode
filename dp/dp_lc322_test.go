@@ -267,3 +267,91 @@ func Test_coinChangePV2(t *testing.T) {
 		})
 	}
 }
+
+func Test_coinChangeV1(t *testing.T) {
+	type args struct {
+		coins  []int
+		amount int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				coins:  []int{1, 2, 5},
+				amount: 11,
+			},
+			want: 3,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				coins:  []int{2},
+				amount: 3,
+			},
+			want: -1,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				coins:  []int{2},
+				amount: 0,
+			},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := coinChangeV1(tt.args.coins, tt.args.amount); got != tt.want {
+				t.Errorf("coinChangeV1() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_coinChangeV2(t *testing.T) {
+	type args struct {
+		coins  []int
+		amount int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				coins:  []int{1, 2, 5},
+				amount: 11,
+			},
+			want: 3,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				coins:  []int{2},
+				amount: 3,
+			},
+			want: -1,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				coins:  []int{2},
+				amount: 0,
+			},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := coinChangeV2(tt.args.coins, tt.args.amount); got != tt.want {
+				t.Errorf("coinChangeV2() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

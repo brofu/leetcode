@@ -215,3 +215,127 @@ func coinChangePV2(coins []int, amount int) int {
 
 	return dp[amount]
 }
+
+/*
+
+TC:
+	1. Recursive depth: worst case N. N is the amount (which is known as the states), if there is only 1$ coin
+	2. At each recursive layer, there is K choices/variables, which is the number of the coins
+	3. Overall, the TC is O(K^N)
+	4. But WITH MEMO, the TC would reduced rapidly. There should ONLY N nodes in the recursive tree, and at each layer, there is K choices/variables,
+	5. So, overall the TC is O(KN)
+
+SC:
+	1. Recursive depth: worst case N.
+	2. But WITH MEMO, there is O(N) for the memo
+	3. Overall it would be O(N)
+*/
+
+func coinChangeV1(coins []int, amount int) int {
+
+	var (
+		dp   func(int) int
+		memo = make([]int, amount+1)
+	)
+
+	for idx := range memo {
+		memo[idx] = 10001
+	}
+
+	dp = func(amount int) int {
+
+		// base case 1
+		if amount < 0 {
+			return -1
+		}
+
+		// base case 1
+		if amount == 0 {
+			return 0
+		}
+
+		if memo[amount] != 10001 {
+			return memo[amount]
+		}
+
+		result := 10001
+		for _, coin := range coins { // choices/variables
+			// choices/variables would lead to status change
+			temp := dp(amount - coin)
+			if temp == -1 {
+				continue
+			}
+			temp += 1
+			if temp < result {
+				result = temp
+			}
+		}
+		if result == 10001 {
+			result = -1
+		}
+		memo[amount] = result
+		return result
+	}
+
+	return dp(amount)
+}
+
+/*
+
+TC:
+	1. Initial dp. O(N)
+	2. Iterate dp, O(N), and at each one, check the best answer O(K).
+	3. Overall is O(KN)
+
+SC:
+	1. dp O(N)
+*/
+func coinChangeV2(coins []int, amount int) int {
+
+	dp := make([]int, amount+1)
+	for idx := range dp {
+		dp[idx] = 10001
+	}
+
+	dp[0] = 0
+
+	for i := 1; i <= amount; i++ {
+
+		for _, coin := range coins {
+			if i-coin >= 0 && dp[i] > dp[i-coin]+1 {
+				dp[i] = dp[i-coin] + 1
+			}
+		}
+	}
+	if dp[amount] == 10001 {
+		return -1
+	}
+	return dp[amount]
+}
+
+/*
+Question: Can we compress the dp table more?
+
+*/
+func coinChangeV3(coins []int, amount int) int {
+
+	dp := make([]int, amount+1)
+	for idx := range dp {
+		dp[idx] = 10001
+	}
+
+	dp[0] = 0
+
+	for i := 1; i <= amount; i++ {
+
+		for _, coin := range coins {
+			if i-coin >= 0 && dp[i] > dp[i-coin]+1 {
+				dp[i] = dp[i-coin] + 1
+			}
+		}
+	}
+	if dp[amount] == 10001 {
+		return -1
+	}
+	return dp[amount]
+}

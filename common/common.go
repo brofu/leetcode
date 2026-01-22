@@ -226,3 +226,16 @@ func ReverseSlice(input []string) []string {
 	}
 	return input
 }
+
+func MinIntThree(x, y, z int) int {
+	if x < y {
+		if x < z {
+			return x
+		}
+		return z
+	}
+	if y < z {
+		return y
+	}
+	return z
+}
