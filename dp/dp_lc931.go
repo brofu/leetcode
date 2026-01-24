@@ -303,6 +303,13 @@ func minFallingPathSumV1WithDP(matrix [][]int) int {
 	return result
 }
 
+/*
+KP
+	1. DP table COMPRESSED version
+	2. The key points for dp table compression.
+		* The order of calculating d[j] and updating old d[j] with it
+*/
+
 func minFallingPathSumV1WithDPCompressed(matrix [][]int) int {
 
 	if len(matrix) == 1 {
@@ -310,17 +317,26 @@ func minFallingPathSumV1WithDPCompressed(matrix [][]int) int {
 	}
 
 	var (
-		result int
-		n      = len(matrix)
-		dp     = make([]int, n)
+		result   int
+		n        = len(matrix)
+		dp       = make([]int, n)
+		dp0, dp1 int
 	)
 
 	copy(dp, matrix[0])
 
 	for i := 1; i < n; i++ {
+		dp0 = common.MinInt(dp[0], dp[1]) + matrix[i][0]
+		result = dp0
+		for j := 1; j < n-1; j++ {
+			dp1 = common.MinIntThree(dp[j-1], dp[j], dp[j+1]) + matrix[i][j]
+			dp[j-1] = dp0
+			dp0 = dp1
+		}
+		dp[n-1] = common.MinInt(dp[n-2], dp[n-1]) + matrix[i][n-1]
+		dp[n-2] = dp1
 	}
 
-	result = dp[0]
 	for i := 1; i < n; i++ {
 		if result > dp[i] {
 			result = dp[i]
