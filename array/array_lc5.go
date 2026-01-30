@@ -30,3 +30,34 @@ func findPalindrome(s string, left, right int) string {
 	// note: s[len(s):len(s)] would not report error
 	return s[left+1 : right]
 }
+
+/*
+KP:
+	1. Why this is wrong? Only consider ODD scenario
+*/
+func longestPalindromePV2(s string) string {
+
+	result := ""
+	for idx := 0; idx < len(s); idx++ {
+		r1 := findTheString(s, idx, idx)
+		r2 := findTheString(s, idx, idx+1)
+		if len(result) < len(r1) {
+			result = r1
+		}
+		if len(result) < len(r2) {
+			result = r2
+		}
+	}
+
+	return result
+}
+
+func findTheString(s string, start, end int) string {
+	for ; start >= 0 && end < len(s); start, end = start-1, end+1 {
+		if s[start] != s[end] {
+			break
+		}
+	}
+
+	return s[start+1 : end]
+}
