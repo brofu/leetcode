@@ -99,3 +99,164 @@ func Test_changeWithSpaceCompression(t *testing.T) {
 		})
 	}
 }
+
+func Test_changeBackTrack(t *testing.T) {
+	type args struct {
+		amount int
+		coins  []int
+	}
+	tests := []struct {
+		name    string
+		enabled bool
+		args    args
+		want    int
+	}{
+		{
+			name:    "lc case 1",
+			enabled: true,
+			args: args{
+				amount: 5,
+				coins:  []int{1, 2, 5},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				amount: 3,
+				coins:  []int{2},
+			},
+			want: 0,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				amount: 10,
+				coins:  []int{10},
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 4",
+			args: args{
+				amount: 5,
+				coins:  []int{2, 5},
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		if !tt.enabled {
+			continue
+		}
+		t.Run(tt.name, func(t *testing.T) {
+			if got := changeBackTrack(tt.args.amount, tt.args.coins); got != tt.want {
+				t.Errorf("changeBackTrack() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_changeDP(t *testing.T) {
+	type args struct {
+		amount int
+		coins  []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				amount: 5,
+				coins:  []int{1, 2, 5},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				amount: 3,
+				coins:  []int{2},
+			},
+			want: 0,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				amount: 10,
+				coins:  []int{10},
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 4",
+			args: args{
+				amount: 5,
+				coins:  []int{2, 5},
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := changeDP(tt.args.amount, tt.args.coins); got != tt.want {
+				t.Errorf("changeDP() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_changeDPCompressed(t *testing.T) {
+	type args struct {
+		amount int
+		coins  []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "lc case 1",
+			args: args{
+				amount: 5,
+				coins:  []int{1, 2, 5},
+			},
+			want: 4,
+		},
+		{
+			name: "lc case 2",
+			args: args{
+				amount: 3,
+				coins:  []int{2},
+			},
+			want: 0,
+		},
+		{
+			name: "lc case 3",
+			args: args{
+				amount: 10,
+				coins:  []int{10},
+			},
+			want: 1,
+		},
+		{
+			name: "lc case 4",
+			args: args{
+				amount: 5,
+				coins:  []int{2, 5},
+			},
+			want: 1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := changeDPCompressed(tt.args.amount, tt.args.coins); got != tt.want {
+				t.Errorf("changeDPCompressed() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

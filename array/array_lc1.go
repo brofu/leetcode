@@ -1,6 +1,8 @@
 package array
 
-import "github.com/brofu/leetcode/common"
+import (
+	"github.com/brofu/leetcode/common"
+)
 
 /**
 KP.
@@ -62,5 +64,64 @@ func twoSumPV1(nums []int, target int) []int {
 		record[num] = index
 	}
 
+	return result
+}
+
+func twoSumPV2(nums []int, target int) []int {
+
+	dMap := make(map[int]int)
+
+	for idx, num := range nums {
+		left := target - num
+		if i, exists := dMap[left]; exists {
+			return []int{i, idx}
+		} else {
+			dMap[num] = idx
+		}
+	}
+	return []int{}
+}
+
+/*
+KP:
+	1. nums should be storted
+	2. use double-pointer,
+
+TC:
+	1. O(N)
+
+*/
+func TwoSum(nums []int, start, target int) [][]int {
+
+	result := [][]int{}
+
+	lo, hi := start, len(nums)-1
+
+	for lo < hi {
+		left, right := nums[lo], nums[hi]
+		sum := left + right
+
+		if sum < target {
+			if lo < hi && left == nums[lo] {
+				lo++
+			}
+			continue
+		}
+		if sum > target {
+			for lo < hi && right == nums[hi] {
+				hi--
+			}
+			continue
+		}
+		result = append(result, []int{left, right})
+
+		for lo < hi && left == nums[lo] {
+			lo++
+		}
+
+		for lo < hi && right == nums[hi] {
+			hi--
+		}
+	}
 	return result
 }

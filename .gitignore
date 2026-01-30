@@ -21,3 +21,7 @@
 go.work
 */.*.swp
 *.swp
+
+# python workspace file
+__pycache__
+.python-version
