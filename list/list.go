@@ -737,3 +737,52 @@ func mergeKListsV3(lists []*ListNode) *ListNode {
 
 	return MergeTwoLists(left, right)
 }
+
+type MonotonicQueue struct {
+	q, maxQ, minQ          []int
+	head, maxHead, minHead int
+}
+
+func (this *MonotonicQueue) Max() int {
+	if len(this.q) == 0 {
+		return -1
+	}
+	return this.maxQ[this.maxHead]
+}
+
+func (this *MonotonicQueue) Min() int {
+	if len(this.q) == 0 {
+		return -1
+	}
+	return this.minQ[this.minHead]
+}
+
+func (this *MonotonicQueue) Push(val int) {
+	this.q = append(this.q, val)
+
+	for len(this.maxQ) > this.maxHead && this.maxQ[len(this.maxQ)-1] < val {
+		this.maxQ = this.maxQ[:len(this.maxQ)-1]
+	}
+	this.maxQ = append(this.maxQ, val)
+
+	for len(this.minQ) > this.minHead && this.minQ[len(this.minQ)-1] > val {
+		this.minQ = this.minQ[:len(this.minQ)-1]
+	}
+	this.minQ = append(this.minQ, val)
+}
+
+func (this *MonotonicQueue) Pop() int {
+	if len(this.q) == 0 {
+		return -1
+	}
+	n := this.q[this.head]
+	this.head++
+
+	if n == this.maxQ[this.maxHead] {
+		this.maxHead++
+	}
+	if n == this.minQ[this.minHead] {
+		this.minHead++
+	}
+	return n
+}
