@@ -5,7 +5,8 @@ import (
 )
 
 func sortArray(nums []int) []int {
-	common.MergeSort(nums)
+	//common.MergeSort(nums)
+	HeapSortIterativeV3(nums)
 	return nums
 }
 

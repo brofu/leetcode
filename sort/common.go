@@ -38,6 +38,80 @@ func heapify(nums []int, length, index int) {
 	}
 }
 
+/*
+KP:
+	1. 2 steps similar as Priority Queue. Take `increasing sort` as an example
+		a.	Construct maxHeap, by `swim` operation. (swich all the numbers one by one)
+		b.	Get the `increasing sort`, by `sink` operation. (swap nums[0] with nums[i-1], and sink nums[0])
+*/
+
+func HeapSortIterativeV2(nums []int) {
+
+	// construct the heap. swim the max heap
+	for i := 0; i < len(nums); i++ {
+		heapMaxSwim(nums, i)
+	}
+
+	// sink the max heap
+	heapSize := len(nums)
+	for heapSize > 0 {
+		nums[0], nums[heapSize-1] = nums[heapSize-1], nums[0]
+		heapSize--
+		heapMaxSink(nums, 0, heapSize)
+	}
+}
+
+func heapMaxSwim(nums []int, node int) {
+	for parent := (node - 1) / 2; parent >= 0 && nums[node] > nums[parent]; {
+		nums[node], nums[parent] = nums[parent], nums[node]
+		node = parent
+		parent = (parent - 1) / 2
+	}
+}
+func heapMaxSink(nums []int, node, heapSize int) {
+	for 2*node+1 < heapSize || 2*node+2 < heapSize {
+		maxM := node
+		if 2*node+1 < heapSize && nums[maxM] < nums[2*node+1] {
+			maxM = 2*node + 1
+		}
+		if 2*node+2 < heapSize && nums[maxM] < nums[2*node+2] {
+			maxM = 2*node + 2
+		}
+		if maxM == node {
+			break
+		}
+		nums[node], nums[maxM] = nums[maxM], nums[node]
+		node = maxM
+	}
+}
+
+/*
+KP:
+	1. 对于一个二叉堆来说，其左右子堆（子树）也是一个二叉堆。
+	2. 如果有两个二叉堆，和一个二叉堆节点，那么可以把这个节点作为堆顶（根节点），两个二叉堆作为左右子堆（子树），构建出一棵新的二叉堆（二叉树）
+	   但是有个问题，构建出的这个新二叉堆，它的左右子堆肯定都符合堆的性质，但这个新的根节点的值可能不符合堆的性质，怎么办？
+		sink 方法不就是专门针对这种情况的吗？只要对根节点调用一次 sink 方法，就能让这个新的二叉堆符合堆的性质了。
+	3. 所以，一个优化的建堆方案
+		a. 从最后一个非叶子节点开始，向前，逐个调用sink操作
+		b. 叶子节点自身，肯定是二叉堆
+		c. 保证每一个非叶子节点，和它下面的二叉堆，新组成的，也是一个二叉堆
+*/
+func HeapSortIterativeV3(nums []int) {
+
+	// construct the heap. swim the max heap
+	heapSize := len(nums)
+	for i := (heapSize - 1) / 2; i >= 0; i-- {
+		heapMaxSink(nums, i, heapSize)
+	}
+
+	// sink the max heap
+	for heapSize > 0 {
+		nums[0], nums[heapSize-1] = nums[heapSize-1], nums[0]
+		heapSize--
+		heapMaxSink(nums, 0, heapSize)
+	}
+}
+
 func HeapSortIterative(nums []int) {
 	length := len(nums)
 
