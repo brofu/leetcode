@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"sync"
 
 	"github.com/brofu/leetcode/backtrack"
 	"github.com/brofu/leetcode/version"
@@ -25,6 +26,15 @@ func main() {
 
 	result := backtrack.Permute([]int{5, 4, 6, 2})
 	fmt.Println("Hello.", result)
+
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	wg.Wait()
+
+	c := sync.NewCond(&sync.Mutex{})
+	c.Signal()
+
+	p := sync.Pool{}
 }
 
 /*
