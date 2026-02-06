@@ -1,6 +1,9 @@
 package math
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func Test_trailingZeroes(t *testing.T) {
 	type args struct {
@@ -32,10 +35,19 @@ func Test_trailingZeroes(t *testing.T) {
 			},
 			want: 0,
 		},
+		{
+			name: "case 4",
+			args: args{
+				n: math.MaxInt64 >> 31,
+			},
+			want: 1073741816,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := trailingZeroes(tt.args.n); got != tt.want {
+			got := trailingZeroes(tt.args.n)
+			t.Log("got", got)
+			if got != tt.want {
 				t.Errorf("trailingZeroes() = %v, want %v", got, tt.want)
 			}
 		})

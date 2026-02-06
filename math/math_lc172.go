@@ -4,6 +4,7 @@ package math
 KP:
 	https://labuladong.online/zh/algo/frequency-interview/factorial-problems/
 
+	1. Got the idear that, how many factors of `5` are there in the n!
 */
 func trailingZeroes(n int) int {
 
