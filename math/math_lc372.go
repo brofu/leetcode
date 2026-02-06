@@ -78,3 +78,67 @@ func superPowV2(a int, b []int) int {
 
 	return res
 }
+
+/*
+KP:
+	Fuck.Can still cannot get this approach. WRONG!
+*/
+func superPowV3(a int, b []int) int {
+
+	res := 1
+	m := 1337
+	for idx := 0; idx < len(b); idx++ {
+		n := b[idx]
+		if n == 0 {
+			continue
+		}
+		for l := 0; l < len(b)-idx-1; l++ {
+			res = fastPow(res, 10, m) % m
+		}
+		res = res * fastPow(a, b[idx], m) % m
+	}
+	return res
+}
+
+/*
+	(((1^10*a^2)^10*a^0)^10*a^1)^10*a^8
+	loop1: res = 1^10*a^2
+	loop2: res = res^10*a^0
+	loop3: res = res^10*a^1
+	loop4: res = res&10*a^8
+*/
+func superPowV4(a int, b []int) int {
+
+	res := 1
+	m := 1337
+	for idx := 0; idx < len(b); idx++ {
+		res = fastPow(res, 10, m)
+		if b[idx] > 0 {
+			res = res * fastPow(a, b[idx], m) % m
+		}
+	}
+
+	return res
+}
+
+/*
+KP:
+	Calculate: a^2000 * a^0 * a^10 * a^8. if b = [2, 0, 1, 8]
+*/
+func superPowV5(a int, b []int) int {
+
+	res := 1
+	m := 1337
+	for idx := 0; idx < len(b); idx++ {
+		if b[idx] == 0 {
+			continue
+		}
+		t := fastPow(a, b[idx], m)
+		for wl := 0; wl < len(b)-idx-1; wl++ {
+			t = fastPow(t, 10, m)
+		}
+		res = (res * t) % m
+	}
+
+	return res
+}
