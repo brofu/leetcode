@@ -135,3 +135,32 @@ func (ipq *InterfacePriorityQueue) Pop() any {
 	ipq.slice = ipq.slice[:len(ipq.slice)-1]
 	return v
 }
+
+type DKState struct {
+	Node   int
+	DistTo int
+}
+
+type HeapDijkstraState []DKState
+
+func (this *HeapDijkstraState) Push(x any) {
+	*this = append(*this, x.(DKState))
+}
+
+func (this *HeapDijkstraState) Pop() any {
+	v := (*this)[len(*this)-1]
+	*this = (*this)[:len(*this)-1]
+	return v
+}
+
+func (this *HeapDijkstraState) Less(x, y int) bool {
+	return (*this)[x].DistTo < (*this)[y].DistTo
+}
+
+func (this *HeapDijkstraState) Len() int {
+	return len(*this)
+}
+
+func (this *HeapDijkstraState) Swap(x, y int) {
+	(*this)[x], (*this)[y] = (*this)[y], (*this)[x]
+}

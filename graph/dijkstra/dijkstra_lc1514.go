@@ -58,3 +58,65 @@ func maxProbability(n int, edges [][]int, succProb []float64, start_node int, en
 	}
 	return 0
 }
+
+type state1514 struct {
+	node int
+	prob float64
+}
+type heapState1514 []state1514
+
+func (h *heapState1514) Len() int {
+	return len(*h)
+}
+
+func (h *heapState1514) Less(x, y int) bool {
+	return (*h)[x].prob > (*h)[y].prob
+}
+
+func (h *heapState1514) Swap(x, y int) {
+	(*h)[x], (*h)[y] = (*h)[y], (*h)[x]
+}
+
+func (h *heapState1514) Push(x any) {
+	*h = append(*h, x.(state1514))
+}
+
+func (h *heapState1514) Pop() any {
+	v := (*h)[len(*h)-1]
+	*h = (*h)[:len(*h)-1]
+	return v
+}
+
+func maxProbabilityPV1(n int, edges [][]int, succProb []float64, start_node int, end_node int) float64 {
+
+	graph := make([][]state1514, n)
+	for idx, edge := range edges {
+		from := edge[0]
+		graph[from] = append(graph[from], state1514{edge[1], succProb[idx]})
+	}
+	probTo := make([]float64, n)
+	probTo[start_node] = 1
+
+	var pq heapState1514 = make([]state1514, 0)
+
+	heap.Push(&pq, state1514{start_node, 1})
+	for pq.Len() > 0 {
+		current := heap.Pop(&pq).(state1514)
+		if current.node == end_node {
+			return current.prob
+		}
+		if probTo[current.node] > current.prob {
+			continue
+		}
+		for _, next := range graph[current.node] {
+			nextProb := current.prob * next.prob
+			if probTo[next.node] >= nextProb {
+				continue
+			}
+			probTo[next.node] = nextProb
+			heap.Push(&pq, state1514{next.node, nextProb})
+		}
+	}
+
+	return 0
+}
